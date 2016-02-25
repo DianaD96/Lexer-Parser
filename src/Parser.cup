@@ -1,0 +1,124 @@
+import java_cup.runtime.*;
+
+scan with {: return lecer.next_token(); :};
+
+parser code {:
+  private boolean debug = false;
+  public boolean  debug()         {return debug;}
+  public void     debug(boolean b){debug = b;}
+
+  static class Node {
+    public ArrayList<Node> children;
+    private static int globalCounter = 0;
+
+    public int counter;
+    private Object value;
+
+    public Node(Object value){
+      Node.globalCounter += 1;
+      this.counter = Node.globalCounter;
+      this.value = value;
+      this.children = new ArrayList<Node>();
+    }
+
+    public void addChild(Node n){ children.add(n); }
+
+    public String toString(){
+      String ret = "";
+      ret += String.format("%d [label=\"%s\"];\n",
+                            counter, value.toString());
+      for(Node n: children){
+        ret += String.format("%d -> %d;\n", this.counter, n.counter);
+        ret += n.toString();
+      }
+      return ret;
+    }
+    
+    private Lexer lexer;
+    
+    public Parser (Lexer lex)
+    {
+       super(lex);
+       lexer=lex;
+    }
+:}
+
+/* Preliminaries to set up and use the scanner */
+init with {: scanner.init();              :};
+acan with {: return scanner.next_token(); :};
+
+/* Terminals (tokens returned by the scanner) */
+terminal INTEGER, IDENTIFIER; 
+terminal SEMI, PLUS, MINUS, TIMES, DIVIDE, MOD;
+terminal UMINUS, LPAREN, RPAREN;
+terminal bool TRUE, FALSE;
+terminal int NUMBER_INT;
+terminal rat NUMBER_RAT;
+terminal float NUMBER_FLOAT;
+temrinal char CHARACTER;
+terminal String COMMENT;
+
+
+/* Non terminals */
+non terminal expr_list, expr_part;
+non terminal Integer expr, term, factor;
+
+/* Precedences */
+precedence left PLUS, MINUS;
+precedence left TIMES, DIVIDE, MOD;
+precedence left UMINUS;
+
+/* The grammar */
+
+top_level ::= statements:ss {: if(debug()) System.out.println(Node)ss :};
+expr_list ::= expr_list expr_part
+              |
+              expr_part;
+
+expr_part ::= expr:e
+              {: System.out.println("= "+e); :}
+              SEMI; 
+              
+full_exp ::= exp:e SEMICOL {: RESULT = (Node)e; :};
+        
+expr ::= expr:e1 PLUS expr:e2
+         {: RESULT = new INTEGER(e1,intValue() + e2.intValue()); :}
+         | 
+         expr:e1 MINUS expr:e2    
+         {: RESULT = new Integer(e1.intValue() - e2.intValue()); :} 
+	     | 
+         expr:e1 TIMES expr:e2 
+	     {: RESULT = new Integer(e1.intValue() * e2.intValue()); :} 
+	     | 
+         expr:e1 DIVIDE expr:e2 
+	     {: RESULT = new Integer(e1.intValue() / e2.intValue()); :} 
+	     | 
+         expr:e1 MOD expr:e2 
+	     {: RESULT = new Integer(e1.intValue() % e2.intValue()); :} 
+	     | 
+         NUMBER:n                 
+	     {: RESULT = n; :} 
+	     | 
+         MINUS expr:e             
+	     {: RESULT = new Integer(0 - e.intValue()); :} 
+	     %prec UMINUS
+	     | 
+         LPAREN expr:e RPAREN     
+	     {: RESULT = e; :} 
+	     ;
+
+boolean ::= TRUE {: RESULT = new Node("T"); :};
+          | FALSE (: RESULT = new Node("F"); :);
+          
+operator ::= PLUS  {: RESULT = new Node("+"); :}
+           | MINUS {: RESULT = new Node("-"); :}
+           | TIMES  {: RESULT = new Node("*"); :}
+           | DIVIDE   {: RESULT = new Node("/"); :}
+           ;
+           
+let_bind ::= LET IDENTIFIER:i EQUAL full_exp:e {:
+               Node n = new Node("LET");
+               n.addChild(new Node(i));
+               n.addChild((Node)e);
+               RESULT = n;
+             :};
