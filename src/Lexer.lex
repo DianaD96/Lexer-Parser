@@ -70,10 +70,10 @@ MultipleLineComment = "/#"({Character}|{Whitespace})*"#/"
 
 BooleanConstants = "T" | "F"
 
-Numbers = {Integers} | {Rationals} | {Floats}
-Integers = {Digit)* | "-"{Digit}* 
-Rationals = {Digit}*"/"{Digit}* | "-"{Digit}*"/"{Digit}* | {Digit}*"_"{Digit}*"/"{Digit}* | "-"{Digit}*"_"{Digit}*"/"{Digit}*      //Dividing by zero?
-Floats =  {Digit}*"."{Digit}* | "-"{Digit}*"."{Digit}*
+Number = {Integers} | {Rationals} | {Floats}
+Integer = {Digit}* | "-"{Digit}* 
+Rational = {Digit}*"/"{Digit}* | "-"{Digit}*"/"{Digit}* | {Digit}*"_"{Digit}*"/"{Digit}* | "-"{Digit}*"_"{Digit}*"/"{Digit}*      //Dividing by zero?
+Float =  {Digit}*"."{Digit}* | "-"{Digit}*"."{Digit}*
 
 %%
 
