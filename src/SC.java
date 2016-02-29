@@ -7,7 +7,18 @@ import java_cup.runtime.*;
 
 class SC {
     public static void main(String[] args) {
-    	Lexer lexer;
+    	
+    	boolean showLexing;
+    	boolean showParser; 
+    	
+0    	Lexer lexer;
+    	
+    	if (args.length < 1 || args.length>2)
+    	{
+    		System.err.printf("Wrong input");
+    		System.exit(1);
+    	}
+    	
 		try {
 			lexer = new Lexer(new FileReader(args[0]));
 			try {
@@ -24,7 +35,7 @@ class SC {
 			}
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		      System.err.printf("Could not find file <%s>\n", args[0]);
 		}
     }
 }
