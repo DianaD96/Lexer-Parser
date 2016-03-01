@@ -17,7 +17,7 @@ class SC {
     	if (args.length < 1 || args.length>2)
     	{
     		System.err.printf("Wrong input");
-    		System.exit(2);
+    		System.exit(1);
     	}
     	
     	for(String arg : args){

@@ -58,13 +58,18 @@ import java_cup.runtime.*;
 %}
 
 Whitespace = \r|\n|\r\n|" "|"\t" 
-NonNewlineWhitespace = \r|" "|"\t" 
+
 Letter = [a-zA-Z]
 Digit = [0-9]
-Punctuation = "!" | "\"" | "#" | "%" | "%" | "&" | "'" | "(" | ")" | "*" | "+" | "," | "-" | "." | "/" | "\\" | ":" | ";" | "<" | "=" | ">" | "?" | "@" | "[" | "]" | "^" | "_" | "`" | "{" | "}" | "|" | "~" 
 
-Character = "\""{Letter}"\"" | "\""{Digit}"\"" | "\""{Punctuation}"\""
+
 Identifier = {Letter}("_" | {Letter} | {Digit})*
+Integer = {Digit}+ | "-"{Digit}+
+/*
+
+Punctuation = "!" | "\"" | "#" | "%" | "%" | "&" | "'" | "(" | ")" | "*" | "+" | "," | "-" | "." | "/" | "\\" | ":" | ";" | "<" | "=" | ">" | "?" | "@" | "[" | "]" | "^" | "_" | "`" | "{" | "}" | "|" | "~" 
+NonNewlineWhitespace = \r|" "|"\t" 
+Character = "\""{Letter}"\"" | "\""{Digit}"\"" | "\""{Punctuation}"\""
 
 Comment = {OneLineComment} | {MultipleLineComment}
 OneLineComment = ({Character} | {NonNewlineWhitespace})*"#"
@@ -76,7 +81,7 @@ Number = {Integer} | {Rational} | {Float}
 Integer = {Digit}* | "-"{Digit}* 
 Rational = {Digit}*"/"{Digit}* | "-"{Digit}*"/"{Digit}* | {Digit}*"_"{Digit}*"/"{Digit}* | "-"{Digit}*"_"{Digit}*"/"{Digit}*      //Dividing by zero?
 Float =  {Digit}*"."{Digit}* | "-"{Digit}*"."{Digit}*
-
+*/
 %%
 
 <YYINITIAL> {

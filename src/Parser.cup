@@ -1,8 +1,10 @@
 import java_cup.runtime.*;
+import java.util.ArrayList;
 
-scan with {: return lecer.next_token(); :};
+scan with {: return lexer.next_token(); :};
 
 parser code {:
+
   private boolean debug = false;
   public boolean  debug()         {return debug;}
   public void     debug(boolean b){debug = b;}
@@ -33,89 +35,76 @@ parser code {:
       }
       return ret;
     }
-    
-    private Lexer lexer;
-    
-    public Parser (Lexer lex)
-    {
-       super(lex);
-       lexer=lex;
-    }
-:}
+  }
 
-/* Preliminaries to set up and use the scanner */
-init with {: scanner.init();              :};
-acan with {: return scanner.next_token(); :};
+  private Lexer lexer;
 
-/* Terminals (tokens returned by the scanner) */
-terminal INTEGER, IDENTIFIER; 
-terminal SEMI, PLUS, MINUS, TIMES, DIVIDE, MOD;
-terminal UMINUS, LPAREN, RPAREN, CLPAREN;
-terminal bool TRUE, FALSE;
-terminal int NUMBER_INT;
-terminal rat NUMBER_RAT;
-terminal float NUMBER_FLOAT;
-temrinal char CHARACTER;
-terminal String COMMENT;
+  public Parser(Lexer lex) {
+    super(lex);
+    lexer = lex;
+  }
 
+:};
 
-/* Non terminals */
-non terminal expr_list, expr_part;
-non terminal Integer expr, term, factor;
+// Do something with ILLEGAL_CHARARCTER or drop it.
+terminal INTEGER, IDENTIFIER, LET, EQUAL, SEMICOL, PLUS, MINUS, MULT, DIV;
+terminal LPAREN, RPAREN, CLPAREN, CRPAREN;
+terminal BADCHAR;
 
-/* Precedences */
+nonterminal statements, statement, top_level;
+nonterminal let_bind, full_exp, simple_exp, operator;
+
 precedence left PLUS, MINUS;
-precedence left TIMES, DIVIDE, MOD;
-precedence left UMINUS;
+precedence left DIV, MULT;
 
-/* The grammar */
+top_level ::= statements:ss {:
+                if(debug()) System.out.println((Node)ss);
+              :}
+            ;
 
-top_level ::= statements:ss {: if(debug()) System.out.println(Node)ss :};
-expr_list ::= expr_list expr_part
-              |
-              expr_part;
+statements ::= statements:ss statement:s {:
+                  Node n = (Node)ss;
+                  n.addChild((Node)s);
+                  RESULT = n;
+               :}
+             | /* empty */ {:
+                  RESULT = new Node("Statements");
+               :}
+             ;
 
-expr_part ::= expr:e
-              {: System.out.println("= "+e); :}
-              SEMI; 
-              
-full_exp ::= exp:e SEMICOL {: RESULT = (Node)e; :};
-        
-expr ::= expr:e1 PLUS expr:e2
-         {: RESULT = new INTEGER(e1,intValue() + e2.intValue()); :}
-         | 
-         expr:e1 MINUS expr:e2    
-         {: RESULT = new Integer(e1.intValue() - e2.intValue()); :} 
-	     | 
-         expr:e1 TIMES expr:e2 
-	     {: RESULT = new Integer(e1.intValue() * e2.intValue()); :} 
-	     | 
-         expr:e1 DIVIDE expr:e2 
-	     {: RESULT = new Integer(e1.intValue() / e2.intValue()); :} 
-	     | 
-         expr:e1 MOD expr:e2 
-	     {: RESULT = new Integer(e1.intValue() % e2.intValue()); :} 
-	     | 
-         NUMBER:n                 
-	     {: RESULT = n; :} 
-	     | 
-         MINUS expr:e             
-	     {: RESULT = new Integer(0 - e.intValue()); :} 
-	     %prec UMINUS
-	     | 
-         LPAREN expr:e RPAREN     
-	     {: RESULT = e; :} 
-	     ;
+statement ::= let_bind:s {:
+                RESULT = (Node)s;
+              :}
+            | full_exp:s {:
+                RESULT = (Node)s;
+              :}
+            ;
 
-boolean ::= TRUE {: RESULT = new Node("T"); :};
-          | FALSE (: RESULT = new Node("F"); :);
-          
+full_exp ::= simple_exp:e SEMICOL {: RESULT = (Node)e; :};
+
+simple_exp ::= INTEGER:i    {: RESULT = new Node(i); :}
+             | IDENTIFIER:i {: RESULT = new Node(i); :}
+             | simple_exp:e1 operator:o simple_exp:e2 {:
+                  Node n = (Node)o;
+                  n.addChild((Node)e1);
+                  n.addChild((Node)e2);
+                  RESULT = n;
+               :}
+             | LPAREN simple_exp:e RPAREN {:
+                 Node n = new Node("parens");
+                 n.addChild(new Node("("));
+                 n.addChild((Node)e);
+                 n.addChild(new Node(")"));
+                 RESULT = (Node)e;
+               :}
+             ;
+
 operator ::= PLUS  {: RESULT = new Node("+"); :}
            | MINUS {: RESULT = new Node("-"); :}
-           | TIMES  {: RESULT = new Node("*"); :}
-           | DIVIDE   {: RESULT = new Node("/"); :}
+           | MULT  {: RESULT = new Node("*"); :}
+           | DIV   {: RESULT = new Node("/"); :}
            ;
-           
+
 let_bind ::= LET IDENTIFIER:i EQUAL full_exp:e {:
                Node n = new Node("LET");
                n.addChild(new Node(i));

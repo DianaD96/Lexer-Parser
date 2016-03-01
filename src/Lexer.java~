@@ -33,12 +33,10 @@ class Lexer implements java_cup.runtime.Scanner {
    * Translates characters to character classes
    */
   private static final String ZZ_CMAP_PACKED = 
-    "\11\0\1\3\1\2\2\0\1\1\22\0\1\3\1\0\1\0\1\0"+
-    "\1\0\1\0\1\0\1\0\1\6\1\7\1\10\1\11\1\0\1\12"+
-    "\1\0\1\13\12\5\1\14\1\15\1\0\1\16\1\0\1\0\1\0"+
-    "\5\4\1\4\15\4\1\4\6\4\1\0\1\0\1\0\1\0\1\17"+
-    "\1\0\4\4\1\22\6\4\1\21\7\4\1\23\6\4\1\20\1\0"+
-    "\1\0\1\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uff91\0";
+    "\11\0\1\3\1\2\2\0\1\1\22\0\1\3\7\0\1\21\1\22"+
+    "\1\17\1\16\1\0\1\7\1\0\1\20\12\5\1\13\1\15\1\0"+
+    "\1\14\3\0\32\4\4\0\1\6\1\0\4\4\1\11\6\4\1\10"+
+    "\7\4\1\12\6\4\1\23\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uff94\0";
 
   /** 
    * Translates characters to character classes
@@ -51,12 +49,12 @@ class Lexer implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\1\1\1\2\2\3\1\4\1\1\1\5\1\6\1\7"+
-    "\1\10\1\11\1\2\1\12\1\13\1\4\1\14\1\4"+
-    "\1\15";
+    "\1\0\1\1\2\2\1\3\1\4\1\5\1\3\1\1"+
+    "\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\3"+
+    "\1\15\1\16";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[18];
+    int [] result = new int[19];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -81,12 +79,12 @@ class Lexer implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\24\0\50\0\24\0\74\0\120\0\24\0\24"+
-    "\0\24\0\24\0\24\0\144\0\24\0\24\0\170\0\24"+
-    "\0\214\0\74";
+    "\0\0\0\24\0\50\0\24\0\74\0\120\0\120\0\144"+
+    "\0\170\0\24\0\24\0\24\0\24\0\24\0\24\0\24"+
+    "\0\214\0\24\0\74";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[18];
+    int [] result = new int[19];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -109,12 +107,11 @@ class Lexer implements java_cup.runtime.Scanner {
   private static final int [] ZZ_TRANS = zzUnpackTrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\1\2\1\3\2\4\1\5\1\6\1\7\1\10\1\11"+
-    "\1\12\1\6\1\13\1\14\1\15\2\2\1\16\1\17"+
-    "\2\5\26\0\1\4\25\0\2\5\11\0\1\5\1\0"+
-    "\3\5\5\0\1\6\34\0\1\20\11\0\2\5\11\0"+
-    "\1\5\1\0\1\5\1\21\1\5\4\0\2\5\11\0"+
-    "\1\5\1\0\2\5\1\22";
+    "\1\2\1\3\2\4\1\5\1\6\1\2\1\7\1\10"+
+    "\2\5\1\11\1\2\1\12\1\13\1\14\1\15\1\16"+
+    "\1\17\1\20\26\0\1\4\25\0\3\5\1\0\3\5"+
+    "\16\0\1\6\22\0\3\5\1\0\1\5\1\21\1\5"+
+    "\25\0\1\22\13\0\3\5\1\0\2\5\1\23\11\0";
 
   private static int [] zzUnpackTrans() {
     int [] result = new int[160];
@@ -155,11 +152,11 @@ class Lexer implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\1\1\11\1\1\1\11\2\1\5\11\1\1\2\11"+
-    "\1\1\1\11\2\1";
+    "\1\0\1\11\1\1\1\11\5\1\7\11\1\1\1\11"+
+    "\1\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[18];
+    int [] result = new int[19];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -303,7 +300,7 @@ class Lexer implements java_cup.runtime.Scanner {
     char [] map = new char[0x110000];
     int i = 0;  /* index in packed string  */
     int j = 0;  /* index in unpacked array */
-    while (i < 138) {
+    while (i < 102) {
       int  count = packed.charAt(i++);
       char value = packed.charAt(i++);
       do map[j++] = value; while (--count > 0);
@@ -667,60 +664,64 @@ class Lexer implements java_cup.runtime.Scanner {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1: 
-            { return symbol(sym.INTEGER,
-                                Integer.parseInt(yytext()));
-            }
-          case 14: break;
-          case 2: 
             { System.out.println("file:" + (yyline+1) +
     ":0: Error: Invalid input '" + yytext()+"'");
   return symbol(sym.BADCHAR);
             }
           case 15: break;
-          case 3: 
+          case 2: 
             { /* do nothing */
             }
           case 16: break;
-          case 4: 
+          case 3: 
             { return symbol(sym.IDENTIFIER, yytext());
             }
           case 17: break;
-          case 5: 
-            { return symbol(sym.LPAREN);
+          case 4: 
+            { return symbol(sym.INTEGER,
+                                Integer.parseInt(yytext()));
             }
           case 18: break;
-          case 6: 
-            { return symbol(sym.RPAREN);
+          case 5: 
+            { return symbol(sym.MINUS);
             }
           case 19: break;
-          case 7: 
-            { return symbol(sym.MULT);
+          case 6: 
+            { return symbol(sym.SEMICOL);
             }
           case 20: break;
-          case 8: 
+          case 7: 
             { return symbol(sym.PLUS);
             }
           case 21: break;
+          case 8: 
+            { return symbol(sym.MULT);
+            }
+          case 22: break;
           case 9: 
             { return symbol(sym.DIV);
             }
-          case 22: break;
-          case 10: 
-            { return symbol(sym.SEMICOL);
-            }
           case 23: break;
-          case 11: 
-            { return symbol(sym.CLPAREN);
+          case 10: 
+            { return symbol(sym.LPAREN);
             }
           case 24: break;
-          case 12: 
-            { return symbol(sym.EQUAL);
+          case 11: 
+            { return symbol(sym.RPAREN);
             }
           case 25: break;
-          case 13: 
-            { return symbol(sym.LET);
+          case 12: 
+            { return symbol(sym.CLPAREN);
             }
           case 26: break;
+          case 13: 
+            { return symbol(sym.EQUAL);
+            }
+          case 27: break;
+          case 14: 
+            { return symbol(sym.LET);
+            }
+          case 28: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }
