@@ -38,6 +38,8 @@ import java_cup.runtime.*;
         System.out.print(")"); break;
       case sym.CLPAREN:
         System.out.print("{"); break;
+      case sym.RLPAREN:
+        System.out.print("}"); break;
       case sym.INTEGER:
         System.out.printf("INT %d", value); break;
       case sym.IDENTIFIER:
@@ -68,7 +70,6 @@ Digit = [0-9]
 Character = "\""{Letter}"\"" | "\""{Digit}"\"" | "\""{Punctuation}"\""
 
 Identifier = {Letter}("_" | {Letter} | {Digit})*
-Integer = {Digit}+ | "-"{Digit}+
 Punctuation = "!" | "\"" | "#" | "%" | "%" | "&" | "'" | "(" | ")" | "*" | "+" | "," | "-" | "." | "/" | "\\" | ":" | ";" | "<" | "=" | ">" | "?" | "@" | "[" | "]" | "^" | "_" | "`" | "{" | "}" | "|" | "~" 
 
 Comment = {OneLineComment} | {MultipleLineComment}
@@ -78,7 +79,7 @@ MultipleLineComment = "/#"({Character}|{Whitespace})*"#/"
 BooleanConstants = "T" | "F"
 
 Number = {Integer} | {Rational} | {Float}
-Integer = {Digit}* | "-"{Digit}* 
+Integer = {Digit}+ | "-"{Digit}+ 
 Rational = {Digit}*"/"{Digit}* | "-"{Digit}*"/"{Digit}* | {Digit}*"_"{Digit}*"/"{Digit}* | "-"{Digit}*"_"{Digit}*"/"{Digit}*      //Dividing by zero?
 Float =  {Digit}*"."{Digit}* | "-"{Digit}*"."{Digit}*
 
@@ -89,9 +90,9 @@ Float =  {Digit}*"."{Digit}* | "-"{Digit}*"."{Digit}*
   "let"         { return symbol(sym.LET);        }
   {Integer}     { return symbol(sym.INTEGER,
                                 Integer.parseInt(yytext())); }
+  {BooleanConstants} {return symbol(sym.BOOLEAN, yytext());}
   {Identifier}  { return symbol(sym.IDENTIFIER, yytext());   }
 
-  {BooleanConstants} {return symbol(sym.BOOLEAN, yytext());}
   {Whitespace}  { /* do nothing */               }
 
   ":="          { return symbol(sym.EQUAL);      }
@@ -103,6 +104,7 @@ Float =  {Digit}*"."{Digit}* | "-"{Digit}*"."{Digit}*
   "("           { return symbol(sym.LPAREN);     }
   ")"           { return symbol(sym.RPAREN);     }
   "{"           { return symbol(sym.CLPAREN);    }
+  "}"           { return symbol(sym.RLPAREN);    }
 
 }
 
