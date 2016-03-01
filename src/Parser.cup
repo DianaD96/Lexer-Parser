@@ -52,7 +52,7 @@ terminal LPAREN, RPAREN, CRPAREN, CLPAREN;
 terminal BADCHAR;
 
 nonterminal statements, statement, top_level;
-nonterminal let_bind, full_exp, simple_exp, operator, comment;
+nonterminal let_bind, full_exp, simple_exp, operator, comment, number;
 
 precedence left PLUS, MINUS;
 precedence left DIV, MULT;
@@ -81,6 +81,9 @@ statement ::= let_bind:s {:
               :}
              | comment:s {:
                RESULT = (Node)s;
+              :}
+             | number:s {:
+               RESULT = (Node)s;
               :};
        
 comment ::= COMMENT:t {:
@@ -89,6 +92,11 @@ comment ::= COMMENT:t {:
 
 full_exp ::= simple_exp:e SEMICOL {: RESULT = (Node)e; :};
 
+
+number ::= INT:i {: RESULT = new Node(i); :}
+         | RAT:i {: RESULT = new Node(i); :}
+         | FLOAT:i {: RESULT = new Node(i); :};
+         
 simple_exp ::= INT:i    {: RESULT = new Node(i); :}
              | IDENTIFIER:i {: RESULT = new Node(i); :}
              | simple_exp:e1 operator:o simple_exp:e2 {:
