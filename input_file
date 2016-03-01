@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 main {
 	fibonacci( 13 );
 	return;
@@ -14,3 +15,15 @@ fdef fibonacci(int pos) : int {
 }
 
 
+=======
+let x := 4;
+
+let y := (x + 7) / 3;
+
+let z :=
+  x * 9 + 4;
+
+let w := ((z + 7) * (y / (3 * x)));
+
+6 / w;
+>>>>>>> origin/master

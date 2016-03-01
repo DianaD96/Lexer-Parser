@@ -8,18 +8,27 @@ import java_cup.runtime.*;
 class SC {
     public static void main(String[] args) {
     	
+<<<<<<< HEAD
     	boolean showLexing=false;
     	boolean showParsing=false; 
     	String inputFile = null;
     	
     	Lexer lexer;
        	
+=======
+    	boolean showLexing;
+    	boolean showParser; 
+    	
+0    	Lexer lexer;
+    	
+>>>>>>> origin/master
     	if (args.length < 1 || args.length>2)
     	{
     		System.err.printf("Wrong input");
     		System.exit(1);
     	}
     	
+<<<<<<< HEAD
     	for(String arg : args){
     	      if     (arg.equals("show-lexing"))  showLexing = true;
     	      else if(arg.equals("show-parsing")) showParsing = true;
@@ -37,6 +46,8 @@ class SC {
     	      System.exit(1);
     	    }
     	
+=======
+>>>>>>> origin/master
 		try {
 			lexer = new Lexer(new FileReader(inputFile));
 		    Parser parser = new Parser(lexer);
@@ -57,6 +68,7 @@ class SC {
 		      }
 				
 				
+<<<<<<< HEAD
 		      //System.out.println();
 	    } catch (FileNotFoundException e) {
 	      System.err.printf("Could not find file <%s>\n", args[0]);
@@ -65,5 +77,15 @@ class SC {
 	    } catch (/* Yuk, but CUP gives us no choice */ Exception e) {
 	      e.printStackTrace();
 	    }
+=======
+			} catch (Exception e) {
+				// Commented out because this output is uniformative.  ETB
+				//e.printStackTrace();
+			}
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+		      System.err.printf("Could not find file <%s>\n", args[0]);
+		}
+>>>>>>> origin/master
     }
 }
