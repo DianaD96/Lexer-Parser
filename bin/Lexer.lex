@@ -21,7 +21,7 @@ import java_cup.runtime.*;
       case sym.LET:
         System.out.print("LET"); break;
       case sym.EQUAL:
-        System.out.print(":="); break;
+        System.out.print("="); break;
       case sym.SEMICOL:
         System.out.print(";"); break;
       case sym.PLUS:
@@ -110,7 +110,7 @@ Float =  {Digit}+"."{Digit}+ | "-"{Digit}+"."{Digit}+
 
   {Whitespace}  { /* do nothing */               }
 
-  ":="          { return symbol(sym.EQUAL);      }
+  "="          { return symbol(sym.EQUAL);      }
   ";"           { return symbol(sym.SEMICOL);    }
   "+"           { return symbol(sym.PLUS);       }
   "-"           { return symbol(sym.MINUS);      }

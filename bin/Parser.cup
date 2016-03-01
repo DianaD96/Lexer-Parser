@@ -112,7 +112,8 @@ simple_exp ::= INT:i        {: RESULT = new Node(i); :}
                :}
              ;
 
-operator ::= PLUS  {: RESULT = new Node("+"); :}
+operator ::= EQUAL {: RESULT = new Node("="); :}
+           | PLUS  {: RESULT = new Node("+"); :}
            | MINUS {: RESULT = new Node("-"); :}
            | MULT  {: RESULT = new Node("*"); :}
            | DIV   {: RESULT = new Node("/"); :}
