@@ -20,6 +20,7 @@ public class sym {
   public static final int BADCHAR = 13;
   public static final int LET = 4;
   public static final int LPAREN = 11;
+  public static final int CLPAREN = 14;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -34,6 +35,7 @@ public class sym {
   "DIV",
   "LPAREN",
   "RPAREN",
+  "CLPAREN",
   "BADCHAR"
   };
 }

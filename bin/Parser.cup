@@ -50,7 +50,7 @@ acan with {: return scanner.next_token(); :};
 /* Terminals (tokens returned by the scanner) */
 terminal INTEGER, IDENTIFIER; 
 terminal SEMI, PLUS, MINUS, TIMES, DIVIDE, MOD;
-terminal UMINUS, LPAREN, RPAREN;
+terminal UMINUS, LPAREN, RPAREN, CLPAREN;
 terminal bool TRUE, FALSE;
 terminal int NUMBER_INT;
 terminal rat NUMBER_RAT;
