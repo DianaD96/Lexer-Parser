@@ -96,12 +96,12 @@ Float =  {Digit}*"."{Digit}* | "-"{Digit}*"."{Digit}*
 
 <YYINITIAL> {
   "let"         { return symbol(sym.LET);        }
+  {Comment} {return symbol(sym.COMMENT, yytext());}
   {Integer}     { return symbol(sym.INT, Integer.parseInt(yytext())); }
   {Float}     { return symbol(sym.FLOAT, Float.parseFloat(yytext())); }
   {Rational}     { return symbol(sym.RAT, yytext()); }
   {BooleanConstants} {return symbol(sym.BOOLEAN, yytext());}
   {Character} {return symbol(sym.CHAR, yytext());}
-  {Comment} {return symbol(sym.COMMENT, yytext());}
   {Identifier}  { return symbol(sym.IDENTIFIER, yytext());   }
 
   {Whitespace}  { /* do nothing */               }

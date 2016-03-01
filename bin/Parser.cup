@@ -47,12 +47,12 @@ parser code {:
 :};
 
 // Do something with ILLEGAL_CHARARCTER or drop it.
-terminal INTEGER, IDENTIFIER, BOOLEAN,	 LET, EQUAL, SEMICOL, PLUS, MINUS, MULT, DIV;
+terminal INT, FLOAT, RAT, CHAR, IDENTIFIER, COMMENT, BOOLEAN, LET, EQUAL, SEMICOL, PLUS, MINUS, MULT, DIV;
 terminal LPAREN, RPAREN, CRPAREN, CLPAREN;
 terminal BADCHAR;
 
 nonterminal statements, statement, top_level;
-nonterminal let_bind, full_exp, simple_exp, operator, test;
+nonterminal let_bind, full_exp, simple_exp, operator, comment;
 
 precedence left PLUS, MINUS;
 precedence left DIV, MULT;
@@ -79,10 +79,13 @@ statement ::= let_bind:s {:
             | full_exp:s {:
                 RESULT = (Node)s;
               :}
-             | test:s {:
-                RESULT = (Node)s;
-             :}
-            ;
+             | comment:s {:
+               RESULT = (Node)s;
+              :};
+       
+comment ::= COMMENT:t {:
+             RESULT = new Node(t); ;
+         :};
 
 full_exp ::= simple_exp:e SEMICOL {: RESULT = (Node)e; :};
 
