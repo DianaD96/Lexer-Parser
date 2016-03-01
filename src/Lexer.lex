@@ -36,12 +36,14 @@ import java_cup.runtime.*;
         System.out.print("("); break;
       case sym.RPAREN:
         System.out.print(")"); break;
+      case sym.CLPAREN:
+        System.out.print("{"); break;
       case sym.INTEGER:
         System.out.printf("INT %d", value); break;
       case sym.IDENTIFIER:
         System.out.printf("IDENT %s", value); break;
     }
-    System.out.print(">  ");
+    System.out.print(">");
   }
 
   private Symbol symbol(int type) {
@@ -93,6 +95,7 @@ Float =  {Digit}*"."{Digit}* | "-"{Digit}*"."{Digit}*
   "/"           { return symbol(sym.DIV);        }
   "("           { return symbol(sym.LPAREN);     }
   ")"           { return symbol(sym.RPAREN);     }
+  "{"           { return symbol(sym.CLPAREN);    }
 
 }
 
