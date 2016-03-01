@@ -78,7 +78,7 @@ NonNewlineWhitespace = \r|" "|"\t"
 Letter = [a-zA-Z]
 Digit = [0-9]
 Character = "\""{Letter}"\"" | "\""{Digit}"\"" | "\""{Punctuation}"\""
-Str = "\" ({Letter}|{Digit}|{Punctuation}|{NonNewlineWhitespace})*  \""
+Str = "\"({Letter}|{Digit}|{Punctuation}|{NonNewlineWhitespace})* \""
 
 Identifier = {Letter}("_" | {Letter} | {Digit})*
 Punctuation = "!" | "\"" | "#" | "%" | "%" | "&" | "'" | "(" | ")" | "*" | "+" | "," | "-" | "." | "/" | "\\" | ":" | ";" | "<" | "=" | ">" | "?" | "@" | "[" | "]" | "^" | "_" | "`" | "{" | "}" | "|" | "~" 
