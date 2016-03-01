@@ -42,6 +42,8 @@ import java_cup.runtime.*;
         System.out.printf("INT %d", value); break;
       case sym.IDENTIFIER:
         System.out.printf("IDENT %s", value); break;
+      case sym.BOOLEAN:
+        System.out.printf("BOOL %s", value); break;
     }
     System.out.print(">");
   }
@@ -57,19 +59,17 @@ import java_cup.runtime.*;
 
 %}
 
+
 Whitespace = \r|\n|\r\n|" "|"\t" 
+NonNewlineWhitespace = \r|" "|"\t" 
 
 Letter = [a-zA-Z]
 Digit = [0-9]
-
+Character = "\""{Letter}"\"" | "\""{Digit}"\"" | "\""{Punctuation}"\""
 
 Identifier = {Letter}("_" | {Letter} | {Digit})*
 Integer = {Digit}+ | "-"{Digit}+
-/*
-
 Punctuation = "!" | "\"" | "#" | "%" | "%" | "&" | "'" | "(" | ")" | "*" | "+" | "," | "-" | "." | "/" | "\\" | ":" | ";" | "<" | "=" | ">" | "?" | "@" | "[" | "]" | "^" | "_" | "`" | "{" | "}" | "|" | "~" 
-NonNewlineWhitespace = \r|" "|"\t" 
-Character = "\""{Letter}"\"" | "\""{Digit}"\"" | "\""{Punctuation}"\""
 
 Comment = {OneLineComment} | {MultipleLineComment}
 OneLineComment = ({Character} | {NonNewlineWhitespace})*"#"
@@ -81,7 +81,8 @@ Number = {Integer} | {Rational} | {Float}
 Integer = {Digit}* | "-"{Digit}* 
 Rational = {Digit}*"/"{Digit}* | "-"{Digit}*"/"{Digit}* | {Digit}*"_"{Digit}*"/"{Digit}* | "-"{Digit}*"_"{Digit}*"/"{Digit}*      //Dividing by zero?
 Float =  {Digit}*"."{Digit}* | "-"{Digit}*"."{Digit}*
-*/
+
+
 %%
 
 <YYINITIAL> {
@@ -90,6 +91,7 @@ Float =  {Digit}*"."{Digit}* | "-"{Digit}*"."{Digit}*
                                 Integer.parseInt(yytext())); }
   {Identifier}  { return symbol(sym.IDENTIFIER, yytext());   }
 
+  {BooleanConstants} {return symbol(sym.BOOLEAN, yytext());}
   {Whitespace}  { /* do nothing */               }
 
   ":="          { return symbol(sym.EQUAL);      }
