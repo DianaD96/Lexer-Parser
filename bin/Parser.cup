@@ -118,7 +118,5 @@ let_bind ::= LET IDENTIFIER:i EQUAL full_exp:e {:
 
 test ::= BOOLEAN:i {:
                Node n = new Node(i);
-               n.addChild(new Node(i));
-               n.addChild((Node)e);
                RESULT = n;
              :};

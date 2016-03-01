@@ -38,7 +38,7 @@ import java_cup.runtime.*;
         System.out.print(")"); break;
       case sym.CLPAREN:
         System.out.print("{"); break;
-      case sym.RLPAREN:
+      case sym.CRPAREN:
         System.out.print("}"); break;
       case sym.INTEGER:
         System.out.printf("INT %d", value); break;
@@ -104,7 +104,7 @@ Float =  {Digit}*"."{Digit}* | "-"{Digit}*"."{Digit}*
   "("           { return symbol(sym.LPAREN);     }
   ")"           { return symbol(sym.RPAREN);     }
   "{"           { return symbol(sym.CLPAREN);    }
-  "}"           { return symbol(sym.RLPAREN);    }
+  "}"           { return symbol(sym.CRPAREN);    }
 
 }
 

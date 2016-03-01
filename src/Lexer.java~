@@ -264,7 +264,7 @@ class Lexer implements java_cup.runtime.Scanner {
         System.out.print(")"); break;
       case sym.CLPAREN:
         System.out.print("{"); break;
-      case sym.RLPAREN:
+      case sym.CRPAREN:
         System.out.print("}"); break;
       case sym.INTEGER:
         System.out.printf("INT %d", value); break;
@@ -722,7 +722,7 @@ class Lexer implements java_cup.runtime.Scanner {
             }
           case 28: break;
           case 13: 
-            { return symbol(sym.RLPAREN);
+            { return symbol(sym.CRPAREN);
             }
           case 29: break;
           case 14: 
