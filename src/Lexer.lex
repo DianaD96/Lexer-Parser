@@ -40,10 +40,18 @@ import java_cup.runtime.*;
         System.out.print("{"); break;
       case sym.CRPAREN:
         System.out.print("}"); break;
-      case sym.INTEGER:
+      case sym.INT:
         System.out.printf("INT %d", value); break;
+      case sym.FLOAT:
+        System.out.printf("FLOAT %d", value); break;
+      case sym.RAT:
+        System.out.printf("RAT %d", value); break;
+      case sym.CHAR:
+        System.out.printf("CHAR %d", value); break;
       case sym.IDENTIFIER:
         System.out.printf("IDENT %s", value); break;
+      case sym.COMMENT:
+        System.out.printf("COMMENT %s", value); break;
       case sym.BOOLEAN:
         System.out.printf("BOOL %s", value); break;
     }
@@ -88,9 +96,12 @@ Float =  {Digit}*"."{Digit}* | "-"{Digit}*"."{Digit}*
 
 <YYINITIAL> {
   "let"         { return symbol(sym.LET);        }
-  {Integer}     { return symbol(sym.INTEGER,
-                                Integer.parseInt(yytext())); }
+  {Integer}     { return symbol(sym.INT, Integer.parseInt(yytext())); }
+  {Float}     { return symbol(sym.FLOAT, Float.parseFloat(yytext())); }
+  {Rational}     { return symbol(sym.RAT, yytext()); }
   {BooleanConstants} {return symbol(sym.BOOLEAN, yytext());}
+  {Character} {return symbol(sym.CHAR, yytext());}
+  {Comment} {return symbol(sym.COMMENT, yytext());}
   {Identifier}  { return symbol(sym.IDENTIFIER, yytext());   }
 
   {Whitespace}  { /* do nothing */               }
