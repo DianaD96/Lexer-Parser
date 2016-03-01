@@ -6,27 +6,28 @@
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int PLUS = 12;
-  public static final int BADCHAR = 20;
-  public static final int RPAREN = 17;
+  public static final int PLUS = 13;
+  public static final int BADCHAR = 21;
+  public static final int RPAREN = 18;
   public static final int INT = 2;
-  public static final int EQUAL = 10;
+  public static final int EQUAL = 11;
   public static final int CHAR = 5;
-  public static final int IDENTIFIER = 6;
-  public static final int CRPAREN = 18;
-  public static final int LPAREN = 16;
-  public static final int BOOLEAN = 8;
+  public static final int IDENTIFIER = 7;
+  public static final int CRPAREN = 19;
+  public static final int LPAREN = 17;
+  public static final int BOOLEAN = 9;
   public static final int FLOAT = 3;
   public static final int EOF = 0;
-  public static final int MULT = 14;
-  public static final int CLPAREN = 19;
-  public static final int DIV = 15;
-  public static final int SEMICOL = 11;
-  public static final int COMMENT = 7;
+  public static final int MULT = 15;
+  public static final int CLPAREN = 20;
+  public static final int DIV = 16;
+  public static final int SEMICOL = 12;
+  public static final int COMMENT = 8;
   public static final int RAT = 4;
-  public static final int MINUS = 13;
+  public static final int MINUS = 14;
   public static final int error = 1;
-  public static final int LET = 9;
+  public static final int LET = 10;
+  public static final int STR = 6;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -34,6 +35,7 @@ public class sym {
   "FLOAT",
   "RAT",
   "CHAR",
+  "STR",
   "IDENTIFIER",
   "COMMENT",
   "BOOLEAN",

@@ -78,23 +78,24 @@ statement ::= let_bind:s {:
               :}
             | full_exp:s {:
                 RESULT = (Node)s;
-              };
+              :}
             | simple_exp:s {:
                 RESULT = (Node)s;
-              :}
+              :};
            
        
 
 full_exp ::= simple_exp:e SEMICOL {: RESULT = (Node)e; :};
 
          
-simple_exp ::= INT:i    {: RESULT = new Node(i); :}
-             | RAT:i {: RESULT = new Node(i); :}
-             | FLOAT:i {: RESULT = new Node(i); :};
+simple_exp ::= INT:i        {: RESULT = new Node(i); :}
+             | RAT:i        {: RESULT = new Node(i); :}
+             | FLOAT:i      {: RESULT = new Node(i); :}
              | IDENTIFIER:i {: RESULT = new Node(i); :}
-             | STR:i {: RESULT = new Node(i); :}
              
-             | COMMENT:t {: RESULT = new Node(t); :}
+             | STR:i        {: RESULT = new Node(i); :}
+             | COMMENT:t    {: RESULT = new Node(t); :}
+             
              | simple_exp:e1 operator:o simple_exp:e2 {:
                   Node n = (Node)o;
                   n.addChild((Node)e1);

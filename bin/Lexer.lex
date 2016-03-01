@@ -93,7 +93,7 @@ Number = {Integer} | {Rational} | {Float}
 Integer = {Digit}+ | "-"{Digit}+ 
 Rational = {Digit}+"/"{Digit}+ | "-"{Digit}+"/"{Digit}+ | {Digit}+"_"{Digit}+"/"{Digit}+ | "-"{Digit}+"_"{Digit}+"/"{Digit}+      //Dividing by zero?
 Float =  {Digit}+"."{Digit}+ | "-"{Digit}+"."{Digit}+
-
+ 
 
 %%
 
