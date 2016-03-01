@@ -45,7 +45,7 @@ import java_cup.runtime.*;
       case sym.FLOAT:
         System.out.printf("FLOAT %f", value); break;
       case sym.RAT:
-        System.out.printf("RAT %d", value); break;
+        System.out.printf("RAT %s", value); break;
       case sym.CHAR:
         System.out.printf("CHAR %d", value); break;
       case sym.IDENTIFIER:
@@ -54,6 +54,8 @@ import java_cup.runtime.*;
         System.out.printf("COMMENT %s", value); break;
       case sym.BOOLEAN:
         System.out.printf("BOOL %s", value); break;
+      case sym.STRING:
+        System.out.printf("STR %S", value); break;
     }
     System.out.print(">");
   }
@@ -76,6 +78,7 @@ NonNewlineWhitespace = \r|" "|"\t"
 Letter = [a-zA-Z]
 Digit = [0-9]
 Character = "\""{Letter}"\"" | "\""{Digit}"\"" | "\""{Punctuation}"\""
+Str = "\" ({Letter}|{Digit}|{Punctuation}|{NonNewlineWhitespace})*  \""
 
 Identifier = {Letter}("_" | {Letter} | {Digit})*
 Punctuation = "!" | "\"" | "#" | "%" | "%" | "&" | "'" | "(" | ")" | "*" | "+" | "," | "-" | "." | "/" | "\\" | ":" | ";" | "<" | "=" | ">" | "?" | "@" | "[" | "]" | "^" | "_" | "`" | "{" | "}" | "|" | "~" 
@@ -97,11 +100,12 @@ Float =  {Digit}+"."{Digit}+ | "-"{Digit}+"."{Digit}+
 <YYINITIAL> {
   "let"         { return symbol(sym.LET);        }
   {Comment} {return symbol(sym.COMMENT, yytext());}
+  {Character} {return symbol(sym.CHAR, yytext());}
+  {Str} {return symbol(sym.STR, yytext());}
   {Integer}     { return symbol(sym.INT, Integer.parseInt(yytext())); }
   {Float}     { return symbol(sym.FLOAT, Float.parseFloat(yytext())); }
   {Rational}     { return symbol(sym.RAT, yytext()); }
   {BooleanConstants} {return symbol(sym.BOOLEAN, yytext());}
-  {Character} {return symbol(sym.CHAR, yytext());}
   {Identifier}  { return symbol(sym.IDENTIFIER, yytext());   }
 
   {Whitespace}  { /* do nothing */               }

@@ -47,12 +47,12 @@ parser code {:
 :};
 
 // Do something with ILLEGAL_CHARARCTER or drop it.
-terminal INT, FLOAT, RAT, CHAR, IDENTIFIER, COMMENT, BOOLEAN, LET, EQUAL, SEMICOL, PLUS, MINUS, MULT, DIV;
+terminal INT, FLOAT, RAT, CHAR, STR, IDENTIFIER, COMMENT, BOOLEAN, LET, EQUAL, SEMICOL, PLUS, MINUS, MULT, DIV;
 terminal LPAREN, RPAREN, CRPAREN, CLPAREN;
 terminal BADCHAR;
 
 nonterminal statements, statement, top_level;
-nonterminal let_bind, full_exp, simple_exp, operator, comment, number;
+nonterminal let_bind, full_exp, simple_exp, operator;
 
 precedence left PLUS, MINUS;
 precedence left DIV, MULT;
@@ -78,33 +78,30 @@ statement ::= let_bind:s {:
               :}
             | full_exp:s {:
                 RESULT = (Node)s;
+              };
+            | simple_exp:s {:
+                RESULT = (Node)s;
               :}
-             | comment:s {:
-               RESULT = (Node)s;
-              :}
-             | number:s {:
-               RESULT = (Node)s;
-              :};
+           
        
-comment ::= COMMENT:t {:
-             RESULT = new Node(t); ;
-         :};
 
 full_exp ::= simple_exp:e SEMICOL {: RESULT = (Node)e; :};
 
-
-number ::= INT:i {: RESULT = new Node(i); :}
-         | RAT:i {: RESULT = new Node(i); :}
-         | FLOAT:i {: RESULT = new Node(i); :};
          
 simple_exp ::= INT:i    {: RESULT = new Node(i); :}
+             | RAT:i {: RESULT = new Node(i); :}
+             | FLOAT:i {: RESULT = new Node(i); :};
              | IDENTIFIER:i {: RESULT = new Node(i); :}
+             | STR:i {: RESULT = new Node(i); :}
+             
+             | COMMENT:t {: RESULT = new Node(t); :}
              | simple_exp:e1 operator:o simple_exp:e2 {:
                   Node n = (Node)o;
                   n.addChild((Node)e1);
                   n.addChild((Node)e2);
                   RESULT = n;
                :}
+               
              | LPAREN simple_exp:e RPAREN {:
                  Node n = new Node("parens");
                  n.addChild(new Node("("));

@@ -292,7 +292,7 @@ class Lexer implements java_cup.runtime.Scanner {
       case sym.FLOAT:
         System.out.printf("FLOAT %f", value); break;
       case sym.RAT:
-        System.out.printf("RAT %d", value); break;
+        System.out.printf("RAT %s", value); break;
       case sym.CHAR:
         System.out.printf("CHAR %d", value); break;
       case sym.IDENTIFIER:
