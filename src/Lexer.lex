@@ -43,7 +43,7 @@ import java_cup.runtime.*;
       case sym.INT:
         System.out.printf("INT %d", value); break;
       case sym.FLOAT:
-        System.out.printf("FLOAT %d", value); break;
+        System.out.printf("FLOAT %f", value); break;
       case sym.RAT:
         System.out.printf("RAT %d", value); break;
       case sym.CHAR:
@@ -102,7 +102,7 @@ Float =  {Digit}+"."{Digit}+ | "-"{Digit}+"."{Digit}+
   {Rational}     { return symbol(sym.RAT, yytext()); }
   {BooleanConstants} {return symbol(sym.BOOLEAN, yytext());}
   {Character} {return symbol(sym.CHAR, yytext());}
-  //{Identifier}  { return symbol(sym.IDENTIFIER, yytext());   }
+  {Identifier}  { return symbol(sym.IDENTIFIER, yytext());   }
 
   {Whitespace}  { /* do nothing */               }
 
