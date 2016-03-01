@@ -81,8 +81,8 @@ Identifier = {Letter}("_" | {Letter} | {Digit})*
 Punctuation = "!" | "\"" | "#" | "%" | "%" | "&" | "'" | "(" | ")" | "*" | "+" | "," | "-" | "." | "/" | "\\" | ":" | ";" | "<" | "=" | ">" | "?" | "@" | "[" | "]" | "^" | "_" | "`" | "{" | "}" | "|" | "~" 
 
 Comment = {OneLineComment} | {MultipleLineComment}
-OneLineComment = ({Character} | {NonNewlineWhitespace})*"#"
-MultipleLineComment = "/#"({Character}|{Whitespace})*"#/"
+OneLineComment = (({Letter} | {Digit} | {Punctuation}) | {NonNewlineWhitespace})*"#"
+MultipleLineComment = "/#"(({Letter} | {Digit} | {Punctuation})|{Whitespace})*"#/"
 
 BooleanConstants = "T" | "F"
 
@@ -102,7 +102,7 @@ Float =  {Digit}*"."{Digit}* | "-"{Digit}*"."{Digit}*
   {Rational}     { return symbol(sym.RAT, yytext()); }
   {BooleanConstants} {return symbol(sym.BOOLEAN, yytext());}
   {Character} {return symbol(sym.CHAR, yytext());}
-  {Identifier}  { return symbol(sym.IDENTIFIER, yytext());   }
+  //{Identifier}  { return symbol(sym.IDENTIFIER, yytext());   }
 
   {Whitespace}  { /* do nothing */               }
 
