@@ -89,7 +89,7 @@ comment ::= COMMENT:t {:
 
 full_exp ::= simple_exp:e SEMICOL {: RESULT = (Node)e; :};
 
-simple_exp ::= INTEGER:i    {: RESULT = new Node(i); :}
+simple_exp ::= INT:i    {: RESULT = new Node(i); :}
              | IDENTIFIER:i {: RESULT = new Node(i); :}
              | simple_exp:e1 operator:o simple_exp:e2 {:
                   Node n = (Node)o;
