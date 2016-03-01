@@ -54,7 +54,7 @@ import java_cup.runtime.*;
         System.out.printf("COMMENT %s", value); break;
       case sym.BOOLEAN:
         System.out.printf("BOOL %s", value); break;
-      case sym.STRING:
+      case sym.STR:
         System.out.printf("STR %S", value); break;
     }
     System.out.print(">");
@@ -78,7 +78,7 @@ NonNewlineWhitespace = \r|" "|"\t"
 Letter = [a-zA-Z]
 Digit = [0-9]
 Character = "\""{Letter}"\"" | "\""{Digit}"\"" | "\""{Punctuation}"\""
-Str = "\"({Letter}|{Digit}|{Punctuation}|{NonNewlineWhitespace})* \""
+Str = "\""({Letter}|{Digit}|{Punctuation}|{NonNewlineWhitespace})* "\""
 
 Identifier = {Letter}("_" | {Letter} | {Digit})*
 Punctuation = "!" | "\"" | "#" | "%" | "%" | "&" | "'" | "(" | ")" | "*" | "+" | "," | "-" | "." | "/" | "\\" | ":" | ";" | "<" | "=" | ">" | "?" | "@" | "[" | "]" | "^" | "_" | "`" | "{" | "}" | "|" | "~" 
