@@ -48,11 +48,11 @@ parser code {:
 
 // Do something with ILLEGAL_CHARARCTER or drop it.
 terminal INT, FLOAT, RAT, CHAR, STR, IDENTIFIER, COMMENT, BOOLEAN, LET, EQUAL, SEMICOL, PLUS, MINUS, MULT, DIV;
-terminal LPAREN, RPAREN, CRPAREN, CLPAREN;
-terminal BADCHAR;
+terminal LPAREN, RPAREN, CRPAREN, CLPAREN, COLON, COMMA;
+terminal BADCHAR; 
 
 nonterminal statements, statement, top_level;
-nonterminal let_bind, full_exp, simple_exp, operator;
+nonterminal let_bind, full_exp, simple_exp, operator, colon, dictionary_value;
 
 precedence left EQUAL;
 precedence left PLUS, MINUS;
@@ -82,14 +82,13 @@ statement ::= let_bind:s {:
               :}
             | simple_exp:s {:
                 RESULT = (Node)s;
+              :}
+            | dictionary_value:s {:
+                RESULT = (Node)s;
               :};
            
-       
-
+      
 full_exp ::= simple_exp:e SEMICOL {: RESULT = (Node)e; :};
-
-
-
          
 simple_exp ::= INT:i        {: RESULT = new Node(i); :}
              | RAT:i        {: RESULT = new Node(i); :}
@@ -97,6 +96,7 @@ simple_exp ::= INT:i        {: RESULT = new Node(i); :}
              | BOOLEAN:i    {: RESULT = new Node(i); :}
              | IDENTIFIER:i {: RESULT = new Node(i); :}
              
+             | CHAR:i       {: RESULT = new Node(i); :}
              | STR:i        {: RESULT = new Node(i); :}
              | COMMENT:t    {: RESULT = new Node(t); :}
              
@@ -120,8 +120,25 @@ operator ::= EQUAL {: RESULT = new Node("="); :}
            | PLUS  {: RESULT = new Node("+"); :}
            | MINUS {: RESULT = new Node("-"); :}
            | MULT  {: RESULT = new Node("*"); :}
-           | DIV   {: RESULT = new Node("/"); :}
-           ;
+           | DIV   {: RESULT = new Node("/"); :};
+           
+dictionary_value ::= INT:i COLON CHAR:j {:
+                     Node n = new Node(":");
+                     n.addChild((Node)i);
+                     n.addChild((Node)j);
+                     RESULT = (Node)n;
+                 :};
+
+dictionary ::= CLPAREN dictionary_value:i CRPAREN {:
+               Node n = new Node("DITIONARY");
+               n.addChild("{");
+               n.addChild((Node)i);
+               n.addChild("}");
+               RESULT = (Node)n;
+             :}
+             | CLPAREN CRPAREN {: Node n = new Node("DICTIONARY"); n.addChild("{"); n.addChild("}"); RESULT = (Node)n; :};
+             
+colon ::= COLON {: RESULT = new Node(":"); :};
 
 let_bind ::= LET IDENTIFIER:i EQUAL full_exp:e {:
                Node n = new Node("LET");

@@ -7,15 +7,17 @@
 public class sym {
   /* terminals */
   public static final int PLUS = 13;
-  public static final int BADCHAR = 21;
+  public static final int BADCHAR = 23;
   public static final int RPAREN = 18;
   public static final int INT = 2;
   public static final int EQUAL = 11;
   public static final int CHAR = 5;
   public static final int IDENTIFIER = 7;
   public static final int CRPAREN = 19;
+  public static final int COLON = 21;
   public static final int LPAREN = 17;
   public static final int BOOLEAN = 9;
+  public static final int COMMA = 22;
   public static final int FLOAT = 3;
   public static final int EOF = 0;
   public static final int MULT = 15;
@@ -50,6 +52,8 @@ public class sym {
   "RPAREN",
   "CRPAREN",
   "CLPAREN",
+  "COLON",
+  "COMMA",
   "BADCHAR"
   };
 }

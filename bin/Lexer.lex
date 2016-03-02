@@ -40,6 +40,10 @@ import java_cup.runtime.*;
         System.out.print("{"); break;
       case sym.CRPAREN:
         System.out.print("}"); break;
+      case sym.COLON:
+        System.out.print(":"); break;
+      case sym.COMMA:
+        System.out.print(","); break;
       case sym.INT:
         System.out.printf("INT %d", value); break;
       case sym.FLOAT:
@@ -47,7 +51,7 @@ import java_cup.runtime.*;
       case sym.RAT:
         System.out.printf("RAT %s", value); break;
       case sym.CHAR:
-        System.out.printf("CHAR %d", value); break;
+        System.out.printf("CHAR %s", value); break;
       case sym.IDENTIFIER:
         System.out.printf("IDENT %s", value); break;
       case sym.COMMENT:
@@ -77,7 +81,7 @@ NonNewlineWhitespace = \r|" "|"\t"
 
 Letter = [a-zA-Z]
 Digit = [0-9]
-Character = "\""{Letter}"\"" | "\""{Digit}"\"" | "\""{Punctuation}"\""
+Character = "\'"{Letter}"\'" | "\'"{Digit}"\'" | "\'"{Punctuation}"\'"
 Str = "\""({Letter}|{Digit}|{Punctuation}|{NonNewlineWhitespace})* "\""
 
 Identifier = {Letter}("_" | {Letter} | {Digit})*
@@ -92,8 +96,7 @@ BooleanConstants = "T" | "F"
 Number = {Integer} | {Rational} | {Float}
 Integer = {Digit}+ | "-"{Digit}+ 
 Rational = {Digit}+"/"{Digit}+ | "-"{Digit}+"/"{Digit}+ | {Digit}+"_"{Digit}+"/"{Digit}+ | "-"{Digit}+"_"{Digit}+"/"{Digit}+      //Dividing by zero?
-Float =  {Digit}+"."{Digit}+ | "-"{Digit}+"."{Digit}+
- 
+Float =  {Digit}+"."{Digit}+ | "-"{Digit}+"."{Digit}+ 
 
 %%
 
@@ -106,12 +109,12 @@ Float =  {Digit}+"."{Digit}+ | "-"{Digit}+"."{Digit}+
   {Float}     { return symbol(sym.FLOAT, Float.parseFloat(yytext())); }
   {Rational}     { return symbol(sym.RAT, yytext()); }
   {BooleanConstants} {return symbol(sym.BOOLEAN, yytext());}
-  {Identifier}  { return symbol(sym.IDENTIFIER, yytext());   }
+  {Identifier}  { return symbol(sym.IDENTIFIER, yytext());}
 
   {Whitespace}  { /* do nothing */               }
 
   "="           { return symbol(sym.EQUAL);      }
-  ";"           { return symbol(sym.SEMICOL);    } 
+  ";"           { return symbol(sym.SEMICOL);    }
   "+"           { return symbol(sym.PLUS);       }
   "-"           { return symbol(sym.MINUS);      }
   "*"           { return symbol(sym.MULT);       }
@@ -120,6 +123,8 @@ Float =  {Digit}+"."{Digit}+ | "-"{Digit}+"."{Digit}+
   ")"           { return symbol(sym.RPAREN);     }
   "{"           { return symbol(sym.CLPAREN);    }
   "}"           { return symbol(sym.CRPAREN);    }
+  ":"           { return symbol(sym.COLON);      }
+  ","           { return symbol(sym.COMMA);      }
 
 }
 
