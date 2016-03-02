@@ -55,9 +55,11 @@ import java_cup.runtime.*;
       case sym.DICTD:
         System.out.print("dict"); break;
       case sym.SEQD:
-        System.out.print("seq"); break;
+        System.out.print("seq"); break; 
       case sym.LEN:
         System.out.print("len"); break;
+      case sym.TDEF:
+        System.out.print("tdef"); break;
       case sym.INT:
         System.out.printf("INT %d", value); break;
       case sym.FLOAT:
@@ -132,40 +134,41 @@ DataType = "bool" | "int" | "rat" | "float" | "char" | "top"
 %%
 
 <YYINITIAL> {
-  "let"         { return symbol(sym.LET);        }
-  {Comment} {return symbol(sym.COMMENT, yytext());}
-  "dict"	{return symbol(sym.DICTD);			}
-  "seq"     {return symbol(sym.SEQD);           }
-  "len"		{return symbol(sym.LEN);			}
-  {DataType}  	{ return symbol(sym.DATATYPE, yytext());}
-  {Character} {return symbol(sym.CHAR, yytext());}
-  {Str} {return symbol(sym.STR, yytext());}
-  {Integer}     { return symbol(sym.INT, Integer.parseInt(yytext())); }
-  {Float}     { return symbol(sym.FLOAT, Float.parseFloat(yytext())); }
-  {Rational}     { return symbol(sym.RAT, yytext()); }
-  {BooleanConstants} {return symbol(sym.BOOLEAN, yytext());}
-  {Identifier}  { return symbol(sym.IDENTIFIER, yytext());}
-  {Dictionary}  { return symbol(sym.DICT, yytext());}
-  {Index} 		{ return symbol(sym.INDEX, yytext());}
-  {Sequence}    { return symbol(sym.SEQ, yytext());}
-  {Whitespace}  { /* do nothing */               }
+  "let"                          {return symbol(sym.LET);        }
+  {Comment}                      {return symbol(sym.COMMENT, yytext());}
+  "tdef"                         {return symbol(sym.TDEF);}
+  "dict"	                     {return symbol(sym.DICTD);			}
+  "seq"                          {return symbol(sym.SEQD);           }
+  "len"	                         {return symbol(sym.LEN);			}
+  {DataType}  	                 {return symbol(sym.DATATYPE, yytext());}
+  {Character}                    {return symbol(sym.CHAR, yytext());}
+  {Str}                          {return symbol(sym.STR, yytext());}
+  {Integer}                      {return symbol(sym.INT, Integer.parseInt(yytext())); }
+  {Float}                        {return symbol(sym.FLOAT, Float.parseFloat(yytext())); }
+  {Rational}                     {return symbol(sym.RAT, yytext()); }
+  {BooleanConstants}             {return symbol(sym.BOOLEAN, yytext());}
+  {Identifier}                   {return symbol(sym.IDENTIFIER, yytext());}
+  {Dictionary}                   {return symbol(sym.DICT, yytext());}
+  {Index} 		                 {return symbol(sym.INDEX, yytext());}
+  {Sequence}                     {return symbol(sym.SEQ, yytext());}
+  {Whitespace}  			     { /* do nothing */               }
 
-  "="           { return symbol(sym.EQUAL);      }
-  ";"           { return symbol(sym.SEMICOL);    }
-  "+"           { return symbol(sym.PLUS);       }
-  "-"           { return symbol(sym.MINUS);      }
-  "*"           { return symbol(sym.MULT);       }
-  "/"           { return symbol(sym.DIV);        }
-  "("           { return symbol(sym.LPAREN);     }
-  ")"           { return symbol(sym.RPAREN);     }
-  "["           { return symbol(sym.SLPAREN);    }
-  "]"           { return symbol(sym.SRPAREN);    }
-  "{"           { return symbol(sym.CLPAREN);    }
-  "}"           { return symbol(sym.CRPAREN);    }
-  ":"           { return symbol(sym.COLON);      }
-  ","           { return symbol(sym.COMMA);      }
-  "<"			{ return symbol(sym.PLPAREN);	 }
-  ">"			{ return symbol(sym.PRPAREN);	 }
+  "="        				   	 {return symbol(sym.EQUAL);      }
+  ";"           				 {return symbol(sym.SEMICOL);    }
+  "+"           				 {return symbol(sym.PLUS);       }
+  "-"           				 {return symbol(sym.MINUS);      }
+  "*"           				 {return symbol(sym.MULT);       }
+  "/"           				 {return symbol(sym.DIV);        }
+  "("           				 {return symbol(sym.LPAREN);     }
+  ")"           				 {return symbol(sym.RPAREN);     }
+  "["           				 {return symbol(sym.SLPAREN);    }
+  "]"           				 {return symbol(sym.SRPAREN);    }
+  "{"           				 {return symbol(sym.CLPAREN);    }
+  "}"           				 {return symbol(sym.CRPAREN);    }
+  ":"           				 {return symbol(sym.COLON);      }
+  ","           				 {return symbol(sym.COMMA);      }
+  "<"							 {return symbol(sym.PLPAREN);	 }
+  ">"							 {return symbol(sym.PRPAREN);	 }
 
 }
 
