@@ -123,8 +123,7 @@ simple_exp ::= INT:i        {: RESULT = new Node(i); :}
                :}
              ;
 
-operator ::= EQUAL {: RESULT = new Node("="); :}
-           | PLUS  {: RESULT = new Node("+"); :}
+operator ::= PLUS  {: RESULT = new Node("+"); :}
            | MINUS {: RESULT = new Node("-"); :}
            | MULT  {: RESULT = new Node("*"); :}
            | DIV   {: RESULT = new Node("/"); :};
@@ -174,6 +173,15 @@ sequence_operations ::= LEN LPAREN IDENTIFIER:t RPAREN {:
                          n.addChild(new Node("("));
                          n.addChild(new Node(")"));
                          RESULT = (Node)n;
+                      :}
+                      | LEN LPAREN IDENTIFIER:t RPAREN operator:e INT:i {:
+                         Node n = new Node(e);
+                         Node m = new Node(t);
+                         n.addChild(m);
+                         n.addChild(new Node(i));
+                         m.addChild(new Node("len"));
+                         m.addChild(new Node("("));
+                         m.addChild(new Node(")"));
                       :};
                       
 colon ::= COLON {: RESULT = new Node(":"); :};
