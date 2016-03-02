@@ -126,13 +126,16 @@ operator ::= EQUAL {: RESULT = new Node("="); :}
 
 dictionary ::= DICTD PLPAREN DATATYPE:i COMMA DATATYPE:j PRPAREN IDENTIFIER:t EQUAL DICT:k {:
                 Node n = new Node("=");
-                n.addChild(new Node("dict"));
-                n.addChild(new Node("<"));
-                n.addChild(new Node (i));
-                n.addChild(new Node(",")); 
-                n.addChild(new Node (j));
-                n.addChild(new Node(">"));
-                n.addChild(new Node (t));
+                Node m = new Node (",");
+                n.addChild(m);
+                Node gr = new Node ("<");
+                Node gl = new Node (">");
+                m.addChild(gr);
+                m.addChild(gl);
+                gr.addChild(new Node("dict"));
+                gr.addChild(new Node (i));
+                gl.addChild(new Node (j));
+                gl.addChild(new Node (t));
                 n.addChild(new Node (k));
                 RESULT = (Node)n;
               :};

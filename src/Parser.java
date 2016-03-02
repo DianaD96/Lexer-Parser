@@ -583,13 +583,16 @@ class CUP$Parser$actions {
 		Object k = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
                 Node n = new Node("=");
-                n.addChild(new Node("dict"));
-                n.addChild(new Node("<"));
-                n.addChild(new Node (i));
-                n.addChild(new Node(",")); 
-                n.addChild(new Node (j));
-                n.addChild(new Node(">"));
-                n.addChild(new Node (t));
+                Node m = new Node (",");
+                n.addChild(m);
+                Node gr = new Node ("<");
+                Node gl = new Node (">");
+                m.addChild(gr);
+                m.addChild(gl);
+                gr.addChild(new Node("dict"));
+                gr.addChild(new Node (i));
+                gl.addChild(new Node (j));
+                gl.addChild(new Node (t));
                 n.addChild(new Node (k));
                 RESULT = (Node)n;
               
