@@ -48,7 +48,7 @@ parser code {:
 
 // Do something with ILLEGAL_CHARARCTER or drop it.
 terminal INT, FLOAT, RAT, CHAR, STR, IDENTIFIER, COMMENT, BOOLEAN, LET, EQUAL, SEMICOL, PLUS, MINUS, MULT, DIV;
-terminal DICT, SEQ, DICTD, DATATYPE, PRPAREN, PLPAREN;
+terminal DICT, SEQ, DICTD, SEQD, DATATYPE, PRPAREN, PLPAREN;
 terminal LPAREN, RPAREN, CRPAREN, CLPAREN, COLON, COMMA;
 terminal BADCHAR; 
 
@@ -123,7 +123,17 @@ operator ::= EQUAL {: RESULT = new Node("="); :}
            | MULT  {: RESULT = new Node("*"); :}
            | DIV   {: RESULT = new Node("/"); :};
            
-sequence ::= SEQ:i {: RESULT = new Node(i); :};
+sequence ::= SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t EQUAL SEQ:k {:
+              Node n = new Node("=");
+              Node m = new Node(t);
+              n.addChild(m);
+              n.addChild(new Node(k));
+              m.addChild(new Node("seq"));
+              m.addChild(new Node("<"));
+              m.addChild(new Node(i));
+              m.addChild(new Node(">"));
+              RESULT = (Node)n;
+           :};
 
 dictionary ::= DICTD PLPAREN DATATYPE:i COMMA DATATYPE:j PRPAREN IDENTIFIER:t EQUAL DICT:k {:
                 Node n = new Node("=");

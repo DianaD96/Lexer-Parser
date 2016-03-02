@@ -8,31 +8,32 @@ public class sym {
   /* terminals */
   public static final int DICTD = 19;
   public static final int PLUS = 13;
-  public static final int BADCHAR = 29;
-  public static final int RPAREN = 24;
+  public static final int BADCHAR = 30;
+  public static final int RPAREN = 25;
   public static final int INT = 2;
   public static final int EQUAL = 11;
   public static final int CHAR = 5;
   public static final int IDENTIFIER = 7;
-  public static final int CRPAREN = 25;
-  public static final int COLON = 27;
-  public static final int LPAREN = 23;
-  public static final int PRPAREN = 21;
+  public static final int CRPAREN = 26;
+  public static final int COLON = 28;
+  public static final int LPAREN = 24;
+  public static final int PRPAREN = 22;
   public static final int BOOLEAN = 9;
-  public static final int COMMA = 28;
+  public static final int COMMA = 29;
   public static final int DICT = 17;
-  public static final int DATATYPE = 20;
+  public static final int DATATYPE = 21;
   public static final int FLOAT = 3;
   public static final int EOF = 0;
   public static final int MULT = 15;
-  public static final int CLPAREN = 26;
+  public static final int CLPAREN = 27;
   public static final int DIV = 16;
   public static final int SEMICOL = 12;
+  public static final int SEQD = 20;
   public static final int COMMENT = 8;
   public static final int SEQ = 18;
   public static final int RAT = 4;
   public static final int MINUS = 14;
-  public static final int PLPAREN = 22;
+  public static final int PLPAREN = 23;
   public static final int error = 1;
   public static final int LET = 10;
   public static final int STR = 6;
@@ -57,6 +58,7 @@ public class sym {
   "DICT",
   "SEQ",
   "DICTD",
+  "SEQD",
   "DATATYPE",
   "PRPAREN",
   "PLPAREN",
