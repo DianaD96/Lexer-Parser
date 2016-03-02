@@ -182,6 +182,8 @@ sequence_operations ::= LEN LPAREN IDENTIFIER:t RPAREN {:
                          m.addChild(new Node("len"));
                          m.addChild(new Node("("));
                          m.addChild(new Node(")"));
+                      :}
+                      | IDENTIFIER:t SLPAREN STR:s SRPAREN {:
                       :};
                       
 colon ::= COLON {: RESULT = new Node(":"); :};
