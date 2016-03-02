@@ -60,8 +60,6 @@ import java_cup.runtime.*;
         System.out.print("len"); break;
       case sym.INT:
         System.out.printf("INT %d", value); break;
-      case sym.NINT:
-        System.out.printf("NINT %d", value); break;
       case sym.FLOAT:
         System.out.printf("FLOAT %f", value); break;
       case sym.RAT:
@@ -119,7 +117,6 @@ BooleanConstants = "T" | "F"
 
 Number = {Integer} | {Rational} | {Float}
 Integer = {Digit}+ | "-"{Digit}+ 
-NInteger = {Digit}+
 Rational = {Digit}+"/"{Digit}+ | "-"{Digit}+"/"{Digit}+ | {Digit}+"_"{Digit}+"/"{Digit}+ | "-"{Digit}+"_"{Digit}+"/"{Digit}+      //Dividing by zero?
 Float =  {Digit}+"."{Digit}+ | "-"{Digit}+"."{Digit}+ 
 
@@ -144,7 +141,6 @@ DataType = "bool" | "int" | "rat" | "float" | "char" | "top"
   {Character} {return symbol(sym.CHAR, yytext());}
   {Str} {return symbol(sym.STR, yytext());}
   {Integer}     { return symbol(sym.INT, Integer.parseInt(yytext())); }
-  {NInteger}     { return symbol(sym.NINT, Integer.parseInt(yytext())); }
   {Float}     { return symbol(sym.FLOAT, Float.parseFloat(yytext())); }
   {Rational}     { return symbol(sym.RAT, yytext()); }
   {BooleanConstants} {return symbol(sym.BOOLEAN, yytext());}
