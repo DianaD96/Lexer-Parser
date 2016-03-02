@@ -6,26 +6,27 @@
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
+  public static final int SLPAREN = 24;
   public static final int DICTD = 19;
   public static final int PLUS = 13;
-  public static final int BADCHAR = 30;
-  public static final int RPAREN = 25;
+  public static final int BADCHAR = 32;
+  public static final int RPAREN = 27;
   public static final int INT = 2;
   public static final int EQUAL = 11;
   public static final int CHAR = 5;
   public static final int IDENTIFIER = 7;
-  public static final int CRPAREN = 26;
-  public static final int COLON = 28;
-  public static final int LPAREN = 24;
+  public static final int CRPAREN = 28;
+  public static final int COLON = 30;
+  public static final int LPAREN = 26;
   public static final int PRPAREN = 22;
   public static final int BOOLEAN = 9;
-  public static final int COMMA = 29;
+  public static final int COMMA = 31;
   public static final int DICT = 17;
   public static final int DATATYPE = 21;
   public static final int FLOAT = 3;
   public static final int EOF = 0;
   public static final int MULT = 15;
-  public static final int CLPAREN = 27;
+  public static final int CLPAREN = 29;
   public static final int DIV = 16;
   public static final int SEMICOL = 12;
   public static final int SEQD = 20;
@@ -37,6 +38,7 @@ public class sym {
   public static final int error = 1;
   public static final int LET = 10;
   public static final int STR = 6;
+  public static final int SRPAREN = 25;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -62,6 +64,8 @@ public class sym {
   "DATATYPE",
   "PRPAREN",
   "PLPAREN",
+  "SLPAREN",
+  "SRPAREN",
   "LPAREN",
   "RPAREN",
   "CRPAREN",

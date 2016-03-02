@@ -1,5 +1,5 @@
 import java_cup.runtime.*;
-
+//...
 %%
 
 %class Lexer      
@@ -36,9 +36,9 @@ import java_cup.runtime.*;
         System.out.print("("); break;
       case sym.RPAREN:
         System.out.print(")"); break;
-      case sym.SRPAREN:
-        System.out.print("["); break;
       case sym.SLPAREN:
+        System.out.print("["); break;
+      case sym.SRPAREN:
         System.out.print("]"); break;
       case sym.CLPAREN:
         System.out.print("{"); break;

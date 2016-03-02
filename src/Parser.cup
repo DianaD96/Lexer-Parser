@@ -53,7 +53,7 @@ terminal SLPAREN, SRPAREN, LPAREN, RPAREN, CRPAREN, CLPAREN, COLON, COMMA;
 terminal BADCHAR; 
 
 nonterminal statements, statement, top_level;
-nonterminal let_bind, full_exp, simple_exp, operator, colon, dictionary_value, dictionary, sequence;
+nonterminal let_bind, full_exp, simple_exp, operator, colon, dictionary_value, dictionary, sequence, dictionary_assignment;
 
 precedence left EQUAL;
 precedence left PLUS, MINUS;
@@ -87,7 +87,7 @@ statement ::= let_bind:s {:
             | sequence:s {:
                 RESULT = (Node)s;
               :}
-            | dictionary_assignement:s {:
+            | dictionary_assignment:s {:
                 RESULT = (Node)s;
               :};
       
@@ -153,7 +153,7 @@ dictionary ::= DICTD PLPAREN DATATYPE:i COMMA DATATYPE:j PRPAREN IDENTIFIER:t EQ
                 RESULT = (Node)n;
               :};
              
-dictionary_assignement = IDENTIFIER:t SLPAREN IDENTIFIER:i SRPAREN EQUAL IDENTIFIER:j {:
+dictionary_assignment ::= IDENTIFIER:t SLPAREN IDENTIFIER:i SRPAREN EQUAL IDENTIFIER:j {:
                           Node n = new Node("=");
                           Node m = new Node(t);
                           n.addChild(m);
