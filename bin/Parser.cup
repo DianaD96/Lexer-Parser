@@ -48,12 +48,12 @@ parser code {:
 
 // Do something with ILLEGAL_CHARARCTER or drop it.
 terminal INT, FLOAT, RAT, CHAR, STR, IDENTIFIER, COMMENT, BOOLEAN, LET, EQUAL, SEMICOL, PLUS, MINUS, MULT, DIV;
-terminal DICT, DICTD, DATATYPE, PRPAREN, PLPAREN;
+terminal DICT, SEQ, DICTD, DATATYPE, PRPAREN, PLPAREN;
 terminal LPAREN, RPAREN, CRPAREN, CLPAREN, COLON, COMMA;
 terminal BADCHAR; 
 
 nonterminal statements, statement, top_level;
-nonterminal let_bind, full_exp, simple_exp, operator, colon, dictionary_value, dictionary;
+nonterminal let_bind, full_exp, simple_exp, operator, colon, dictionary_value, dictionary, sequence;
 
 precedence left EQUAL;
 precedence left PLUS, MINUS;
@@ -84,7 +84,7 @@ statement ::= let_bind:s {:
             | simple_exp:s {:
                 RESULT = (Node)s;
               :}
-            | dictionary:s {:
+            | sequence:s {:
                 RESULT = (Node)s;
               :};
            
@@ -123,6 +123,7 @@ operator ::= EQUAL {: RESULT = new Node("="); :}
            | MULT  {: RESULT = new Node("*"); :}
            | DIV   {: RESULT = new Node("/"); :};
            
+sequence ::= SEQ:i {: RESULT = new Node(i); :};
 
 dictionary ::= DICTD PLPAREN DATATYPE:i COMMA DATATYPE:j PRPAREN IDENTIFIER:t EQUAL DICT:k {:
                 Node n = new Node("=");
