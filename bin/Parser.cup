@@ -184,6 +184,17 @@ sequence_operations ::= LEN LPAREN IDENTIFIER:t RPAREN {:
                          m.addChild(new Node(")"));
                       :}
                       | IDENTIFIER:t INDEX:s {:
+                      :}
+                      | IDENTIFIER:t SLPAREN LEN LPAREN IDENTIFIER:s RPAREN operator:e INT:i SRPAREN {:
+                        Node n = new Node(t);
+                        n.addChild(new Node("["));
+                        n.addChild(new Node("len"));
+                        n.addChild(new Node("("));
+                        n.addChild(new Node(s));
+                        n.addChild(new Node(")"));
+                        n.addChild(new Node(e));
+                        n.addChild(new Node(i));
+                        RESULT = (Node)n;
                       :};
                       
 colon ::= COLON {: RESULT = new Node(":"); :};
