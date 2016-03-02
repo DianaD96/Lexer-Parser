@@ -120,6 +120,7 @@ DataType = "bool" | "int" | "rat" | "float" | "char" | "top"
   "let"         { return symbol(sym.LET);        }
   {Comment} {return symbol(sym.COMMENT, yytext());}
   "dict"	{return symbol(sym.DICTD);			}
+  {DataType}  	{ return symbol(sym.DATATYPE, yytext());}
   {Character} {return symbol(sym.CHAR, yytext());}
   {Str} {return symbol(sym.STR, yytext());}
   {Integer}     { return symbol(sym.INT, Integer.parseInt(yytext())); }
@@ -128,7 +129,6 @@ DataType = "bool" | "int" | "rat" | "float" | "char" | "top"
   {BooleanConstants} {return symbol(sym.BOOLEAN, yytext());}
   {Identifier}  { return symbol(sym.IDENTIFIER, yytext());}
   {Dictionary}  { return symbol(sym.DICT, yytext());}
-  {DataType}  	{ return symbol(sym.DATATYPE, yytext());}
   {Whitespace}  { /* do nothing */               }
 
   "="           { return symbol(sym.EQUAL);      }

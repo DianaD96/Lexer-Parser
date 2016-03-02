@@ -37,7 +37,7 @@ public class Parser extends java_cup.runtime.lr_parser {
     "\007\003\000\002\007\003\000\002\007\003\000\002\007" +
     "\003\000\002\007\003\000\002\007\005\000\002\007\005" +
     "\000\002\010\003\000\002\010\003\000\002\010\003\000" +
-    "\002\010\003\000\002\010\003\000\002\013\012\000\002" +
+    "\002\010\003\000\002\010\003\000\002\013\013\000\002" +
     "\011\003\000\002\005\006" });
 
   /** Access to production table. */
@@ -46,7 +46,7 @@ public class Parser extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\051\000\032\002\ufffe\004\ufffe\005\ufffe\006\ufffe\007" +
+    "\000\052\000\032\002\ufffe\004\ufffe\005\ufffe\006\ufffe\007" +
     "\ufffe\010\ufffe\011\ufffe\012\ufffe\013\ufffe\014\ufffe\024\ufffe" +
     "\030\ufffe\001\002\000\032\002\001\004\007\005\026\006" +
     "\015\007\025\010\011\011\020\012\024\013\012\014\022" +
@@ -118,11 +118,11 @@ public class Parser extends java_cup.runtime.lr_parser {
     "\032\002\ufff9\004\ufff9\005\ufff9\006\ufff9\007\ufff9\010\ufff9" +
     "\011\ufff9\012\ufff9\013\ufff9\014\ufff9\024\ufff9\030\ufff9\001" +
     "\002\000\004\025\046\001\002\000\004\035\047\001\002" +
-    "\000\004\025\050\001\002\000\004\027\051\001\002\000" +
-    "\004\015\052\001\002\000\004\023\053\001\002\000\032" +
-    "\002\uffe9\004\uffe9\005\uffe9\006\uffe9\007\uffe9\010\uffe9\011" +
-    "\uffe9\012\uffe9\013\uffe9\014\uffe9\024\uffe9\030\uffe9\001\002" +
-    "" });
+    "\000\004\025\050\001\002\000\004\026\051\001\002\000" +
+    "\004\011\052\001\002\000\004\015\053\001\002\000\004" +
+    "\023\054\001\002\000\032\002\uffe9\004\uffe9\005\uffe9\006" +
+    "\uffe9\007\uffe9\010\uffe9\011\uffe9\012\uffe9\013\uffe9\014\uffe9" +
+    "\024\uffe9\030\uffe9\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -130,7 +130,7 @@ public class Parser extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\051\000\006\002\003\004\004\001\001\000\014\003" +
+    "\000\052\000\006\002\003\004\004\001\001\000\014\003" +
     "\015\005\007\006\013\007\020\013\016\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
@@ -145,7 +145,7 @@ public class Parser extends java_cup.runtime.lr_parser {
     "\001\001\000\004\010\030\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001" });
+    "\001\000\002\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -566,15 +566,18 @@ class CUP$Parser$actions {
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 24: // dictionary ::= DICTD PLPAREN DATATYPE COMMA DATATYPE PLPAREN EQUAL DICT 
+          case 24: // dictionary ::= DICTD PLPAREN DATATYPE COMMA DATATYPE PRPAREN IDENTIFIER EQUAL DICT 
             {
               Object RESULT =null;
-		int ileft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).left;
-		int iright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).right;
-		Object i = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-5)).value;
-		int jleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).left;
-		int jright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).right;
-		Object j = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
+		int ileft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)).left;
+		int iright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)).right;
+		Object i = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-6)).value;
+		int jleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)).left;
+		int jright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)).right;
+		Object j = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-4)).value;
+		int tleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
+		int tright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
+		Object t = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
 		int kleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int kright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object k = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
@@ -582,13 +585,15 @@ class CUP$Parser$actions {
                 Node n = new Node("=");
                 n.addChild(new Node("dict"));
                 n.addChild(new Node("<"));
-                n.addChild((Node)i);
-                n.addChild(new Node(","));
-                n.addChild((Node)j);
+                n.addChild(new Node (i));
+                n.addChild(new Node(",")); 
+                n.addChild(new Node (j));
                 n.addChild(new Node(">"));
-                n.addChild((Node)k);
+                n.addChild(new Node (t));
+                n.addChild(new Node (k));
+                RESULT = (Node)n;
               
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("dictionary",9, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("dictionary",9, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-8)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 

@@ -124,15 +124,17 @@ operator ::= EQUAL {: RESULT = new Node("="); :}
            | DIV   {: RESULT = new Node("/"); :};
            
 
-dictionary ::= DICTD PLPAREN DATATYPE:i COMMA DATATYPE:j PLPAREN EQUAL DICT:k {:
+dictionary ::= DICTD PLPAREN DATATYPE:i COMMA DATATYPE:j PRPAREN IDENTIFIER:t EQUAL DICT:k {:
                 Node n = new Node("=");
                 n.addChild(new Node("dict"));
                 n.addChild(new Node("<"));
-                n.addChild((Node)i);
-                n.addChild(new Node(","));
-                n.addChild((Node)j);
+                n.addChild(new Node (i));
+                n.addChild(new Node(",")); 
+                n.addChild(new Node (j));
                 n.addChild(new Node(">"));
-                n.addChild((Node)k);
+                n.addChild(new Node (t));
+                n.addChild(new Node (k));
+                RESULT = (Node)n;
               :};
              
              
