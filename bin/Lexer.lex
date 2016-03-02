@@ -40,6 +40,10 @@ import java_cup.runtime.*;
         System.out.print("{"); break;
       case sym.CRPAREN:
         System.out.print("}"); break;
+      case sym.PLPAREN:
+        System.out.print("<"); break;
+      case sym.PRPAREN:
+        System.out.print(">"); break;
       case sym.COLON:
         System.out.print(":"); break;
       case sym.COMMA:
@@ -62,6 +66,8 @@ import java_cup.runtime.*;
         System.out.printf("STR %s", value); break;
       case sym.DICT:
         System.out.printf("DICT %s", value); break;
+      case sym.DATATYPE:
+        System.out.printf("DATATYPE %s", value); break;
     }
     System.out.print(">");
   }
@@ -103,8 +109,8 @@ Float =  {Digit}+"."{Digit}+ | "-"{Digit}+"."{Digit}+
 DictionaryValue = {NonNewlineWhitespace}*{Top}{NonNewlineWhitespace}*":"{NonNewlineWhitespace}*{Top}{NonNewlineWhitespace}*
 Dictionary = "{"({DictionaryValue}",")*{DictionaryValue}"}" | "{""}"
 
-Top = {Number} | {Character} | {BooleanConstants} | {Dictionary}
-//DataType = "bool" | "int" | 
+Top = {Number} | {Character} | {BooleanConstants}
+DataType = "bool" | "int" | "rat" | "float" | "char" | "top"
 
 %%
 
@@ -118,7 +124,8 @@ Top = {Number} | {Character} | {BooleanConstants} | {Dictionary}
   {Rational}     { return symbol(sym.RAT, yytext()); }
   {BooleanConstants} {return symbol(sym.BOOLEAN, yytext());}
   {Identifier}  { return symbol(sym.IDENTIFIER, yytext());}
-  {Dictionary}  {return symbol(sym.DICT, yytext());}
+  {Dictionary}  { return symbol(sym.DICT, yytext());}
+  {DataType}  	{ return symbol(sym.DATATYPE, yytext());}
   {Whitespace}  { /* do nothing */               }
 
   "="           { return symbol(sym.EQUAL);      }
@@ -133,6 +140,8 @@ Top = {Number} | {Character} | {BooleanConstants} | {Dictionary}
   "}"           { return symbol(sym.CRPAREN);    }
   ":"           { return symbol(sym.COLON);      }
   ","           { return symbol(sym.COMMA);      }
+  "<"			{ return symbol(sym.PLPAREN);	 }
+  ">"			{ return symbol(sym.PRPAREN);	 }
 
 }
 
