@@ -100,8 +100,11 @@ Integer = {Digit}+ | "-"{Digit}+
 Rational = {Digit}+"/"{Digit}+ | "-"{Digit}+"/"{Digit}+ | {Digit}+"_"{Digit}+"/"{Digit}+ | "-"{Digit}+"_"{Digit}+"/"{Digit}+      //Dividing by zero?
 Float =  {Digit}+"."{Digit}+ | "-"{Digit}+"."{Digit}+ 
 
-DictionaryValue = {NonNewlineWhitespace}*{Integer}{NonNewlineWhitespace}*":"{NonNewlineWhitespace}*{Character}{NonNewlineWhitespace}*
+DictionaryValue = {NonNewlineWhitespace}*{Top}{NonNewlineWhitespace}*":"{NonNewlineWhitespace}*{Top}{NonNewlineWhitespace}*
 Dictionary = "{"({DictionaryValue}",")*{DictionaryValue}"}" | "{""}"
+
+Top = {Number} | {Character} | {BooleanConstants} | {Dictionary}
+//DataType = "bool" | "int" | 
 
 %%
 
