@@ -122,7 +122,7 @@ operator ::= EQUAL {: RESULT = new Node("="); :}
            | MULT  {: RESULT = new Node("*"); :}
            | DIV   {: RESULT = new Node("/"); :};
            
-dictionary_value ::= INT:i COLON CHAR:j {:
+dictionary_value ::= INT:i COLON CHAR:j{:
                      Node n = new Node(":");
                      n.addChild(new Node(i));
                      n.addChild(new Node(j));
