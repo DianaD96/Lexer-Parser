@@ -100,7 +100,7 @@ Integer = {Digit}+ | "-"{Digit}+
 Rational = {Digit}+"/"{Digit}+ | "-"{Digit}+"/"{Digit}+ | {Digit}+"_"{Digit}+"/"{Digit}+ | "-"{Digit}+"_"{Digit}+"/"{Digit}+      //Dividing by zero?
 Float =  {Digit}+"."{Digit}+ | "-"{Digit}+"."{Digit}+ 
 
-DictionaryValue = {Integer}{NonNewlineWhitespace}*":"{NonNewlineWhitespace}*{Character}
+DictionaryValue = {NonNewlineWhitespace}*{Integer}{NonNewlineWhitespace}*":"{NonNewlineWhitespace}*{Character}{NonNewlineWhitespace}*
 Dictionary = "{"({DictionaryValue}",")*{DictionaryValue}"}" | "{""}"
 
 %%
