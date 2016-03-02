@@ -54,6 +54,7 @@ terminal BADCHAR;
 nonterminal statements, statement, top_level;
 nonterminal let_bind, full_exp, simple_exp, operator;
 
+precedence left EQUAL;
 precedence left PLUS, MINUS;
 precedence left DIV, MULT;
 
@@ -87,10 +88,13 @@ statement ::= let_bind:s {:
 
 full_exp ::= simple_exp:e SEMICOL {: RESULT = (Node)e; :};
 
+
+
          
 simple_exp ::= INT:i        {: RESULT = new Node(i); :}
              | RAT:i        {: RESULT = new Node(i); :}
              | FLOAT:i      {: RESULT = new Node(i); :}
+             | BOOLEAN:i    {: RESULT = new Node(i); :}
              | IDENTIFIER:i {: RESULT = new Node(i); :}
              
              | STR:i        {: RESULT = new Node(i); :}
