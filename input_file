@@ -1,1 +1,1 @@
-seq<char> = "hello world"
+seq<char> s = [1,2,3,4,5]
