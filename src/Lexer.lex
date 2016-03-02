@@ -100,7 +100,7 @@ Integer = {Digit}+ | "-"{Digit}+
 Rational = {Digit}+"/"{Digit}+ | "-"{Digit}+"/"{Digit}+ | {Digit}+"_"{Digit}+"/"{Digit}+ | "-"{Digit}+"_"{Digit}+"/"{Digit}+      //Dividing by zero?
 Float =  {Digit}+"."{Digit}+ | "-"{Digit}+"."{Digit}+ 
 
-DictionaryValue = {Integer}{NonNewlineWhitespace}*":"{NonNewlineWhitespace}*{Character}
+DictionaryValue = {NonNewlineWhitespace}*{Integer}{NonNewlineWhitespace}*":"{NonNewlineWhitespace}*{Character}{NonNewlineWhitespace}*
 Dictionary = "{"({DictionaryValue}",")*{DictionaryValue}"}" | "{""}"
 
 %%
@@ -115,7 +115,7 @@ Dictionary = "{"({DictionaryValue}",")*{DictionaryValue}"}" | "{""}"
   {Rational}     { return symbol(sym.RAT, yytext()); }
   {BooleanConstants} {return symbol(sym.BOOLEAN, yytext());}
   {Identifier}  { return symbol(sym.IDENTIFIER, yytext());}
-  {Dictionary}  {return symbol(sym.DICT, yytext();}
+  {Dictionary}  {return symbol(sym.DICT, yytext());}
   {Whitespace}  { /* do nothing */               }
 
   "="           { return symbol(sym.EQUAL);      }
