@@ -48,7 +48,7 @@ parser code {:
 
 // Do something with ILLEGAL_CHARARCTER or drop it.
 terminal INT, FLOAT, RAT, CHAR, STR, IDENTIFIER, COMMENT, BOOLEAN, LET, EQUAL, SEMICOL, PLUS, MINUS, MULT, DIV;
-terminal DICT;
+terminal DICT, DATATYPE, PRPAREN, PLPAREN;
 terminal LPAREN, RPAREN, CRPAREN, CLPAREN, COLON, COMMA;
 terminal BADCHAR; 
 
@@ -123,14 +123,17 @@ operator ::= EQUAL {: RESULT = new Node("="); :}
            | MULT  {: RESULT = new Node("*"); :}
            | DIV   {: RESULT = new Node("/"); :};
            
-dictionary_value ::= INT:i COLON CHAR:j {:
-                     Node n = new Node(":");
-                     n.addChild(new Node(i));
-                     n.addChild(new Node(j));
-                     RESULT = (Node)n;
-                 :};
 
-dictionary ::= DICT:i {: Node n = new Node(i); RESULT = n; :};
+dictionary ::= DICTD PLPAREN DATATYPE:i COMMA DATATYPE:j RLPAREN EQUAL DICT:k {:
+                Node n = new Node("=");
+                n.addChild("dict");
+                n.addChild("<");
+                n.addChild("i");
+                n.addChild(",");
+                n.addChild("j");
+                n.addChild(">");
+                n.addChild(k);
+              :};
              
              
 colon ::= COLON {: RESULT = new Node(":"); :};
