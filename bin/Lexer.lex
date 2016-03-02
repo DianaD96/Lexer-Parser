@@ -136,7 +136,7 @@ DataType = "bool" | "int" | "rat" | "float" | "char" | "top"
 <YYINITIAL> {
   "let"                          {return symbol(sym.LET);        }
   {Comment}                      {return symbol(sym.COMMENT, yytext());}
-  "tdef"                         {return symbol(sym.TDEF);}
+  "tdef"                         {return symbol(sym.TDEF);			}
   "dict"	                     {return symbol(sym.DICTD);			}
   "seq"                          {return symbol(sym.SEQD);           }
   "len"	                         {return symbol(sym.LEN);			}

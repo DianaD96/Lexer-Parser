@@ -401,7 +401,7 @@ class Lexer implements java_cup.runtime.Scanner {
       case sym.LEN:
         System.out.print("len"); break;
       case sym.TDEF:
-        System.out.printf("tdef"); break;
+        System.out.print("tdef"); break;
       case sym.INT:
         System.out.printf("INT %d", value); break;
       case sym.FLOAT:

@@ -220,7 +220,7 @@ declaration_list ::= DATATYPE:i IDENTIFIER:j {:
                    | DATATYPE:i IDENTIFIER:j COMMA {:
                    :};
                     
-data_type_declaration ::= TDEF IDENTIFIER:i CLPAREN declaration:list:e CRPAREN SEMICOL{:
+data_type_declaration ::= TDEF IDENTIFIER:i CLPAREN declaration_list:e CRPAREN SEMICOL{:
                        :};
 
 let_bind ::= LET IDENTIFIER:i EQUAL full_exp:e {:
