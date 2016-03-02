@@ -54,7 +54,7 @@ terminal SLPAREN, SRPAREN, LPAREN, RPAREN, CRPAREN, CLPAREN, COLON, COMMA;
 terminal BADCHAR; 
 
 nonterminal statements, statement, top_level;
-nonterminal let_bind, full_exp, simple_exp, operator, colon, dictionary_value, dictionary, sequence, dictionary_assignment;
+nonterminal let_bind, full_exp, simple_exp, operator, colon, dictionary_value, dictionary, sequence, dictionary_assignment, sequence_operations;
 
 precedence left EQUAL;
 precedence left PLUS, MINUS;
@@ -169,9 +169,9 @@ sequence_operations ::= LEN LPAREN IDENTIFIER:t RPAREN {:
                          Node n = new Node(t);
                          n.addChild(new Node("len"));
                          n.addChild(new Node("("));
-                         n.addChild(")");
+                         n.addChild(new Node(")"));
                          RESULT = (Node)n;
-                      :}
+                      :};
 colon ::= COLON {: RESULT = new Node(":"); :};
 
 let_bind ::= LET IDENTIFIER:i EQUAL full_exp:e {:
