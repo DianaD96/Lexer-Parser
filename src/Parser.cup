@@ -52,7 +52,7 @@ terminal LPAREN, RPAREN, CRPAREN, CLPAREN, COLON, COMMA;
 terminal BADCHAR; 
 
 nonterminal statements, statement, top_level;
-nonterminal let_bind, full_exp, simple_exp, operator, colon, dictionary_value;
+nonterminal let_bind, full_exp, simple_exp, operator, colon, dictionary_value, dictionary;
 
 precedence left EQUAL;
 precedence left PLUS, MINUS;
@@ -83,7 +83,7 @@ statement ::= let_bind:s {:
             | simple_exp:s {:
                 RESULT = (Node)s;
               :}
-            | dictionary_value:s {:
+            | dictionary:s {:
                 RESULT = (Node)s;
               :};
            
@@ -130,13 +130,13 @@ dictionary_value ::= INT:i COLON CHAR:j {:
                  :};
 
 dictionary ::= CLPAREN dictionary_value:i CRPAREN {:
-               Node n = new Node("DITIONARY");
-               n.addChild("{");
-               n.addChild((Node)i);
-               n.addChild("}");
+               Node n = new Node("DICTIONARY");
+               n.addChild(new Node("{"));
+               n.addChild(new Node (i));
+               n.addChild(new Node("}"));
                RESULT = (Node)n;
              :}
-             | CLPAREN CRPAREN {: Node n = new Node("DICTIONARY"); n.addChild("{"); n.addChild("}"); RESULT = (Node)n; :};
+             | CLPAREN CRPAREN {: Node n = new Node("DICTIONARY"); n.addChild(new Node("{")); n.addChild(new Node("}") ); RESULT = (Node)n; :};
              
              
 colon ::= COLON {: RESULT = new Node(":"); :};
