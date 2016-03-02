@@ -303,7 +303,7 @@ class Lexer implements java_cup.runtime.Scanner {
       case sym.BOOLEAN:
         System.out.printf("BOOL %s", value); break;
       case sym.STR:
-        System.out.printf("STR %S", value); break;
+        System.out.printf("STR %s", value); break;
     }
     System.out.print(">");
   }

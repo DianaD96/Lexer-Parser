@@ -55,7 +55,7 @@ import java_cup.runtime.*;
       case sym.BOOLEAN:
         System.out.printf("BOOL %s", value); break;
       case sym.STR:
-        System.out.printf("STR %S", value); break;
+        System.out.printf("STR %s", value); break;
     }
     System.out.print(">");
   }
@@ -110,8 +110,8 @@ Float =  {Digit}+"."{Digit}+ | "-"{Digit}+"."{Digit}+
 
   {Whitespace}  { /* do nothing */               }
 
-  "="          { return symbol(sym.EQUAL);      }
-  ";"           { return symbol(sym.SEMICOL);    }
+  "="           { return symbol(sym.EQUAL);      }
+  ";"           { return symbol(sym.SEMICOL);    } 
   "+"           { return symbol(sym.PLUS);       }
   "-"           { return symbol(sym.MINUS);      }
   "*"           { return symbol(sym.MULT);       }
