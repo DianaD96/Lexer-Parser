@@ -36,6 +36,10 @@ import java_cup.runtime.*;
         System.out.print("("); break;
       case sym.RPAREN:
         System.out.print(")"); break;
+      case sym.SRPAREN:
+        System.out.print("["); break;
+      case sym.SLPAREN:
+        System.out.print("]"); break;
       case sym.CLPAREN:
         System.out.print("{"); break;
       case sym.CRPAREN:
@@ -147,6 +151,8 @@ DataType = "bool" | "int" | "rat" | "float" | "char" | "top"
   "/"           { return symbol(sym.DIV);        }
   "("           { return symbol(sym.LPAREN);     }
   ")"           { return symbol(sym.RPAREN);     }
+  "["           { return symbol(sym.SLPAREN);    }
+  "]"           { return symbol(sym.SRPAREN);    }
   "{"           { return symbol(sym.CLPAREN);    }
   "}"           { return symbol(sym.CRPAREN);    }
   ":"           { return symbol(sym.COLON);      }
