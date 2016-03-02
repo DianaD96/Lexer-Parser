@@ -48,6 +48,8 @@ import java_cup.runtime.*;
         System.out.print(":"); break;
       case sym.COMMA:
         System.out.print(","); break;
+      case sym.DICTD:
+        System.out.print("dict"); break;
       case sym.INT:
         System.out.printf("INT %d", value); break;
       case sym.FLOAT:
@@ -117,6 +119,7 @@ DataType = "bool" | "int" | "rat" | "float" | "char" | "top"
 <YYINITIAL> {
   "let"         { return symbol(sym.LET);        }
   {Comment} {return symbol(sym.COMMENT, yytext());}
+  "dict"	{return symbol(sym.DICTD);			}
   {Character} {return symbol(sym.CHAR, yytext());}
   {Str} {return symbol(sym.STR, yytext());}
   {Integer}     { return symbol(sym.INT, Integer.parseInt(yytext())); }
