@@ -60,8 +60,8 @@ import java_cup.runtime.*;
         System.out.printf("BOOL %s", value); break;
       case sym.STR:
         System.out.printf("STR %s", value); break;
-      case sym.DICTVAL:
-        System.out.printf("DICTVAL %s", value); break;
+      case sym.DICT:
+        System.out.printf("DICT %s", value); break;
     }
     System.out.print(">");
   }
@@ -101,6 +101,7 @@ Rational = {Digit}+"/"{Digit}+ | "-"{Digit}+"/"{Digit}+ | {Digit}+"_"{Digit}+"/"
 Float =  {Digit}+"."{Digit}+ | "-"{Digit}+"."{Digit}+ 
 
 DictionaryValue = {Integer}{NonNewlineWhitespace}*":"{NonNewlineWhitespace}*{Character}
+Dictionary = "{"({DictionaryValue}",")*{DictionaryValue}"}" | "{""}"
 
 %%
 
@@ -114,7 +115,7 @@ DictionaryValue = {Integer}{NonNewlineWhitespace}*":"{NonNewlineWhitespace}*{Cha
   {Rational}     { return symbol(sym.RAT, yytext()); }
   {BooleanConstants} {return symbol(sym.BOOLEAN, yytext());}
   {Identifier}  { return symbol(sym.IDENTIFIER, yytext());}
-  {DictionaryValue}  {return symbol(sym.DICTVAL, yytext();}
+  {Dictionary}  {return symbol(sym.DICT, yytext();}
   {Whitespace}  { /* do nothing */               }
 
   "="           { return symbol(sym.EQUAL);      }
