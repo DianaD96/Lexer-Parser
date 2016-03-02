@@ -90,6 +90,9 @@ statement ::= let_bind:s {:
               :}
             | dictionary_assignment:s {:
                 RESULT = (Node)s;
+              :}
+            | sequence_operations:s {:
+                RESULT = (Node)s;
               :};
       
 full_exp ::= simple_exp:e SEMICOL {: RESULT = (Node)e; :};
@@ -172,6 +175,7 @@ sequence_operations ::= LEN LPAREN IDENTIFIER:t RPAREN {:
                          n.addChild(new Node(")"));
                          RESULT = (Node)n;
                       :};
+                      
 colon ::= COLON {: RESULT = new Node(":"); :};
 
 let_bind ::= LET IDENTIFIER:i EQUAL full_exp:e {:
