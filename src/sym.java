@@ -12,7 +12,7 @@ public class sym {
   public static final int STR = 6;
   public static final int COMMENT = 9;
   public static final int LPAREN = 29;
-  public static final int BADCHAR = 35;
+  public static final int BADCHAR = 36;
   public static final int INT = 2;
   public static final int MINUS = 15;
   public static final int RPAREN = 30;
@@ -27,6 +27,7 @@ public class sym {
   public static final int RAT = 4;
   public static final int CRPAREN = 31;
   public static final int PLUS = 14;
+  public static final int DOT = 35;
   public static final int DICTD = 22;
   public static final int SRPAREN = 28;
   public static final int PRPAREN = 25;
@@ -78,6 +79,7 @@ public class sym {
   "CLPAREN",
   "COLON",
   "COMMA",
+  "DOT",
   "BADCHAR"
   };
 }
