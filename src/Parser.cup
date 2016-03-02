@@ -204,6 +204,9 @@ declaration_list ::= IDENTIFIER:i IDENTIFIER:j {::}
                     
 data_type_declaration ::= TDEF IDENTIFIER:i CLPAREN declaration_list:e CRPAREN SEMICOL {::};
 
+method_input ::= types:i {::}
+               | types:i COMMA {::};
+               
 method_declarations ::= IDENTIFIER:i DOT IDENTIFIER:j {::}
                       | method_declarations:i operator:e INT:j{::}
                       | method_declarations:i operator:e FLOAT:j{::}
