@@ -55,7 +55,7 @@ terminal BADCHAR;
 
 nonterminal statements, statement, top_level;
 nonterminal types, let_bind, full_exp, simple_exp, operator, colon, dictionary_value, dictionary, sequence, dictionary_assignment, sequence_operations;
-nonterminal declaration_list, data_type_declaration, method_declarations;
+nonterminal declaration_list, data_type_declaration, method_declarations, method_input;
 
 precedence left EQUAL;
 precedence left PLUS, MINUS;
@@ -81,20 +81,20 @@ statement ::= let_bind:s {::}
             | full_exp:s {::}
             | simple_exp:s {::}
             | sequence:s {::}
+            | dictionary:s {::}
             | dictionary_assignment:s {::}
             | sequence_operations:s {::}
             | data_type_declaration:s {::}
             | method_declarations {::};
       
-types ::=  INT:i            {: RESULT = new Node(i); :}
-             | RAT:i        {: RESULT = new Node(i); :}
-             | FLOAT:i      {: RESULT = new Node(i); :}
-             | BOOLEAN:i    {: RESULT = new Node(i); :}
-             | IDENTIFIER:i {: RESULT = new Node(i); :}
-             
-             | CHAR:i       {: RESULT = new Node(i); :}
-             | STR:i        {: RESULT = new Node(i); :}
-             | COMMENT:t    {: RESULT = new Node(t); :};
+types ::=  INT:i       {: RESULT = new Node(i); :}
+        | RAT:i        {: RESULT = new Node(i); :}
+        | FLOAT:i      {: RESULT = new Node(i); :}
+        | BOOLEAN:i    {: RESULT = new Node(i); :}
+        | IDENTIFIER:i {: RESULT = new Node(i); :}    
+        | CHAR:i       {: RESULT = new Node(i); :}
+        | STR:i        {: RESULT = new Node(i); :}
+        | COMMENT:t    {: RESULT = new Node(t); :};
              
 full_exp ::= simple_exp:e SEMICOL {::};
          
@@ -107,93 +107,27 @@ operator ::= PLUS  {: RESULT = new Node("+"); :}
            | MULT  {: RESULT = new Node("*"); :}
            | DIV   {: RESULT = new Node("/"); :};
            
-sequence ::= SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t EQUAL SEQ:k {:
-              Node n = new Node("=");
-              Node m = new Node(t);
-              n.addChild(m);
-              n.addChild(new Node(k));
-              m.addChild(new Node("seq"));
-              m.addChild(new Node("<"));
-              m.addChild(new Node(i));
-              m.addChild(new Node(">"));
-              RESULT = (Node)n;
-           :}
-           | SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t EQUAL STR:k {:
-           :}
-           | SEQD PLPAREN IDENTIFIER:t PRPAREN {:
-           :};
+sequence ::= SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t EQUAL SEQ:k {::}
+           | SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t EQUAL STR:k {::}
+           | SEQD PLPAREN IDENTIFIER:t PRPAREN {::};
 
-dictionary ::= DICTD PLPAREN DATATYPE:i COMMA DATATYPE:j PRPAREN IDENTIFIER:t EQUAL DICT:k {:
-                Node n = new Node("=");
-                Node m = new Node (",");
-                n.addChild(m);
-                Node gr = new Node ("<");
-                Node gl = new Node (">");
-                m.addChild(gr);
-                m.addChild(gl);
-                gr.addChild(new Node("dict"));
-                gr.addChild(new Node (i));
-                gl.addChild(new Node (j));
-                gl.addChild(new Node (t));
-                n.addChild(new Node (k));
-                RESULT = (Node)n;
-              :};
+dictionary ::= DICTD PLPAREN DATATYPE:i COMMA DATATYPE:j PRPAREN IDENTIFIER:t EQUAL DICT:k {::};
              
-dictionary_assignment ::= IDENTIFIER:t SLPAREN IDENTIFIER:i SRPAREN EQUAL IDENTIFIER:j {:
-                          Node n = new Node("=");
-                          Node m = new Node(t);
-                          n.addChild(m);
-                          n.addChild(new Node(j));
-                          m.addChild(new Node("["));
-                          m.addChild(new Node(i));
-                          m.addChild(new Node("]"));
-                          RESULT = (Node)n;
-                       :};
+dictionary_assignment ::= IDENTIFIER:t SLPAREN IDENTIFIER:i SRPAREN EQUAL IDENTIFIER:j {::};
 
-sequence_operations ::= LEN LPAREN IDENTIFIER:t RPAREN {:
-                         Node n = new Node(t);
-                         n.addChild(new Node("len"));
-                         n.addChild(new Node("("));
-                         n.addChild(new Node(")"));
-                         RESULT = (Node)n;
-                      :}
-                      | LEN LPAREN IDENTIFIER:t RPAREN operator:e INT:i {:
-                         Node n = new Node(e);
-                         Node m = new Node(t);
-                         n.addChild(m);
-                         n.addChild(new Node(i));
-                         m.addChild(new Node("len"));
-                         m.addChild(new Node("("));
-                         m.addChild(new Node(")"));
-                      :}
-                      | IDENTIFIER:t INDEX:s {:
-                      :}
-                      | IDENTIFIER:t SLPAREN LEN LPAREN IDENTIFIER:s RPAREN INT:i SRPAREN {:
-                        Node n = new Node(t);
-                        n.addChild(new Node("["));
-                        n.addChild(new Node("len"));
-                        n.addChild(new Node("("));
-                        n.addChild(new Node(s));
-                        n.addChild(new Node(")"));
-                        n.addChild(new Node("]"));
-                        n.addChild(new Node(i));
-                        RESULT = (Node)n;
-                      :}
-                      | IDENTIFIER:t SLPAREN LEN LPAREN IDENTIFIER:s RPAREN operator:e INT:i SRPAREN {:
-                      :}
-                      | IDENTIFIER:t SLPAREN IDENTIFIER:s operator:e INT:i SRPAREN {:
-                      :}
-                      | IDENTIFIER:t SLPAREN INT:i COLON INT:j SRPAREN {:
-                      :}
-                      | IDENTIFIER:t SLPAREN COLON INT:J SRPAREN {:
-                      :}
-                      | IDENTIFIER:t SLPAREN INT:i COLON SRPAREN {:
-                      :}
-                      | IDENTIFIER:t SLPAREN INT:i COLON sequence_operations:e {:
-                      :};
+sequence_operations ::= LEN LPAREN IDENTIFIER:t RPAREN {::}
+                      | LEN LPAREN IDENTIFIER:t RPAREN operator:e INT:i {::}
+                      | IDENTIFIER:t INDEX:s {::}
+                      | IDENTIFIER:t SLPAREN LEN LPAREN IDENTIFIER:s RPAREN INT:i SRPAREN {::}
+                      | IDENTIFIER:t SLPAREN LEN LPAREN IDENTIFIER:s RPAREN operator:e INT:i SRPAREN {::}
+                      | IDENTIFIER:t SLPAREN IDENTIFIER:s operator:e INT:i SRPAREN {::}
+                      | IDENTIFIER:t SLPAREN INT:i COLON INT:j SRPAREN {::}
+                      | IDENTIFIER:t SLPAREN COLON INT:J SRPAREN {::}
+                      | IDENTIFIER:t SLPAREN INT:i COLON SRPAREN {::}
+                      | IDENTIFIER:t SLPAREN INT:i COLON sequence_operations:e {::};
                       
                       
-colon ::= COLON {: RESULT = new Node(":"); :};
+colon ::= COLON {::};
 
 declaration_list ::= IDENTIFIER:i IDENTIFIER:j {::}
                    | IDENTIFIER:i IDENTIFIER:j COMMA declaration_list:e {::}
@@ -208,6 +142,7 @@ method_input ::= types:i {::}
                | types:i COMMA {::};
                
 method_declarations ::= IDENTIFIER:i DOT IDENTIFIER:j {::}
+                      | IDENTIFIER:i LPAREN method_input:i RPAREN {::}
                       | method_declarations:i operator:e INT:j{::}
                       | method_declarations:i operator:e FLOAT:j{::}
                       | method_declarations:i operator:e RAT:j{::}
@@ -215,14 +150,3 @@ method_declarations ::= IDENTIFIER:i DOT IDENTIFIER:j {::}
                       | FLOAT:j operator:e method_declarations:i {::}
                       | RAT:j operator:e method_declarations:i {::};
                       
-let_bind ::= LET IDENTIFIER:i EQUAL full_exp:e {:
-               Node n = new Node("LET");
-               n.addChild(new Node(i));
-               n.addChild((Node)e);
-               RESULT = n;
-             :};
-
-test ::= BOOLEAN:i {:
-               Node n = new Node(i);
-               RESULT = n;
-             :};
