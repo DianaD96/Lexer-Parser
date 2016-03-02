@@ -291,7 +291,7 @@ class Lexer implements java_cup.runtime.Scanner {
       case sym.COLON:
         System.out.print(":"); break;
       case sym.COMMA:
-        System.out.print(",")
+        System.out.print(","); break;
       case sym.INT:
         System.out.printf("INT %d", value); break;
       case sym.FLOAT:
