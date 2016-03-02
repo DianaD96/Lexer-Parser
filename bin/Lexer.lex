@@ -56,6 +56,8 @@ import java_cup.runtime.*;
         System.out.print("dict"); break;
       case sym.SEQD:
         System.out.print("seq"); break;
+      case sym.LEN:
+        System.out.print("len"); break;
       case sym.INT:
         System.out.printf("INT %d", value); break;
       case sym.FLOAT:
@@ -131,6 +133,7 @@ DataType = "bool" | "int" | "rat" | "float" | "char" | "top"
   {Comment} {return symbol(sym.COMMENT, yytext());}
   "dict"	{return symbol(sym.DICTD);			}
   "seq"     {return symbol(sym.SEQD);           }
+  "len"		{return symbol(sym.LEN);			}
   {DataType}  	{ return symbol(sym.DATATYPE, yytext());}
   {Character} {return symbol(sym.CHAR, yytext());}
   {Str} {return symbol(sym.STR, yytext());}
