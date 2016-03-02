@@ -48,6 +48,7 @@ parser code {:
 
 // Do something with ILLEGAL_CHARARCTER or drop it.
 terminal INT, FLOAT, RAT, CHAR, STR, IDENTIFIER, COMMENT, BOOLEAN, LET, EQUAL, SEMICOL, PLUS, MINUS, MULT, DIV;
+terminal LEN;
 terminal DICT, SEQ, DICTD, SEQD, DATATYPE, PRPAREN, PLPAREN;
 terminal SLPAREN, SRPAREN, LPAREN, RPAREN, CRPAREN, CLPAREN, COLON, COMMA;
 terminal BADCHAR; 
@@ -163,7 +164,14 @@ dictionary_assignment ::= IDENTIFIER:t SLPAREN IDENTIFIER:i SRPAREN EQUAL IDENTI
                           m.addChild(new Node("]"));
                           RESULT = (Node)n;
                        :};
-             
+
+sequence_operations ::= LEN LPAREN IDENTIFIER:t RPAREN {:
+                         Node n = new Node(t);
+                         n.addChild(new Node("len"));
+                         n.addChild(new Node("("));
+                         n.addChild(")");
+                         RESULT = (Node)n;
+                      :}
 colon ::= COLON {: RESULT = new Node(":"); :};
 
 let_bind ::= LET IDENTIFIER:i EQUAL full_exp:e {:
