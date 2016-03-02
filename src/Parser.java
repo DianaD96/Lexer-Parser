@@ -572,8 +572,8 @@ class CUP$Parser$actions {
 		Object j = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
                      Node n = new Node(":");
-                     n.addChild((Node)i);
-                     n.addChild((Node)j);
+                     n.addChild(new Node(i));
+                     n.addChild(new Node(j));
                      RESULT = (Node)n;
                  
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("dictionary_value",8, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);

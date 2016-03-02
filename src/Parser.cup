@@ -124,8 +124,8 @@ operator ::= EQUAL {: RESULT = new Node("="); :}
            
 dictionary_value ::= INT:i COLON CHAR:j {:
                      Node n = new Node(":");
-                     n.addChild((Node)i);
-                     n.addChild((Node)j);
+                     n.addChild(new Node(i));
+                     n.addChild(new Node(j));
                      RESULT = (Node)n;
                  :};
 
@@ -137,6 +137,7 @@ dictionary ::= CLPAREN dictionary_value:i CRPAREN {:
                RESULT = (Node)n;
              :}
              | CLPAREN CRPAREN {: Node n = new Node("DICTIONARY"); n.addChild("{"); n.addChild("}"); RESULT = (Node)n; :};
+             
              
 colon ::= COLON {: RESULT = new Node(":"); :};
 
