@@ -78,6 +78,8 @@ import java_cup.runtime.*;
         System.out.printf("DICT %s", value); break;
       case sym.DATATYPE:
         System.out.printf("DATATYPE %s", value); break;
+      case sym.INDEX:
+        System.out.printf("INDEX %s", value); break;
       case sym.SEQ:
         System.out.printf("SEQUENCE %s", value); break;
     }
@@ -122,6 +124,7 @@ DictionaryValue = {NonNewlineWhitespace}*{Top}{NonNewlineWhitespace}*":"{NonNewl
 Dictionary = "{"({DictionaryValue}",")*{DictionaryValue}"}" | "{""}"
 
 Sequence = "["({Top}",")*{Top}"]" | "[""]"
+Index = "["{Integer}"]"
 
 Top = {Number} | {Character} | {BooleanConstants}
 DataType = "bool" | "int" | "rat" | "float" | "char" | "top"
@@ -143,6 +146,7 @@ DataType = "bool" | "int" | "rat" | "float" | "char" | "top"
   {BooleanConstants} {return symbol(sym.BOOLEAN, yytext());}
   {Identifier}  { return symbol(sym.IDENTIFIER, yytext());}
   {Dictionary}  { return symbol(sym.DICT, yytext());}
+  {Index} 		{ return symbol(sym.INDEX, yytext());}
   {Sequence}    { return symbol(sym.SEQ, yytext());}
   {Whitespace}  { /* do nothing */               }
 
