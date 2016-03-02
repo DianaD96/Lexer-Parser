@@ -115,7 +115,7 @@ Dictionary = "{"({DictionaryValue}",")*{DictionaryValue}"}" | "{""}"
   {Rational}     { return symbol(sym.RAT, yytext()); }
   {BooleanConstants} {return symbol(sym.BOOLEAN, yytext());}
   {Identifier}  { return symbol(sym.IDENTIFIER, yytext());}
-  {Dictionary}  {return symbol(sym.DICT, yytext();}
+  {Dictionary}  {return symbol(sym.DICT, yytext());}
   {Whitespace}  { /* do nothing */               }
 
   "="           { return symbol(sym.EQUAL);      }
