@@ -144,6 +144,8 @@ sequence ::= SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t EQUAL SEQ:k {:
               RESULT = (Node)n;
            :}
            | SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t EQUAL STR:k {:
+           :}
+           | SEQD PLPAREN IDENTIFIER:t PRPAREN {:
            :};
 
 dictionary ::= DICTD PLPAREN DATATYPE:i COMMA DATATYPE:j PRPAREN IDENTIFIER:t EQUAL DICT:k {:
@@ -218,8 +220,6 @@ sequence_operations ::= LEN LPAREN IDENTIFIER:t RPAREN {:
                       
 colon ::= COLON {: RESULT = new Node(":"); :};
 
-full_declaration_list ::= declaration_list:e {::};
-
 declaration_list ::= IDENTIFIER:i IDENTIFIER:j {:
                    :}
                    | IDENTIFIER:i IDENTIFIER:j COMMA declaration_list:e {:
@@ -227,6 +227,10 @@ declaration_list ::= IDENTIFIER:i IDENTIFIER:j {:
                    | DATATYPE:i IDENTIFIER:j {:
                    :}
                    | DATATYPE:i IDENTIFIER:j COMMA declaration_list:e {:
+                   :}
+                   | sequence:e IDENTIFIER:j {:
+                   :}
+                   | sequence:f IDENTIFIER:g COMMA declaration_list:h {:
                    :};
                     
 data_type_declaration ::= TDEF IDENTIFIER:i CLPAREN declaration_list:e CRPAREN SEMICOL{:

@@ -1,1 +1,1 @@
-tdef person { string name, int age};
+tdef family { person mother, seq<person> children, person father };
