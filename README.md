@@ -1,7 +1,3 @@
-# Lexer and Parser
+# Ambiguities
 
-Please put your Lexer.lex and Parser.cup files into the src subdirectory.
-
-To build, issue `make`.
-
-To test, issue `make test`.
+1. We suppose there are no space in a sequence (e.g. only [1,2,3] is accepted; [1,2, 3] is not)

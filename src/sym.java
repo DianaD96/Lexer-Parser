@@ -6,43 +6,44 @@
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int SEQ = 21;
+  public static final int SEQ = 22;
   public static final int MULT = 16;
   public static final int CHAR = 5;
   public static final int STR = 6;
   public static final int COMMENT = 9;
-  public static final int LPAREN = 29;
-  public static final int BADCHAR = 37;
+  public static final int LPAREN = 30;
+  public static final int BADCHAR = 38;
   public static final int INT = 2;
   public static final int MINUS = 15;
-  public static final int RPAREN = 30;
-  public static final int CLPAREN = 32;
+  public static final int RPAREN = 31;
+  public static final int CLPAREN = 33;
   public static final int TDEF = 7;
-  public static final int COMMA = 34;
+  public static final int COMMA = 35;
   public static final int SEMICOL = 13;
-  public static final int PLPAREN = 26;
-  public static final int SLPAREN = 27;
-  public static final int DOTDOT = 36;
+  public static final int PLPAREN = 27;
+  public static final int SLPAREN = 28;
+  public static final int DOTDOT = 37;
   public static final int DIV = 17;
-  public static final int DATATYPE = 24;
+  public static final int DATATYPE = 25;
   public static final int RAT = 4;
-  public static final int CRPAREN = 31;
+  public static final int CRPAREN = 32;
   public static final int PLUS = 14;
-  public static final int DOT = 35;
-  public static final int DICTD = 22;
-  public static final int SRPAREN = 28;
-  public static final int PRPAREN = 25;
+  public static final int DOT = 36;
+  public static final int DICTD = 23;
+  public static final int SRPAREN = 29;
+  public static final int PRPAREN = 26;
   public static final int EOF = 0;
   public static final int BOOLEAN = 10;
   public static final int EQUAL = 12;
   public static final int error = 1;
-  public static final int COLON = 33;
-  public static final int DICT = 20;
+  public static final int COLON = 34;
+  public static final int DICT = 21;
   public static final int INDEX = 19;
   public static final int LET = 11;
   public static final int FLOAT = 3;
   public static final int LEN = 18;
-  public static final int SEQD = 23;
+  public static final int ALIAS = 20;
+  public static final int SEQD = 24;
   public static final int IDENTIFIER = 8;
   public static final String[] terminalNames = new String[] {
   "EOF",
@@ -65,6 +66,7 @@ public class sym {
   "DIV",
   "LEN",
   "INDEX",
+  "ALIAS",
   "DICT",
   "SEQ",
   "DICTD",

@@ -1,1 +1,1 @@
-p(10,c, d)
+alias dict<int,char> var
