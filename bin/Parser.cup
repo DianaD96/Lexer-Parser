@@ -54,7 +54,7 @@ terminal SLPAREN, SRPAREN, LPAREN, RPAREN, CRPAREN, CLPAREN, COLON, COMMA, DOT, 
 terminal BADCHAR; 
 
 nonterminal statements, statement, top_level;
-nonterminal types, let_bind, full_exp, simple_exp, operator, colon, dictionary_value, dictionary, sequence, dictionary_assignment, sequence_operations;
+nonterminal types,let_bind, full_exp, simple_exp, operator, colon, dictionary_value, dictionary, sequence, dictionary_assignment, sequence_operations;
 nonterminal declaration_list, data_type_declaration, method_declarations, method_input, method_input2;
 
 precedence left EQUAL;
@@ -88,7 +88,6 @@ statement ::= let_bind:s {::}
             | method_declarations {::};
       
 types ::=  INT:i       {: RESULT = new Node(i); :}
-        | IDENTIFIER:i {::};
         | RAT:i        {: RESULT = new Node(i); :}
         | FLOAT:i      {: RESULT = new Node(i); :}
         | BOOLEAN:i    {: RESULT = new Node(i); :}
@@ -99,10 +98,10 @@ types ::=  INT:i       {: RESULT = new Node(i); :}
 full_exp ::= simple_exp:e SEMICOL {::};
          
 simple_exp ::= types:i {::}
+            | IDENTIFIER:i {::}
             | simple_exp:e1 operator:o simple_exp:e2 {::}
-            | simple_exp:e1 EQUAL simple_exp:e2 {::}
-            | LPAREN simple_exp:e RPAREN {::};
-
+            | simple_exp:e1 EQUAL simple_exp:e2 {::};
+            
 operator ::= PLUS  {: RESULT = new Node("+"); :}
            | MINUS {: RESULT = new Node("-"); :}
            | MULT  {: RESULT = new Node("*"); :}
