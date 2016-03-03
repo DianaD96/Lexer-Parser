@@ -227,8 +227,7 @@ z_statements ::= dictionary SEMICOL{::}
 				| for_all_statement {::}
 				| RETURN IDENTIFIER SEMICOL {::};
 				
-expression ::= IDENTIFIER:i EQUAL IDENTIFIER:t SEMICOL {::} //assignment
-				| DATATYPE:s IDENTIFIER:i EQUAL IDENTIFIER:t SEMICOL {::}
+expression ::= DATATYPE:s IDENTIFIER:i EQUAL IDENTIFIER:t SEMICOL {::}
 				| READ IDENTIFIER:i SEMICOL {::} //input
 				| PRINT simple_exp SEMICOL {::}; //output
 				
