@@ -108,6 +108,9 @@ types ::=  INT:i       {: RESULT = new Node(i); :}
         | COMMENT:t    {: RESULT = new Node(t); :};
              
 full_exp ::= simple_exp:e SEMICOL {::}
+           | sequence SEMICOL {::}
+           | sequence_operations SEMICOL {::}
+           | dictionary_assignment SEMICOL {::}
            | method_declarations SEMICOL{::};
          
 simple_exp ::= types:i {::}
