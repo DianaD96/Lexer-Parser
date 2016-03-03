@@ -116,7 +116,8 @@ simple_exp ::= types:i {::}
             | IDENTIFIER:i {::}
             | sequence_operations {::}
             | simple_exp:e1 operator:o simple_exp:e2 {::}
-            | simple_exp:e1 EQUAL simple_exp:e2 {::};
+            | simple_exp:e1 EQUAL simple_exp:e2 {::}
+            | simple_exp:e1 EQUAL method_declarations {::};
             
 operator ::= PLUS  {: RESULT = new Node("+"); :}
            | MINUS {: RESULT = new Node("-"); :}
@@ -174,6 +175,8 @@ method_input ::= types:i {::}
  
 method_declarations ::= IDENTIFIER:i DOT IDENTIFIER:j {::}
                       | IDENTIFIER:i DOTDOT method_declarations {::}
+                      | SEQ DOTDOT IDENTIFIER {::}
+                      | IDENTIFIER SLPAREN IDENTIFIER SRPAREN DOTDOT IDENTIFIER {::} //Example Case
                       | IDENTIFIER:i DOTDOT SEQ {::}
                       | IDENTIFIER:i LPAREN RPAREN {::}
                       | IDENTIFIER:i LPAREN IDENTIFIER RPAREN {::} 
