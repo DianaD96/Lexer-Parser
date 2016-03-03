@@ -94,7 +94,6 @@ statement ::= let_bind:s {::}
             | z_statements {::}
             | expression {::}
             | dictionary_assignment:s {::}
-            | sequence_operations:s {::}
             | data_type_declaration:s {::}
             | method_declarations {::}
             | methods {::};
@@ -109,7 +108,6 @@ types ::=  INT:i       {: RESULT = new Node(i); :}
              
 full_exp ::= simple_exp:e SEMICOL {::}
            | sequence SEMICOL {::}
-           | sequence_operations SEMICOL {::}
            | dictionary_assignment SEMICOL {::}
            | method_declarations SEMICOL{::}
            | data_type_declaration SEMICOL {::};  
@@ -118,7 +116,7 @@ simple_exp ::= types:i {::}
             | IDENTIFIER:i {::}
             | simple_exp:e1 operator:o simple_exp:e2 {::}
             | simple_exp:e1 EQUAL simple_exp:e2 {::}
-            | simple_exp EQUAL sequence_operation;
+            | sequence_operations {::};
             
 operator ::= PLUS  {: RESULT = new Node("+"); :}
            | MINUS {: RESULT = new Node("-"); :}
