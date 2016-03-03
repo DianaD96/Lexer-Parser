@@ -105,8 +105,7 @@ types ::=  INT:i       {: RESULT = new Node(i); :}
         | FLOAT:i      {: RESULT = new Node(i); :}
         | BOOLEAN:i    {: RESULT = new Node(i); :}
         | CHAR:i       {: RESULT = new Node(i); :}
-        | STR:i        {: RESULT = new Node(i); :}
-        | COMMENT:t    {: RESULT = new Node(t); :};
+        | STR:i        {: RESULT = new Node(i); :};
              
 full_exp ::= simple_exp:e SEMICOL {::}
            | sequence SEMICOL {::}
@@ -184,6 +183,9 @@ method_declarations ::= IDENTIFIER:i DOT IDENTIFIER:j {::}
                       
 methods ::= IDENTIFIER CLPAREN statements CRPAREN SEMICOL {::}
           | DATATYPE IDENTIFIER CLPAREN statements CRPAREN SEMICOL {::}
+          | SEQD PLPAREN DATATYPE PRPAREN IDENTIFIER CLPAREN statement CRPAREN SEMICOL {::}
+          | DICTD PLPAREN DATATYPE COMMA DATATYPE PRPAREN IDENTIFIER CLPAREN statement CRPAREN SEMICOL {::}
+          | DATATYPE IDENTIFIER LPAREN method_input RPAREN CLPAREN statements CRPAREN SEMICOL {::}
           | VOID IDENTIFIER CLPAREN statements CRPAREN SEMICOL {::};
                  
 alias ::= ALIAS DATATYPE IDENTIFIER {::}

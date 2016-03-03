@@ -1,5 +1,3 @@
-main {
-seq<int> a = [1,2,3];
-seq<int> b = reverse(a);
-print b; 
+int d (c) {
+int d;
 };
