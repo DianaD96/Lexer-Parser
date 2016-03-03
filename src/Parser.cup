@@ -94,7 +94,6 @@ statement ::= let_bind:s {::}
             | z_statements {::}
             | expression {::}
             | dictionary_assignment:s {::}
-            | sequence_operations:s {::}
             | data_type_declaration:s {::}
             | method_declarations {::}
             | methods {::};
@@ -115,15 +114,14 @@ full_exp ::= simple_exp:e SEMICOL {::}
                   
 simple_exp ::= types:i {::}
             | IDENTIFIER:i {::}
+            | sequence_operations {::}
             | simple_exp:e1 operator:o simple_exp:e2 {::}
-            | simple_exp:e1 EQUAL simple_exp:e2 {::}
-            | sequence_operations {::};
+            | simple_exp:e1 EQUAL simple_exp:e2 {::};
             
 operator ::= PLUS  {: RESULT = new Node("+"); :}
            | MINUS {: RESULT = new Node("-"); :}
            | MULT  {: RESULT = new Node("*"); :}
-           | DIV   {: RESULT = new Node("/"); :}
-           | DOTDOT {::};
+           | DIV   {: RESULT = new Node("/"); :};
       
 sequence ::= SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t EQUAL SEQ:k {::}
            | SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t EQUAL STR:k {::}
