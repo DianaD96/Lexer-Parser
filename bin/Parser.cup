@@ -49,6 +49,7 @@ parser code {:
 // Do something with ILLEGAL_CHARARCTER or drop it.
 terminal INT, FLOAT, RAT, CHAR, STR, TDEF, IDENTIFIER, COMMENT, BOOLEAN, LET, EQUAL, SEMICOL, PLUS, MINUS, MULT, DIV;
 terminal LEN, INDEX;
+terminal READ, PRINT, IF, THEN, FI, ELSE, ELIF, WHILE, DO, OD, FORALL, IN, RETURN;
 terminal ALIAS, DICT, SEQ, DICTD, SEQD, DATATYPE, PRPAREN, PLPAREN;
 terminal SLPAREN, SRPAREN, LPAREN, RPAREN, CRPAREN, CLPAREN, COLON, COMMA, DOT, DOTDOT;
 terminal BADCHAR; 
@@ -88,6 +89,19 @@ statement ::= let_bind:s {::}
             | data_type_declaration:s {::}
             | method_declarations {::};
       
+//Change Identifier t to expression
+z_statements ::= IDENTIFIER:i EQUAL IDENTIFIER:t SEMICOL {:
+				:}
+				|
+				DATATYPE:s IDENTIFIER:i EQUAL IDENTIFIER:t SEMICOL {:
+				:}
+				| READ IDENTIFIER:i SEMICOL {:
+				:}
+				| PRINT IDENTIFIER:t SEMICOL {:
+				:}
+				| dictionary SEMICOL{:
+				:};
+				
 types ::=  INT:i       {: RESULT = new Node(i); :}
         | RAT:i        {: RESULT = new Node(i); :}
         | FLOAT:i      {: RESULT = new Node(i); :}

@@ -66,6 +66,32 @@ import java_cup.runtime.*;
         System.out.print("tdef"); break;
       case sym.ALIAS:
         System.out.print("alias"); break;
+      case sym.READ:
+        System.out.print("read"); break;
+      case sym.PRINT:
+        System.out.print("print"); break;
+      case sym.IF:
+        System.out.print("if"); break;
+      case sym.THEN:
+        System.out.print("then"); break;
+      case sym.FI:
+        System.out.print("fi"); break;
+      case sym.ELSE:
+        System.out.print("else"); break;
+      case sym.ELIF:
+        System.out.print("elif"); break;
+      case sym.WHILE:
+        System.out.print("while"); break;
+      case sym.DO:
+        System.out.print("do"); break;
+      case sym.OD:
+        System.out.print("od"); break;
+      case sym.FORALL:
+        System.out.print("forall"); break;
+      case sym.IN:
+        System.out.print("in"); break;
+      case sym.RETURN:
+        System.out.print("return"); break;
       case sym.INT:
         System.out.printf("INT %d", value); break;
       case sym.FLOAT:
@@ -147,6 +173,20 @@ DataType = "bool" | "int" | "rat" | "float" | "char" | "top"
   "seq"                          {return symbol(sym.SEQD);           }
   "len"	                         {return symbol(sym.LEN);			}
   "alias"	                     {return symbol(sym.ALIAS);			}
+  "read"						 {return symbol(sym.READ);			}
+  "print"						 {return symbol(sym.PRINT);			}
+  "if"							 {return symbol(sym.IF);			}
+  "then"						 {return symbol(sym.THEN);			}
+  "fi"							 {return symbol(sym.FI);			}
+  "else"						 {return symbol(sym.ELSE);			}
+  "elif"						 {return symbol(sym.ELIF); 			}
+  "while"						 {return symbol(sym.WHILE); 		}
+  "do"							 {return symbol(sym.DO);			}
+  "od"							 {return symbol(sym.OD);			}
+  "forall"						 {return symbol(sym.FORALL);		}
+  "in"							 {return symbol(sym.IN);			}
+  "return"						 {return symbol(sym.RETURN);		}
+  
   {DataType}  	                 {return symbol(sym.DATATYPE, yytext());}
   {Character}                    {return symbol(sym.CHAR, yytext());}
   {Str}                          {return symbol(sym.STR, yytext());}
