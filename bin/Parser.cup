@@ -62,7 +62,7 @@ terminal BADCHAR;
 
 nonterminal statements, statement, top_level;
 nonterminal if_statement, do_statement, while_statement, for_all_statement, expression;
-nonterminal types,let_bind, full_exp, simple_exp, operator, colon, dictionary_value, dictionary, sequence, dictionary_assignment, sequence_operations;
+nonterminal methods, types,let_bind, full_exp, simple_exp, operator, colon, dictionary_value, dictionary, sequence, dictionary_assignment, sequence_operations;
 nonterminal alias, declaration_list, data_type_declaration, method_declarations, method_input, z_statements, after_then;
 
 precedence left EQUAL;
@@ -96,7 +96,8 @@ statement ::= let_bind:s {::}
             | dictionary_assignment:s {::}
             | sequence_operations:s {::}
             | data_type_declaration:s {::}
-            | method_declarations {::};
+            | method_declarations {::}
+            | methods {::};
       
 				
 types ::=  INT:i       {: RESULT = new Node(i); :}
@@ -111,8 +112,9 @@ full_exp ::= simple_exp:e SEMICOL {::}
            | sequence SEMICOL {::}
            | sequence_operations SEMICOL {::}
            | dictionary_assignment SEMICOL {::}
-           | method_declarations SEMICOL{::};
-         
+           | method_declarations SEMICOL{::}
+           | data_type_declaration SEMICOL {::};  
+                  
 simple_exp ::= types:i {::}
             | IDENTIFIER:i {::}
             | simple_exp:e1 operator:o simple_exp:e2 {::}
@@ -152,7 +154,7 @@ declaration_list ::= IDENTIFIER:i IDENTIFIER:j {::}
                    | sequence:e IDENTIFIER:j {::}
                    | sequence:f IDENTIFIER:g COMMA declaration_list:h {::};
                     
-data_type_declaration ::= TDEF IDENTIFIER:i CLPAREN declaration_list:e CRPAREN SEMICOL {::};
+data_type_declaration ::= TDEF IDENTIFIER:i CLPAREN declaration_list:e CRPAREN {::};
 
 
 // Doesn't solve double> nested functions
@@ -179,26 +181,42 @@ method_declarations ::= IDENTIFIER:i DOT IDENTIFIER:j {::}
                       | FLOAT:j operator:e method_declarations:i {::}
                       | RAT:j operator:e method_declarations:i {::};
                       
+methods ::= IDENTIFIER CLPAREN statements CRPAREN SEMICOL {::};
+                 
 alias ::= ALIAS DATATYPE IDENTIFIER {::}
         | ALIAS SEQD PLPAREN DATATYPE PRPAREN IDENTIFIER {::}
         | ALIAS DICTD PLPAREN DATATYPE:i COMMA DATATYPE:j PRPAREN IDENTIFIER {::};
 
 
-
 //1.REPLACE IDENTIFIER WITH FUNCTION BODY
-after_then ::= IDENTIFIER {::}
-             | IDENTIFIER FI {::}
-             | IDENTIFIER ELSE after_then {::};
+after_then ::= full_exp {::}
+             | full_exp FI {::}
+             | full_exp ELSE after_then {::}
+             | do_statement FI {::}
+             | while_statement FI {::}
+             | for_all_statement FI {::};
              
-if_statement ::= IF LPAREN IDENTIFIER RPAREN THEN after_then {::}
+if_statement ::= IF LPAREN simple_exp RPAREN THEN after_then {::}
 			  | ELIF LPAREN IDENTIFIER RPAREN THEN after_then {::};
 			  
 do_statement ::= DO expression OD {::}
-               | DO if_statement OD {::};
+               | DO if_statement OD {::}
+               | DO do_statement OD {::}
+               | DO while_statement OD {::}
+               | DO for_all_statement OD {::};
                
-while_statement ::= WHILE LPAREN IDENTIFIER RPAREN do_statement {::};
+while_statement ::= WHILE LPAREN expression RPAREN do_statement {::};
 
-for_all_statement ::= FORALL LPAREN IDENTIFIER IN IDENTIFIER RPAREN do_statement {::};
+for_all_statement ::= FORALL LPAREN INT IN SEQ RPAREN do_statement {::}
+                    | FORALL LPAREN FLOAT IN SEQ RPAREN do_statement {::}
+                    | FORALL LPAREN RAT IN SEQ RPAREN do_statement {::}
+                    | FORALL LPAREN CHAR IN SEQ RPAREN do_statement {::}
+                    | FORALL LPAREN STR IN SEQ RPAREN do_statement {::}
+                    | FORALL LPAREN INT IN DICT RPAREN do_statement {::}
+                    | FORALL LPAREN FLOAT IN DICT RPAREN do_statement {::}
+                    | FORALL LPAREN RAT IN DICT RPAREN do_statement {::}
+                    | FORALL LPAREN CHAR IN DICT RPAREN do_statement {::}
+                    | FORALL LPAREN STR IN DICT RPAREN do_statement {::};
 
 //Change Identifier t to expression 
 // 1. REPLACE IDENTIFIER WITH FUNCTION BODY
@@ -214,3 +232,4 @@ expression ::= IDENTIFIER:i EQUAL IDENTIFIER:t SEMICOL {::} //assignment
 				| READ IDENTIFIER:i SEMICOL {::} //input
 				| PRINT simple_exp SEMICOL {::}; //output
 				
+
