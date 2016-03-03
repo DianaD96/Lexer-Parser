@@ -181,7 +181,9 @@ method_declarations ::= IDENTIFIER:i DOT IDENTIFIER:j {::}
                       | FLOAT:j operator:e method_declarations:i {::}
                       | RAT:j operator:e method_declarations:i {::};
                       
-methods ::= IDENTIFIER CLPAREN statements CRPAREN SEMICOL {::};
+methods ::= IDENTIFIER CLPAREN statements CRPAREN SEMICOL {::}
+          | DATATYPE IDENTIFIER CLPAREN statements CRPAREN SEMICOL {::}
+          | VOID IDENTIFIER CLPAREN statements CRPAREN SEMICOL {::};
                  
 alias ::= ALIAS DATATYPE IDENTIFIER {::}
         | ALIAS SEQD PLPAREN DATATYPE PRPAREN IDENTIFIER {::}

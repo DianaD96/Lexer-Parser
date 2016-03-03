@@ -1,1 +1,1 @@
-seq<int> b = reverse(a);
+seq<int> b = reverse(a); 

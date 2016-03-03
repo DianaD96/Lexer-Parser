@@ -6,44 +6,45 @@
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int SEQ = 35;
+  public static final int SEQ = 36;
   public static final int FORALL = 30;
   public static final int MULT = 16;
   public static final int CHAR = 5;
   public static final int STR = 6;
   public static final int COMMENT = 9;
-  public static final int LPAREN = 43;
-  public static final int BADCHAR = 51;
+  public static final int LPAREN = 44;
+  public static final int BADCHAR = 52;
   public static final int INT = 2;
   public static final int MINUS = 15;
-  public static final int RPAREN = 44;
-  public static final int CLPAREN = 46;
+  public static final int RPAREN = 45;
+  public static final int CLPAREN = 47;
   public static final int IN = 31;
   public static final int TDEF = 7;
-  public static final int COMMA = 48;
+  public static final int COMMA = 49;
   public static final int SEMICOL = 13;
-  public static final int SLPAREN = 41;
-  public static final int PLPAREN = 40;
+  public static final int SLPAREN = 42;
+  public static final int PLPAREN = 41;
   public static final int FI = 24;
-  public static final int DOTDOT = 50;
-  public static final int DATATYPE = 38;
+  public static final int DOTDOT = 51;
+  public static final int DATATYPE = 39;
   public static final int DIV = 17;
   public static final int RAT = 4;
-  public static final int CRPAREN = 45;
+  public static final int CRPAREN = 46;
   public static final int PLUS = 14;
   public static final int IF = 22;
-  public static final int DOT = 49;
-  public static final int DICTD = 36;
-  public static final int SRPAREN = 42;
-  public static final int PRPAREN = 39;
+  public static final int DOT = 50;
+  public static final int DICTD = 37;
+  public static final int SRPAREN = 43;
+  public static final int PRPAREN = 40;
   public static final int EOF = 0;
   public static final int BOOLEAN = 10;
   public static final int OD = 29;
   public static final int RETURN = 32;
   public static final int EQUAL = 12;
   public static final int error = 1;
-  public static final int COLON = 47;
-  public static final int DICT = 34;
+  public static final int VOID = 33;
+  public static final int COLON = 48;
+  public static final int DICT = 35;
   public static final int ELSE = 25;
   public static final int INDEX = 19;
   public static final int READ = 20;
@@ -52,8 +53,8 @@ public class sym {
   public static final int FLOAT = 3;
   public static final int THEN = 23;
   public static final int LEN = 18;
-  public static final int ALIAS = 33;
-  public static final int SEQD = 37;
+  public static final int ALIAS = 34;
+  public static final int SEQD = 38;
   public static final int ELIF = 26;
   public static final int PRINT = 21;
   public static final int DO = 28;
@@ -92,6 +93,7 @@ public class sym {
   "FORALL",
   "IN",
   "RETURN",
+  "VOID",
   "ALIAS",
   "DICT",
   "SEQ",
