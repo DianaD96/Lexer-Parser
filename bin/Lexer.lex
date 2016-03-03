@@ -202,7 +202,11 @@ DataType = "bool" | "int" | "rat" | "float" | "char" | "top"
   "in"							 {return symbol(sym.IN);			}
   "return"						 {return symbol(sym.RETURN);		}
   "void"						 {return symbol(sym.VOID);			}
+<<<<<<< HEAD
   "main"                         {return symbol(sym.MAIN);          }
+=======
+  "main"						 {return symbol(sym.MAIN);          }
+>>>>>>> origin/master
   
   {DataType}  	                 {return symbol(sym.DATATYPE, yytext());}
   {Character}                    {return symbol(sym.CHAR, yytext());}
