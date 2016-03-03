@@ -137,6 +137,9 @@ sequence_operations ::= LEN LPAREN IDENTIFIER:t RPAREN {::}
                       | LEN LPAREN IDENTIFIER:t RPAREN operator:e INT:i {::}
                       | IDENTIFIER:t INDEX:s {::}
                       | IDENTIFIER SLPAREN IDENTIFIER SRPAREN {::}
+                      | IDENTIFIER SLPAREN IDENTIFIER SRPAREN DOTDOT{::}
+                      | types DOTDOT{::}
+                      | IDENTIFIER INDEX DOTDOT{::}
                       | IDENTIFIER:t SLPAREN LEN LPAREN IDENTIFIER:s RPAREN INT:i SRPAREN {::}
                       | IDENTIFIER:t SLPAREN LEN LPAREN IDENTIFIER:s RPAREN operator:e INT:i SRPAREN {::}
                       | IDENTIFIER:t SLPAREN IDENTIFIER:s operator:e INT:i SRPAREN {::}
