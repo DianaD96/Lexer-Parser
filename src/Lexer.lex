@@ -157,7 +157,7 @@ Float =  {Digit}+"."{Digit}+ | "-"{Digit}+"."{Digit}+
 DictionaryValue = {NonNewlineWhitespace}*{Top}{NonNewlineWhitespace}*":"{NonNewlineWhitespace}*{Top}{NonNewlineWhitespace}*
 Dictionary = "{"({DictionaryValue}",")*{DictionaryValue}"}" | "{""}"
 
-Sequence = "["({Top}",")*{Top}"]" | "[""]"
+Sequence = "["  {NonNewlineWhitespace}* ({NonNewlineWhitespace}*{Top}","{NonNewlineWhitespace}*)* {Top} {NonNewlineWhitespace}* "]" | "[""]"
 Index = "["{Integer}"]"
 
 Top = {Number} | {Character} | {BooleanConstants}
