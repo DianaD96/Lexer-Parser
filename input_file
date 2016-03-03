@@ -1,4 +1,2 @@
 
-
-outseq = inseq[i];
-
+outseq = inseq[i] :: outseq;
