@@ -88,6 +88,7 @@ statement ::= let_bind:s {::}
             | method_declarations {::};
       
 types ::=  INT:i       {: RESULT = new Node(i); :}
+        | IDENTIFIER:i {::};
         | RAT:i        {: RESULT = new Node(i); :}
         | FLOAT:i      {: RESULT = new Node(i); :}
         | BOOLEAN:i    {: RESULT = new Node(i); :}
@@ -99,6 +100,7 @@ full_exp ::= simple_exp:e SEMICOL {::};
          
 simple_exp ::= types:i {::}
             | simple_exp:e1 operator:o simple_exp:e2 {::}
+            | simple_exp:e1 EQUAL simple_exp:e2 {::}
             | LPAREN simple_exp:e RPAREN {::};
 
 operator ::= PLUS  {: RESULT = new Node("+"); :}
