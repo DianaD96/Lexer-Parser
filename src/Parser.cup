@@ -44,6 +44,12 @@ parser code {:
     lexer = lex;
   }
 
+  public void syntax_error(Symbol current_token) {
+		report error(
+			"Syntax error at line " + (current_token.left+1) + ", column " + current_token.right, null
+			); 
+	}
+	
 :};
  
 // Do something with ILLEGAL_CHARARCTER or drop it.
