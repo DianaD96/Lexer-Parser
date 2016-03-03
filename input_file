@@ -1,5 +1,4 @@
-seq<top> reverse (seq<top> inseq) {
-seq<top> outseq = [];
-int i = 0;
 
-};
+
+outseq = inseq[i];
+

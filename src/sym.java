@@ -6,59 +6,60 @@
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int SEQ = 36;
-  public static final int FORALL = 30;
-  public static final int MULT = 16;
+  public static final int SEQ = 37;
+  public static final int FORALL = 31;
+  public static final int MULT = 17;
   public static final int CHAR = 5;
   public static final int STR = 6;
-  public static final int COMMENT = 9;
-  public static final int LPAREN = 44;
-  public static final int BADCHAR = 52;
+  public static final int COMMENT = 10;
+  public static final int LPAREN = 45;
+  public static final int BADCHAR = 53;
   public static final int INT = 2;
-  public static final int MINUS = 15;
-  public static final int RPAREN = 45;
-  public static final int CLPAREN = 47;
-  public static final int IN = 31;
+  public static final int MINUS = 16;
+  public static final int RPAREN = 46;
+  public static final int CLPAREN = 48;
+  public static final int IN = 32;
   public static final int TDEF = 7;
-  public static final int COMMA = 49;
-  public static final int SEMICOL = 13;
-  public static final int SLPAREN = 42;
-  public static final int PLPAREN = 41;
-  public static final int FI = 24;
-  public static final int DOTDOT = 51;
-  public static final int DATATYPE = 39;
-  public static final int DIV = 17;
+  public static final int COMMA = 50;
+  public static final int SEMICOL = 14;
+  public static final int SLPAREN = 43;
+  public static final int PLPAREN = 42;
+  public static final int FI = 25;
+  public static final int DOTDOT = 52;
+  public static final int DATATYPE = 40;
+  public static final int DIV = 18;
   public static final int RAT = 4;
-  public static final int CRPAREN = 46;
-  public static final int PLUS = 14;
-  public static final int IF = 22;
-  public static final int DOT = 50;
-  public static final int DICTD = 37;
-  public static final int SRPAREN = 43;
-  public static final int PRPAREN = 40;
+  public static final int CRPAREN = 47;
+  public static final int PLUS = 15;
+  public static final int IF = 23;
+  public static final int DOT = 51;
+  public static final int DICTD = 38;
+  public static final int SRPAREN = 44;
+  public static final int PRPAREN = 41;
   public static final int EOF = 0;
-  public static final int BOOLEAN = 10;
-  public static final int OD = 29;
-  public static final int RETURN = 32;
-  public static final int EQUAL = 12;
+  public static final int BOOLEAN = 11;
+  public static final int OD = 30;
+  public static final int RETURN = 33;
+  public static final int EQUAL = 13;
   public static final int error = 1;
-  public static final int VOID = 33;
-  public static final int COLON = 48;
-  public static final int DICT = 35;
-  public static final int ELSE = 25;
-  public static final int INDEX = 19;
-  public static final int READ = 20;
-  public static final int WHILE = 27;
-  public static final int LET = 11;
+  public static final int FDEF = 8;
+  public static final int VOID = 34;
+  public static final int COLON = 49;
+  public static final int DICT = 36;
+  public static final int ELSE = 26;
+  public static final int INDEX = 20;
+  public static final int READ = 21;
+  public static final int WHILE = 28;
+  public static final int LET = 12;
   public static final int FLOAT = 3;
-  public static final int THEN = 23;
-  public static final int LEN = 18;
-  public static final int ALIAS = 34;
-  public static final int SEQD = 38;
-  public static final int ELIF = 26;
-  public static final int PRINT = 21;
-  public static final int DO = 28;
-  public static final int IDENTIFIER = 8;
+  public static final int THEN = 24;
+  public static final int LEN = 19;
+  public static final int ALIAS = 35;
+  public static final int SEQD = 39;
+  public static final int ELIF = 27;
+  public static final int PRINT = 22;
+  public static final int DO = 29;
+  public static final int IDENTIFIER = 9;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -68,6 +69,7 @@ public class sym {
   "CHAR",
   "STR",
   "TDEF",
+  "FDEF",
   "IDENTIFIER",
   "COMMENT",
   "BOOLEAN",

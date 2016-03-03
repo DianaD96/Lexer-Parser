@@ -117,7 +117,8 @@ full_exp ::= simple_exp:e SEMICOL {::}
 simple_exp ::= types:i {::}
             | IDENTIFIER:i {::}
             | simple_exp:e1 operator:o simple_exp:e2 {::}
-            | simple_exp:e1 EQUAL simple_exp:e2 {::};
+            | simple_exp:e1 EQUAL simple_exp:e2 {::}
+            | simple_exp EQUAL sequence_operation;
             
 operator ::= PLUS  {: RESULT = new Node("+"); :}
            | MINUS {: RESULT = new Node("-"); :}
@@ -140,6 +141,7 @@ sequence_operations ::= LEN LPAREN IDENTIFIER:t RPAREN {::}
                       | IDENTIFIER:t SLPAREN LEN LPAREN IDENTIFIER:s RPAREN operator:e INT:i SRPAREN {::}
                       | IDENTIFIER:t SLPAREN IDENTIFIER:s operator:e INT:i SRPAREN {::}
                       | IDENTIFIER:t SLPAREN INT:i COLON INT:j SRPAREN {::}
+                      | IDENTIFIER:t SLPAREN IDENTIFIER SRPAREN {::}
                       | IDENTIFIER:t SLPAREN COLON INT:J SRPAREN {::}
                       | IDENTIFIER:t SLPAREN INT:i COLON SRPAREN {::}
                       | IDENTIFIER:t SLPAREN INT:i COLON sequence_operations:e {::};
@@ -187,9 +189,9 @@ method_declarations ::= IDENTIFIER:i DOT IDENTIFIER:j {::}
                       
 methods ::= IDENTIFIER CLPAREN statements CRPAREN SEMICOL {::}
           | DATATYPE IDENTIFIER CLPAREN statements CRPAREN SEMICOL {::}
-          | SEQD PLPAREN DATATYPE PRPAREN IDENTIFIER CLPAREN statement CRPAREN SEMICOL {::}
-          | SEQD PLPAREN DATATYPE PRPAREN IDENTIFIER LPAREN method_input RPAREN CLPAREN statement CRPAREN SEMICOL {::}
-          | DICTD PLPAREN DATATYPE COMMA DATATYPE PRPAREN IDENTIFIER CLPAREN statement CRPAREN SEMICOL {::}
+          | SEQD PLPAREN DATATYPE PRPAREN IDENTIFIER CLPAREN statements CRPAREN SEMICOL {::}
+          | SEQD PLPAREN DATATYPE PRPAREN IDENTIFIER LPAREN method_input RPAREN CLPAREN statements CRPAREN SEMICOL {::}
+          | DICTD PLPAREN DATATYPE COMMA DATATYPE PRPAREN IDENTIFIER CLPAREN statements CRPAREN SEMICOL {::}
           | DATATYPE IDENTIFIER LPAREN method_input RPAREN CLPAREN statements CRPAREN SEMICOL {::}
           | VOID IDENTIFIER CLPAREN statements CRPAREN SEMICOL {::};
                  
@@ -246,7 +248,7 @@ z_statements ::= dictionary SEMICOL{::}
 				| RETURN IDENTIFIER SEMICOL {::};
 				
 expression ::= DATATYPE:s IDENTIFIER:i EQUAL IDENTIFIER:t SEMICOL {::}
-                | DATATYPE:s IDENTIFIER:i EQUAL IDENTIFIER:t INT SEMICOL {::}
+                | DATATYPE:s IDENTIFIER:i EQUAL types SEMICOL {::}
                 | DATATYPE:s IDENTIFIER:i SEMICOL {::}
 				| READ IDENTIFIER:i SEMICOL {::} //input
 				| PRINT simple_exp SEMICOL {::}; //output
