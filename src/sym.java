@@ -12,7 +12,7 @@ public class sym {
   public static final int STR = 6;
   public static final int COMMENT = 9;
   public static final int LPAREN = 29;
-  public static final int BADCHAR = 36;
+  public static final int BADCHAR = 37;
   public static final int INT = 2;
   public static final int MINUS = 15;
   public static final int RPAREN = 30;
@@ -22,6 +22,7 @@ public class sym {
   public static final int SEMICOL = 13;
   public static final int PLPAREN = 26;
   public static final int SLPAREN = 27;
+  public static final int DOTDOT = 36;
   public static final int DIV = 17;
   public static final int DATATYPE = 24;
   public static final int RAT = 4;
@@ -80,6 +81,7 @@ public class sym {
   "COLON",
   "COMMA",
   "DOT",
+  "DOTDOT",
   "BADCHAR"
   };
 }

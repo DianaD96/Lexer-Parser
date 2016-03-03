@@ -54,6 +54,8 @@ import java_cup.runtime.*;
         System.out.print(","); break;
       case sym.DOT:
         System.out.print("."); break;
+      case sym.DOTDOT:
+        System.out.print("::"); break;
       case sym.DICTD:
         System.out.print("dict"); break;
       case sym.SEQD:
@@ -172,7 +174,7 @@ DataType = "bool" | "int" | "rat" | "float" | "char" | "top"
   ","           				 {return symbol(sym.COMMA);      }
   "<"							 {return symbol(sym.PLPAREN);	 }
   ">"							 {return symbol(sym.PRPAREN);	 }
-
+  "::"							 {return symbol(sym.DOTDOT);	 }
 }
 
 [^]  {
