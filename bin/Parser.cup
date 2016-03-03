@@ -54,16 +54,16 @@ parser code {:
  
 // Do something with ILLEGAL_CHARARCTER or drop it.
 terminal INT, FLOAT, RAT, CHAR, STR, TDEF, FDEF, IDENTIFIER, COMMENT, BOOLEAN, LET, EQUAL, SEMICOL, PLUS, MINUS, MULT, DIV;
-terminal LEN, INDEX;
+terminal LEN, INDEX, EQEQ, NOTEQ, ANDAND, OROR;
 terminal READ, PRINT, IF, THEN, FI, ELSE, ELIF, WHILE, DO, OD, FORALL, IN, RETURN, VOID;
 terminal ALIAS, DICT, SEQ, DICTD, SEQD, DATATYPE, PRPAREN, PLPAREN;
 terminal SLPAREN, SRPAREN, LPAREN, RPAREN, CRPAREN, CLPAREN, COLON, COMMA, DOT, DOTDOT;
 terminal BADCHAR; 
 
 nonterminal statements, statement, top_level;
-nonterminal if_statement, do_statement, while_statement, for_all_statement, expression;
+nonterminal if_statement, do_statement, while_statement, for_all_statement, expression, Number;
 nonterminal methods, types,let_bind, full_exp, simple_exp, operator, colon, dictionary_value, dictionary, sequence, dictionary_assignment, sequence_operations, while_expression;
-nonterminal alias, declaration_list, data_type_declaration, method_declarations, method_input, z_statements, after_then;
+nonterminal alias, declaration_list, data_type_declaration, method_declarations, method_input, z_statements, after_then, while_mini_expression;
 
 precedence left EQUAL;
 precedence left PLUS, MINUS;
@@ -221,9 +221,42 @@ do_statement ::= DO expression OD {::}
                | DO while_statement OD {::}
                | DO for_all_statement OD {::};
                
-while_statement ::= WHILE LPAREN while_expression RPAREN do_statement {::};
+while_statement ::= WHILE LPAREN while_expression RPAREN do_statement {::}
+					| WHILE LPAREN while_mini_expression RPAREN do_statement {::};
 
-while_expression ::= IDENTIFIER PLPAREN INT {::}; 
+
+while_expression ::=  LPAREN while_mini_expression RPAREN
+					| LPAREN while_mini_expression RPAREN ANDAND IDENTIFIER {::}
+					| LPAREN while_mini_expression RPAREN ANDAND while_expression {::}
+					| LPAREN while_mini_expression RPAREN OROR IDENTIFIER {::}
+					| LPAREN while_mini_expression RPAREN OROR while_expression {::};
+
+while_mini_expression ::= IDENTIFIER {::}
+					 | BOOLEAN {::}
+					 //Methods
+					 | IDENTIFIER PLPAREN Number {::}
+	                 | IDENTIFIER PRPAREN Number
+					 | Number PLPAREN IDENTIFIER {::}
+					 | Number PRPAREN IDENTIFIER {::}
+					 | IDENTIFIER PLPAREN IDENTIFIER {::}
+					 | IDENTIFIER PRPAREN IDENTIFIER {::}
+					 | Number PLPAREN Number {::}
+					 | Number PRPAREN Number {::}
+					 | IDENTIFIER EQEQ types {::}
+					 | types EQEQ IDENTIFIER {::}
+					 | IDENTIFIER EQEQ IDENTIFIER {::}
+					 | types EQEQ types {::}
+					 | IDENTIFIER NOTEQ types {::}
+					 | types NOTEQ IDENTIFIER {::}
+					 | IDENTIFIER NOTEQ IDENTIFIER {::}
+					 | types NOTEQ types {::}
+					 | IDENTIFIER ANDAND while_expression{::}
+					 | IDENTIFIER OROR while_expression{::};
+					 
+
+Number ::= INT {::}
+		  	 | FLOAT {::}
+		  	 | RAT {::};
 
 for_all_statement ::=FORALL LPAREN INT IN IDENTIFIER RPAREN do_statement {::}
                     | FORALL LPAREN FLOAT IN IDENTIFIER RPAREN do_statement {::}

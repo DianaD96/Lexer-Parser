@@ -56,6 +56,14 @@ import java_cup.runtime.*;
         System.out.print("."); break;
       case sym.DOTDOT:
         System.out.print("::"); break;
+      case sym.EQEQ:
+        System.out.print("=="); break;
+      case sym.NOTEQ:
+        System.out.print("!="); break;
+      case sym.ANDAND:
+        System.out.print("&&"); break;
+      case sym.OROR:
+        System.out.print("||"); break;
       case sym.DICTD:
         System.out.print("dict"); break;
       case sym.SEQD:
@@ -206,6 +214,7 @@ DataType = "bool" | "int" | "rat" | "float" | "char" | "top"
   {Sequence}                     {return symbol(sym.SEQ, yytext());}
   {Whitespace}  			     { /* do nothing */               }
 
+
   "."                            {return symbol(sym.DOT);        }
   "="        				   	 {return symbol(sym.EQUAL);      }
   ";"           				 {return symbol(sym.SEMICOL);    }
@@ -224,6 +233,10 @@ DataType = "bool" | "int" | "rat" | "float" | "char" | "top"
   "<"							 {return symbol(sym.PLPAREN);	 }
   ">"							 {return symbol(sym.PRPAREN);	 }
   "::"							 {return symbol(sym.DOTDOT);	 }
+  "=="							 {return symbol(sym.EQEQ);		 }
+  "!="							 {return symbol(sym.NOTEQ);		 }
+  "&&"							 {return symbol(sym.ANDAND);	 }
+  "||"							 {return symbol(sym.OROR);		 }
 }
 
 [^]  {
