@@ -163,6 +163,8 @@ method_input ::= types:i {::}
                | types:i COMMA IDENTIFIER {::}
                | IDENTIFIER COMMA types {::}
                | IDENTIFIER:i LPAREN method_input:j RPAREN {::}
+               | DATATYPE:t IDENTIFIER:i {::}
+               | DATATYPE:t IDENTIFIER:i COMMA method_input {::}
                | IDENTIFIER:i LPAREN RPAREN {::}
                | IDENTIFIER:i LPAREN method_input:j RPAREN COMMA types {::}
                | IDENTIFIER:i LPAREN RPAREN COMMA types {::};
