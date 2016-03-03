@@ -1,1 +1,1 @@
-return expression ;
+print n*2;
