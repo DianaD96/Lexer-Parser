@@ -1,4 +1,5 @@
-main {
-	fibonacci( 13 );
-	return;
-};
+
+while (i < 2) do
+outseq = inseq[i] :: outseq;
+i = i + 1;
+od
