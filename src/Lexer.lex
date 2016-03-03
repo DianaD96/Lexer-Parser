@@ -92,6 +92,8 @@ import java_cup.runtime.*;
         System.out.print("in"); break;
       case sym.RETURN:
         System.out.print("return"); break;
+      case sym.VOID:
+        System.out.print("void"); break;
       case sym.INT:
         System.out.printf("INT %d", value); break;
       case sym.FLOAT:
@@ -186,6 +188,7 @@ DataType = "bool" | "int" | "rat" | "float" | "char" | "top"
   "forall"						 {return symbol(sym.FORALL);		}
   "in"							 {return symbol(sym.IN);			}
   "return"						 {return symbol(sym.RETURN);		}
+  "void"						 {return symbol(sym.VOID);			}
   
   {DataType}  	                 {return symbol(sym.DATATYPE, yytext());}
   {Character}                    {return symbol(sym.CHAR, yytext());}
