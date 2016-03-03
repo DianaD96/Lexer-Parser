@@ -64,6 +64,8 @@ import java_cup.runtime.*;
         System.out.print("len"); break;
       case sym.TDEF:
         System.out.print("tdef"); break;
+      case sym.FDEF:
+        System.out.print("fdef"); break;
       case sym.ALIAS:
         System.out.print("alias"); break;
       case sym.READ:
@@ -171,6 +173,7 @@ DataType = "bool" | "int" | "rat" | "float" | "char" | "top"
   "let"                          {return symbol(sym.LET);        }
   {Comment}                      {return symbol(sym.COMMENT, yytext());}
   "tdef"                         {return symbol(sym.TDEF);			}
+  "fdef"						 {return symbol(sym.FDEF);			}
   "dict"	                     {return symbol(sym.DICTD);			}
   "seq"                          {return symbol(sym.SEQD);           }
   "len"	                         {return symbol(sym.LEN);			}
