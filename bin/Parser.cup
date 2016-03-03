@@ -62,7 +62,7 @@ terminal BADCHAR;
 
 nonterminal statements, statement, top_level;
 nonterminal if_statement, do_statement, while_statement, for_all_statement, expression;
-nonterminal methods, types,let_bind, full_exp, simple_exp, operator, colon, dictionary_value, dictionary, sequence, dictionary_assignment, sequence_operations;
+nonterminal methods, types,let_bind, full_exp, simple_exp, operator, colon, dictionary_value, dictionary, sequence, dictionary_assignment, sequence_operations, while_expression;
 nonterminal alias, declaration_list, data_type_declaration, method_declarations, method_input, z_statements, after_then;
 
 precedence left EQUAL;
@@ -215,12 +215,15 @@ if_statement ::= IF LPAREN simple_exp RPAREN THEN after_then {::}
 			  | ELIF LPAREN IDENTIFIER RPAREN THEN after_then {::};
 			  
 do_statement ::= DO expression OD {::}
+			   | DO full_exp OD {::}
                | DO if_statement OD {::}
                | DO do_statement OD {::}
                | DO while_statement OD {::}
                | DO for_all_statement OD {::};
                
-while_statement ::= WHILE LPAREN expression RPAREN do_statement {::};
+while_statement ::= WHILE LPAREN while_expression RPAREN do_statement {::};
+
+while_expression ::= IDENTIFIER PLPAREN INT {::}; 
 
 for_all_statement ::=FORALL LPAREN INT IN IDENTIFIER RPAREN do_statement {::}
                     | FORALL LPAREN FLOAT IN IDENTIFIER RPAREN do_statement {::}
