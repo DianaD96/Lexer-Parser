@@ -1,2 +1,1 @@
-
 outseq = inseq[i] :: outseq;
