@@ -211,7 +211,7 @@ alias ::= ALIAS DATATYPE IDENTIFIER {::}
 //1.REPLACE IDENTIFIER WITH FUNCTION BODY
 after_then ::= full_exp {::}
              | full_exp FI {::}
-             | full_exp ELSE after_then {::}
+             | full_exp ELSE after_then {::} 
              | do_statement FI {::}
              | while_statement FI {::}
              | for_all_statement FI {::};
