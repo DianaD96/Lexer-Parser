@@ -1,1 +1,3 @@
-print n*2;
+forall(n in a) do
+print n * 2;
+od

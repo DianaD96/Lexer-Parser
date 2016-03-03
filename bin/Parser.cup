@@ -55,7 +55,7 @@ terminal SLPAREN, SRPAREN, LPAREN, RPAREN, CRPAREN, CLPAREN, COLON, COMMA, DOT, 
 terminal BADCHAR; 
 
 nonterminal statements, statement, top_level;
-nonterminal if_statement, do_statement, while_statement, for_all_statement	;
+nonterminal if_statement, do_statement, while_statement, for_all_statement, expression;
 nonterminal types,let_bind, full_exp, simple_exp, operator, colon, dictionary_value, dictionary, sequence, dictionary_assignment, sequence_operations;
 nonterminal alias, declaration_list, data_type_declaration, method_declarations, method_input, z_statements, after_then;
 
@@ -86,6 +86,7 @@ statement ::= let_bind:s {::}
             | sequence:s {::}
             | dictionary:s {::}
             | z_statements {::}
+            | expression {::}
             | dictionary_assignment:s {::}
             | sequence_operations:s {::}
             | data_type_declaration:s {::}
@@ -183,7 +184,7 @@ after_then ::= IDENTIFIER {::}
 if_statement ::= IF LPAREN IDENTIFIER RPAREN THEN after_then {::}
 			  | ELIF LPAREN IDENTIFIER RPAREN THEN after_then {::};
 			  
-do_statement ::= DO IDENTIFIER OD {::}
+do_statement ::= DO expression OD {::}
                | DO if_statement OD {::};
                
 while_statement ::= WHILE LPAREN IDENTIFIER RPAREN do_statement {::};
@@ -192,14 +193,15 @@ for_all_statement ::= FORALL LPAREN IDENTIFIER IN IDENTIFIER RPAREN do_statement
 
 //Change Identifier t to expression 
 // 1. REPLACE IDENTIFIER WITH FUNCTION BODY
-z_statements ::= IDENTIFIER:i EQUAL IDENTIFIER:t SEMICOL {::} //assignment
-				| DATATYPE:s IDENTIFIER:i EQUAL IDENTIFIER:t SEMICOL {::}
-				| READ IDENTIFIER:i SEMICOL {::} //input
-				| PRINT simple_exp SEMICOL {::} //output
-				| dictionary SEMICOL{::}
+z_statements ::= dictionary SEMICOL{::}
 				| if_statement {::}
 				| do_statement {::}
 				| while_statement {::}
 				| for_all_statement {::}
 				| RETURN IDENTIFIER SEMICOL {::};
+				
+expression ::= IDENTIFIER:i EQUAL IDENTIFIER:t SEMICOL {::} //assignment
+				| DATATYPE:s IDENTIFIER:i EQUAL IDENTIFIER:t SEMICOL {::}
+				| READ IDENTIFIER:i SEMICOL {::} //input
+				| PRINT simple_exp SEMICOL {::}; //output
 				
