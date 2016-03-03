@@ -55,8 +55,9 @@ terminal SLPAREN, SRPAREN, LPAREN, RPAREN, CRPAREN, CLPAREN, COLON, COMMA, DOT, 
 terminal BADCHAR; 
 
 nonterminal statements, statement, top_level;
+nonterminal if_statement, do_statement, while_statement, for_all_statement	;
 nonterminal types,let_bind, full_exp, simple_exp, operator, colon, dictionary_value, dictionary, sequence, dictionary_assignment, sequence_operations;
-nonterminal alias, declaration_list, data_type_declaration, method_declarations, method_input, method_input2;
+nonterminal alias, declaration_list, data_type_declaration, method_declarations, method_input, z_statements, after_then;
 
 precedence left EQUAL;
 precedence left PLUS, MINUS;
@@ -84,23 +85,12 @@ statement ::= let_bind:s {::}
             | alias:s {::}
             | sequence:s {::}
             | dictionary:s {::}
+            | z_statements {::}
             | dictionary_assignment:s {::}
             | sequence_operations:s {::}
             | data_type_declaration:s {::}
             | method_declarations {::};
       
-//Change Identifier t to expression
-z_statements ::= IDENTIFIER:i EQUAL IDENTIFIER:t SEMICOL {:
-				:}
-				|
-				DATATYPE:s IDENTIFIER:i EQUAL IDENTIFIER:t SEMICOL {:
-				:}
-				| READ IDENTIFIER:i SEMICOL {:
-				:}
-				| PRINT IDENTIFIER:t SEMICOL {:
-				:}
-				| dictionary SEMICOL{:
-				:};
 				
 types ::=  INT:i       {: RESULT = new Node(i); :}
         | RAT:i        {: RESULT = new Node(i); :}
@@ -110,7 +100,8 @@ types ::=  INT:i       {: RESULT = new Node(i); :}
         | STR:i        {: RESULT = new Node(i); :}
         | COMMENT:t    {: RESULT = new Node(t); :};
              
-full_exp ::= simple_exp:e SEMICOL {::};
+full_exp ::= simple_exp:e SEMICOL {::}
+           | method_declarations SEMICOL{::};
          
 simple_exp ::= types:i {::}
             | IDENTIFIER:i {::}
@@ -169,6 +160,7 @@ method_declarations ::= IDENTIFIER:i DOT IDENTIFIER:j {::}
                       | IDENTIFIER:i DOTDOT method_declarations {::}
                       | IDENTIFIER:i DOTDOT SEQ {::}
                       | IDENTIFIER:i LPAREN RPAREN {::}
+                      | IDENTIFIER:i LPAREN IDENTIFIER RPAREN {::} 
                       | IDENTIFIER:i LPAREN method_input RPAREN {::} 
                       | method_declarations:i operator:e INT:j{::}
                       | method_declarations:i operator:e FLOAT:j{::}
@@ -180,3 +172,33 @@ method_declarations ::= IDENTIFIER:i DOT IDENTIFIER:j {::}
 alias ::= ALIAS DATATYPE IDENTIFIER {::}
         | ALIAS SEQD PLPAREN DATATYPE PRPAREN IDENTIFIER {::}
         | ALIAS DICTD PLPAREN DATATYPE:i COMMA DATATYPE:j PRPAREN IDENTIFIER {::};
+
+
+//1.REPLACE IDENTIFIER WITH FUNCTION BODY
+after_then ::= IDENTIFIER {::}
+             | IDENTIFIER FI {::}
+             | IDENTIFIER ELSE after_then {::};
+             
+if_statement ::= IF LPAREN IDENTIFIER RPAREN THEN after_then {::}
+			  | ELIF LPAREN IDENTIFIER RPAREN THEN after_then {::};
+			  
+do_statement ::= DO IDENTIFIER OD {::}
+               | DO if_statement OD {::};
+               
+while_statement ::= WHILE LPAREN IDENTIFIER RPAREN do_statement {::};
+
+for_all_statement ::= FORALL LPAREN IDENTIFIER IN IDENTIFIER RPAREN do_statement {::};
+
+//Change Identifier t to expression 
+// 1. REPLACE IDENTIFIER WITH FUNCTION BODY
+z_statements ::= IDENTIFIER:i EQUAL IDENTIFIER:t SEMICOL {::} //assignment
+				| DATATYPE:s IDENTIFIER:i EQUAL IDENTIFIER:t SEMICOL {::}
+				| READ IDENTIFIER:i SEMICOL {::} //input
+				| PRINT IDENTIFIER:t SEMICOL {::} //output
+				| dictionary SEMICOL{::}
+				| if_statement {::}
+				| do_statement {::}
+				| while_statement {::}
+				| for_all_statement {::}
+				| RETURN IDENTIFIER SEMICOL {::};
+				
