@@ -124,9 +124,10 @@ operator ::= PLUS  {: RESULT = new Node("+"); :}
            | MINUS {: RESULT = new Node("-"); :}
            | MULT  {: RESULT = new Node("*"); :}
            | DIV   {: RESULT = new Node("/"); :};
-           
+      
 sequence ::= SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t EQUAL SEQ:k {::}
            | SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t EQUAL STR:k {::}
+           | SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t EQUAL method_declarations {::}
            | SEQD PLPAREN IDENTIFIER:t PRPAREN {::};
 
 dictionary ::= DICTD PLPAREN DATATYPE:i COMMA DATATYPE:j PRPAREN IDENTIFIER:t EQUAL DICT:k {::};
@@ -209,7 +210,15 @@ do_statement ::= DO expression OD {::}
                
 while_statement ::= WHILE LPAREN expression RPAREN do_statement {::};
 
-for_all_statement ::= FORALL LPAREN INT IN SEQ RPAREN do_statement {::}
+for_all_statement ::=FORALL LPAREN INT IN IDENTIFIER RPAREN do_statement {::}
+                    | FORALL LPAREN FLOAT IN IDENTIFIER RPAREN do_statement {::}
+                    | FORALL LPAREN RAT IN IDENTIFIER RPAREN do_statement {::}
+                    | FORALL LPAREN CHAR IN IDENTIFIER RPAREN do_statement {::}
+                    | FORALL LPAREN STR IN IDENTIFIER RPAREN do_statement {::}
+                    | FORALL LPAREN IDENTIFIER IN IDENTIFIER RPAREN do_statement {::}
+                    | FORALL LPAREN IDENTIFIER IN SEQ RPAREN do_statement {::}
+                    | FORALL LPAREN IDENTIFIER IN DICT RPAREN do_statement {::}
+                    | FORALL LPAREN INT IN SEQ RPAREN do_statement {::}
                     | FORALL LPAREN FLOAT IN SEQ RPAREN do_statement {::}
                     | FORALL LPAREN RAT IN SEQ RPAREN do_statement {::}
                     | FORALL LPAREN CHAR IN SEQ RPAREN do_statement {::}
