@@ -62,8 +62,8 @@ terminal BADCHAR;
 
 nonterminal statements, statement, top_level;
 nonterminal if_statement, do_statement, while_statement, for_all_statement, expression, Number;
-nonterminal methods, types,let_bind, full_exp, simple_exp, operator, colon, dictionary_value, dictionary, sequence, dictionary_assignment, sequence_operations, while_expression;
-nonterminal alias, declaration_list, data_type_declaration, method_declarations, method_input, z_statements, after_then, while_mini_expression;
+nonterminal return_statement, method_declaration, method_attribute, types,let_bind, full_exp, simple_exp, operator, colon, dictionary_value, dictionary, sequence, dictionary_assignment, sequence_operations, while_expression;
+nonterminal alias, declaration_list, data_type_declaration, method_call, method_input, z_statements, after_then, while_mini_expression;
 
 precedence left EQUAL;
 precedence left PLUS, MINUS;
@@ -95,9 +95,13 @@ statement ::= let_bind:s {::}
             | expression {::}
             | dictionary_assignment:s {::}
             | data_type_declaration:s {::}
-            | method_declarations {::}
-            | methods {::};
-      
+            | method_call {::}
+            | method_declaration {::};
+
+return_statement ::= RETURN {::}
+                  | RETURN types {::}
+                  | RETURN IDENTIFIER {::}
+                  | RETURN method_call {::};
 				
 types ::=  INT:i       {: RESULT = new Node(i); :}
         | RAT:i        {: RESULT = new Node(i); :}
@@ -107,9 +111,10 @@ types ::=  INT:i       {: RESULT = new Node(i); :}
         | STR:i        {: RESULT = new Node(i); :};
              
 full_exp ::= simple_exp:e SEMICOL {::}
+           | return_statement SEMICOL {::}
            | sequence SEMICOL {::}
            | dictionary_assignment SEMICOL {::}
-           | method_declarations SEMICOL{::}
+           | method_call SEMICOL{::}
            | data_type_declaration SEMICOL {::};  
                   
 simple_exp ::= types:i {::}
@@ -117,7 +122,7 @@ simple_exp ::= types:i {::}
             | sequence_operations {::}
             | simple_exp:e1 operator:o simple_exp:e2 {::}
             | simple_exp:e1 EQUAL simple_exp:e2 {::}
-            | simple_exp:e1 EQUAL method_declarations {::};
+            | simple_exp:e1 EQUAL method_call {::};
             
 operator ::= PLUS  {: RESULT = new Node("+"); :}
            | MINUS {: RESULT = new Node("-"); :}
@@ -126,7 +131,7 @@ operator ::= PLUS  {: RESULT = new Node("+"); :}
       
 sequence ::= SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t EQUAL SEQ:k {::}
            | SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t EQUAL STR:k {::}
-           | SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t EQUAL method_declarations {::}
+           | SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t EQUAL method_call {::}
            | SEQD PLPAREN IDENTIFIER:t PRPAREN {::};
 
 dictionary ::= DICTD PLPAREN DATATYPE:i COMMA DATATYPE:j PRPAREN IDENTIFIER:t EQUAL DICT:k {::};
@@ -175,22 +180,22 @@ method_input ::= types:i {::}
                | IDENTIFIER:i LPAREN method_input:j RPAREN COMMA types {::}
                | IDENTIFIER:i LPAREN RPAREN COMMA types {::};
 
- 
-method_declarations ::= IDENTIFIER:i DOT IDENTIFIER:j {::}
-                      | IDENTIFIER:i DOTDOT method_declarations {::}
+method_call ::= IDENTIFIER:i DOT IDENTIFIER:j {::}
+                      | IDENTIFIER:i DOTDOT method_call {::}
                       | SEQ DOTDOT IDENTIFIER {::}
                       | IDENTIFIER:i DOTDOT SEQ {::}
                       | IDENTIFIER:i LPAREN RPAREN {::}
                       | IDENTIFIER:i LPAREN IDENTIFIER RPAREN {::} 
                       | IDENTIFIER:i LPAREN method_input RPAREN {::} 
-                      | method_declarations:i operator:e INT:j{::}
-                      | method_declarations:i operator:e FLOAT:j{::}
-                      | method_declarations:i operator:e RAT:j{::}
-                      | INT:j operator:e method_declarations:i {::}
-                      | FLOAT:j operator:e method_declarations:i {::}
-                      | RAT:j operator:e method_declarations:i {::};
+                      | method_call:i operator:e INT:j{::}
+                      | method_call:i operator:e FLOAT:j{::}
+                      | method_call:i operator:e RAT:j{::}
+                      | INT:j operator:e method_call:i {::}
+                      | FLOAT:j operator:e method_call:i {::}
+                      | RAT:j operator:e method_call:i {::};
                       
-methods ::= IDENTIFIER CLPAREN statements CRPAREN SEMICOL {::}
+                     
+method_declaration ::= IDENTIFIER CLPAREN statements CRPAREN SEMICOL {::}
           | DATATYPE IDENTIFIER CLPAREN statements CRPAREN SEMICOL {::}
           | SEQD PLPAREN DATATYPE PRPAREN IDENTIFIER CLPAREN statements CRPAREN SEMICOL {::}
           | SEQD PLPAREN DATATYPE PRPAREN IDENTIFIER LPAREN method_input RPAREN CLPAREN statements CRPAREN SEMICOL {::}
@@ -233,7 +238,7 @@ while_expression ::=  LPAREN while_mini_expression RPAREN
 
 while_mini_expression ::= IDENTIFIER {::}
 					 | BOOLEAN {::}
-					 //Methods
+					 //method_declaration
 					 | IDENTIFIER PLPAREN Number {::}
 	                 | IDENTIFIER PRPAREN Number
 					 | Number PLPAREN IDENTIFIER {::}
@@ -283,8 +288,7 @@ z_statements ::= dictionary SEMICOL{::}
 				| if_statement {::}
 				| do_statement {::}
 				| while_statement {::}
-				| for_all_statement {::}
-				| RETURN IDENTIFIER SEMICOL {::};
+				| for_all_statement {::};
 				
 expression ::= DATATYPE:s IDENTIFIER:i EQUAL IDENTIFIER:t SEMICOL {::}
                 | DATATYPE:s IDENTIFIER:i EQUAL types SEMICOL {::}

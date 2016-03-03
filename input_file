@@ -1,3 +1,4 @@
-while (len(s)) do
-x = 5;
-od
+main {
+	fibonacci( 13 );
+	return;
+};
