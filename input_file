@@ -1,3 +1,5 @@
-int d (int c, int e) {
-int d;
-}; 
+seq<top> reverse (seq<top> inseq) {
+seq<top> outseq = [];
+int i = 0;
+
+};

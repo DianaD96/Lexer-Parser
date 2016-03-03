@@ -161,6 +161,8 @@ data_type_declaration ::= TDEF IDENTIFIER:i CLPAREN declaration_list:e CRPAREN {
 method_input ::= types:i {::}
                | types:i COMMA method_input:j {::}
                | types:i COMMA IDENTIFIER {::}
+               | SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t {::}
+               | SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t COMMA method_input {::}
                | IDENTIFIER COMMA types {::}
                | IDENTIFIER:i LPAREN method_input:j RPAREN {::}
                | DATATYPE:t IDENTIFIER:i {::}
@@ -186,6 +188,7 @@ method_declarations ::= IDENTIFIER:i DOT IDENTIFIER:j {::}
 methods ::= IDENTIFIER CLPAREN statements CRPAREN SEMICOL {::}
           | DATATYPE IDENTIFIER CLPAREN statements CRPAREN SEMICOL {::}
           | SEQD PLPAREN DATATYPE PRPAREN IDENTIFIER CLPAREN statement CRPAREN SEMICOL {::}
+          | SEQD PLPAREN DATATYPE PRPAREN IDENTIFIER LPAREN method_input RPAREN CLPAREN statement CRPAREN SEMICOL {::}
           | DICTD PLPAREN DATATYPE COMMA DATATYPE PRPAREN IDENTIFIER CLPAREN statement CRPAREN SEMICOL {::}
           | DATATYPE IDENTIFIER LPAREN method_input RPAREN CLPAREN statements CRPAREN SEMICOL {::}
           | VOID IDENTIFIER CLPAREN statements CRPAREN SEMICOL {::};
