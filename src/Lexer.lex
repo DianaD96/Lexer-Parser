@@ -170,7 +170,7 @@ DictionaryValue = {NonNewlineWhitespace}*{Top}{NonNewlineWhitespace}*":"{NonNewl
 Dictionary = "{"({DictionaryValue}",")*{DictionaryValue}"}" | "{""}"
 
 Sequence = "["  {NonNewlineWhitespace}* ({NonNewlineWhitespace}*({Top}|{Identifier})","{NonNewlineWhitespace}*)* ({Top}|{Identifier}) {NonNewlineWhitespace}* "]" | "[""]"
-Index = {Identifier} "["{Integer}|{Identifier}"]"
+Index = {Identifier} "["({Integer}|{Identifier})"]"
 
 Top = {Number} | {Character} | {BooleanConstants}
 DataType = "bool" | "int" | "rat" | "float" | "char" | "top" | "string"
