@@ -1,1 +1,3 @@
-seq<string> books;
+
+     if (i<1) then found = T; fi 
+
