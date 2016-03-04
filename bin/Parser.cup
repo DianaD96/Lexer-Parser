@@ -100,7 +100,11 @@ return_statement ::= RETURN {::}
                   | RETURN types {::}
                   | RETURN IDENTIFIER {::}
                   | RETURN method_call {::}
-                  | RETURN method_call operator method_call {::};
+                  | RETURN method_call operator method_call {::}
+                  | RETURN IDENTIFIER operator IDENTIFIER {::}
+                  | RETURN DATATYPE operator IDENTIFIER {::}
+                  | RETURN IDENTIFIER operator DATATYPE {::}
+                  | RETURN DATATYPE operator DATATYPE {::};
 				
 types ::=  INT:i       {: RESULT = new Node(i); :}
         | RAT:i        {: RESULT = new Node(i); :}
@@ -120,6 +124,7 @@ simple_exp ::= types:i {::}
             | IDENTIFIER:i {::}
             | sequence_operations {::}
             | simple_exp:e1 operator:o simple_exp:e2 {::}
+            | simple_exp operator LPAREN simple_exp RPAREN {::}
             | simple_exp:e1 EQUAL simple_exp:e2 {::}
             | simple_exp:e1 EQUAL method_call {::};
             
@@ -324,6 +329,7 @@ z_statements ::= dictionary SEMICOL{::}
 				| for_all_statement {::};
 				
 expression ::= DATATYPE:s IDENTIFIER:i EQUAL IDENTIFIER:t SEMICOL {::}
+                | DATATYPE IDENTIFIER EQUAL method_call SEMICOL {::}
                 | DATATYPE:s IDENTIFIER:i EQUAL types SEMICOL {::}
                 | DATATYPE:s IDENTIFIER:i SEMICOL {::}
 				| READ IDENTIFIER:i SEMICOL {::} //input
