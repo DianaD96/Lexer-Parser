@@ -1,2 +1,2 @@
 
-  dict<char,int> X = { }; 
+  dict< char ,int > X = { }; 

@@ -165,7 +165,7 @@ Rational = {Digit}+"/"{Digit}+ | "-"{Digit}+"/"{Digit}+ | {Digit}+"_"{Digit}+"/"
 Float =  {Digit}+"."{Digit}+ | "-"{Digit}+"."{Digit}+ 
 
 DictionaryValue = {NonNewlineWhitespace}*{Top}{NonNewlineWhitespace}*":"{NonNewlineWhitespace}*{Top}{NonNewlineWhitespace}*
-Dictionary = "{"({DictionaryValue}",")*{DictionaryValue}"}" | "{" {NonNewLineWhitespace}* "}"
+Dictionary = "{"({DictionaryValue}",")*{DictionaryValue}"}" | "{" {NonNewlineWhitespace}* "}"
 
 Sequence = "=" {NonNewlineWhitespace}* "["  {NonNewlineWhitespace}* ({NonNewlineWhitespace}*({Top}|{Identifier})","{NonNewlineWhitespace}*)* ({Top}|{Identifier}) {NonNewlineWhitespace}* "]" | "[""]"
 
