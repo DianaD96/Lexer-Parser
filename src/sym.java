@@ -6,62 +6,60 @@
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int SEQ = 40;
-  public static final int FORALL = 34;
-  public static final int MULT = 17;
+  public static final int SEQ = 39;
+  public static final int FORALL = 33;
+  public static final int MULT = 16;
   public static final int CHAR = 5;
   public static final int STR = 6;
   public static final int COMMENT = 10;
-  public static final int LPAREN = 48;
-  public static final int BADCHAR = 56;
+  public static final int LPAREN = 47;
   public static final int INT = 2;
-  public static final int MINUS = 16;
-  public static final int RPAREN = 49;
-  public static final int OROR = 22;
-  public static final int CLPAREN = 51;
-  public static final int IN = 35;
+  public static final int MINUS = 15;
+  public static final int RPAREN = 48;
+  public static final int OROR = 21;
+  public static final int CLPAREN = 50;
+  public static final int IN = 34;
   public static final int TDEF = 7;
-  public static final int COMMA = 53;
-  public static final int SEMICOL = 14;
-  public static final int SLPAREN = 46;
-  public static final int PLPAREN = 45;
-  public static final int FI = 28;
-  public static final int DOTDOT = 55;
-  public static final int DATATYPE = 43;
-  public static final int DIV = 18;
-  public static final int ANDAND = 21;
+  public static final int COMMA = 52;
+  public static final int SEMICOL = 13;
+  public static final int SLPAREN = 45;
+  public static final int PLPAREN = 44;
+  public static final int FI = 27;
+  public static final int DOTDOT = 54;
+  public static final int DATATYPE = 42;
+  public static final int DIV = 17;
+  public static final int ANDAND = 20;
   public static final int RAT = 4;
-  public static final int CRPAREN = 50;
-  public static final int PLUS = 15;
-  public static final int MAIN = 23;
-  public static final int IF = 26;
-  public static final int DOT = 54;
-  public static final int DICTD = 41;
-  public static final int SRPAREN = 47;
-  public static final int PRPAREN = 44;
+  public static final int CRPAREN = 49;
+  public static final int PLUS = 14;
+  public static final int MAIN = 22;
+  public static final int IF = 25;
+  public static final int DOT = 53;
+  public static final int DICTD = 40;
+  public static final int SRPAREN = 46;
+  public static final int PRPAREN = 43;
   public static final int EOF = 0;
   public static final int BOOLEAN = 11;
-  public static final int RETURN = 36;
-  public static final int OD = 33;
-  public static final int EQUAL = 13;
+  public static final int RETURN = 35;
+  public static final int OD = 32;
+  public static final int EQUAL = 12;
   public static final int error = 1;
-  public static final int EQEQ = 19;
+  public static final int EQEQ = 18;
   public static final int FDEF = 8;
-  public static final int VOID = 37;
-  public static final int COLON = 52;
-  public static final int DICT = 39;
-  public static final int ELSE = 29;
-  public static final int READ = 24;
-  public static final int WHILE = 31;
-  public static final int LET = 12;
+  public static final int VOID = 36;
+  public static final int COLON = 51;
+  public static final int DICT = 38;
+  public static final int ELSE = 28;
+  public static final int READ = 23;
+  public static final int WHILE = 30;
   public static final int FLOAT = 3;
-  public static final int THEN = 27;
-  public static final int ALIAS = 38;
-  public static final int SEQD = 42;
-  public static final int ELIF = 30;
-  public static final int PRINT = 25;
-  public static final int DO = 32;
-  public static final int NOTEQ = 20;
+  public static final int THEN = 26;
+  public static final int ALIAS = 37;
+  public static final int SEQD = 41;
+  public static final int ELIF = 29;
+  public static final int PRINT = 24;
+  public static final int DO = 31;
+  public static final int NOTEQ = 19;
   public static final int IDENTIFIER = 9;
   public static final String[] terminalNames = new String[] {
   "EOF",
@@ -76,7 +74,6 @@ public class sym {
   "IDENTIFIER",
   "COMMENT",
   "BOOLEAN",
-  "LET",
   "EQUAL",
   "SEMICOL",
   "PLUS",
@@ -119,8 +116,7 @@ public class sym {
   "COLON",
   "COMMA",
   "DOT",
-  "DOTDOT",
-  "BADCHAR"
+  "DOTDOT"
   };
 }
 

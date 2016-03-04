@@ -1,0 +1,52 @@
+tests//open/n-alice.s
+Syntax error at line 2, column 0Couldn't repair and continue parse at character 1 of input
+tests//open/n-decl.s
+Syntax error at line 9, column 7Couldn't repair and continue parse at character 8 of input
+tests//open/n-fib.s
+Syntax error at line 6, column 14Couldn't repair and continue parse at character 5 of input
+tests//open/n-funcParamTypeError0.s
+Syntax error at line 1, column 24Couldn't repair and continue parse at character 0 of input
+tests//open/n-main1.s
+parsing successful
+tests//open/n-multiple-assignment.s
+parsing successful
+tests//open/n-nestedTypeDef0.s
+Syntax error at line 2, column 9Couldn't repair and continue parse at character 1 of input
+tests//open/n-no-main.s
+Syntax error at line 1, column 16Couldn't repair and continue parse at character 0 of input
+tests//open/p-adt.s
+Syntax error at line 11, column 32Couldn't repair and continue parse at character 10 of input
+tests//open/p-alice.s
+parsing successful
+tests//open/p-elif.s
+parsing successful
+tests//open/p-emptyDict.s
+parsing successful
+tests//open/p-emptySeq.s
+parsing successful
+tests//open/p-fib.s
+parsing successful
+tests//open/p-fp0.s
+parsing successful
+tests//open/p-function0.s
+Syntax error at line 7, column 14Couldn't repair and continue parse at character 6 of input
+tests//open/p-ifthenelse0.s
+parsing successful
+tests//open/p-ifthenelse1.s
+parsing successful
+tests//open/p-main.s
+parsing successful
+tests//open/p-rat0.s
+Syntax error at line 2, column 14Couldn't repair and continue parse at character 1 of input
+tests//open/p-return0.s
+parsing successful
+tests//open/p-return1.s
+parsing successful
+tests//open/p-reverse.s
+Syntax error at line 11, column 29Couldn't repair and continue parse at character 10 of input
+tests//open/p-sequences.s
+Syntax error at line 10, column 29Couldn't repair and continue parse at character 9 of input
+tests//open/p-tdef0.s
+Syntax error at line 2, column 17Couldn't repair and continue parse at character 1 of input
+tests//open/p-while.s
+parsing successful
