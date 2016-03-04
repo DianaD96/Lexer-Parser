@@ -248,13 +248,38 @@ while_mini_expression ::= IDENTIFIER {::}
 					 | method_call PLPAREN EQUAL method_call {::}
 					 | IDENTIFIER PLPAREN Number {::}
 					 | IDENTIFIER PLPAREN EQUAL Number {::}
-	                 | IDENTIFIER PRPAREN Number
 					 | Number PLPAREN IDENTIFIER {::}
-					 | Number PRPAREN IDENTIFIER {::}
+					 | Number PLPAREN EQUAL IDENTIFIER {::}
 					 | IDENTIFIER PLPAREN IDENTIFIER {::}
-					 | IDENTIFIER PRPAREN IDENTIFIER {::}
+					 | IDENTIFIER PLPAREN EQUAL IDENTIFIER {::}
 					 | Number PLPAREN Number {::}
-					 | Number PRPAREN Number {::}
+					 | Number PLPAREN EQUAL Number {::}
+					 | IDENTIFIER EQEQ types {::}
+					 | types EQEQ IDENTIFIER {::}
+					 | IDENTIFIER EQEQ IDENTIFIER {::}
+					 | types EQEQ types {::}
+					 | IDENTIFIER NOTEQ types {::}
+					 | types NOTEQ IDENTIFIER {::}
+					 | IDENTIFIER NOTEQ IDENTIFIER {::}
+					 | types NOTEQ types {::}
+					 | IDENTIFIER ANDAND while_expression{::}
+					 | IDENTIFIER OROR while_expression{::};
+					 
+while_mini_expression ::= IDENTIFIER {::}
+					 | BOOLEAN {::}
+					 | method_call {::}
+					 | IDENTIFIER PLPAREN Number {::}
+					 | IDENTIFIER PLPAREN EQUAL Number {::}
+//	                 | IDENTIFIER PRPAREN Number
+					 | Number PLPAREN IDENTIFIER {::}
+					 | Number PLPAREN EQUAL IDENTIFIER {::}
+//					 | Number PRPAREN IDENTIFIER {::}
+					 | IDENTIFIER PLPAREN IDENTIFIER {::}
+					 | IDENTIFIER PLPAREN EQUAL IDENTIFIER
+//					 | IDENTIFIER PRPAREN IDENTIFIER {::}
+					 | Number PLPAREN Number {::}
+					 | Number PLPAREN EQUAL Number {::}
+//					 | Number PRPAREN Number {::}
 					 | IDENTIFIER EQEQ types {::}
 					 | types EQEQ IDENTIFIER {::}
 					 | IDENTIFIER EQEQ IDENTIFIER {::}
