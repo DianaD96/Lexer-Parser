@@ -129,7 +129,9 @@ operator ::= PLUS  {: RESULT = new Node("+"); :}
            | DIV   {: RESULT = new Node("/"); :};
     
 index ::= IDENTIFIER SLPAREN IDENTIFIER SRPAREN {::}  
-        | IDENTIFIER SLPAREN INT SRPAREN {::};
+        | IDENTIFIER SLPAREN INT SRPAREN {::}
+        | IDENTIFIER SLPAREN index SRPAREN {::}
+        | IDENTIFIER SLPAREN method_call SRPAREN {::};
         
 sequence ::= SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t EQUAL SEQ:k {::}
            | SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t EQUAL STR:k {::}
