@@ -63,7 +63,7 @@ terminal BADCHAR;
 nonterminal statements, statement, top_level;
 nonterminal if_statement, do_statement, while_statement, for_all_statement, expression, Number;
 nonterminal in_operations, return_statement, method_declaration, method_attribute, types,let_bind, full_exp, simple_exp, operator, colon, dictionary_value, dictionary, sequence, dictionary_assignment, sequence_operations, while_expression;
-nonterminal sequence_att, index, alias, declaration_list, data_type_declaration, method_call, method_input, z_statements, after_then, while_mini_expression, do_input;
+nonterminal index, alias, declaration_list, data_type_declaration, method_call, method_input, z_statements, after_then, while_mini_expression, do_input;
 
 precedence left EQUAL;
 precedence left PLUS, MINUS;
@@ -133,10 +133,8 @@ index ::= IDENTIFIER SLPAREN IDENTIFIER SRPAREN {::}
         | IDENTIFIER SLPAREN index SRPAREN {::}
         | IDENTIFIER SLPAREN method_call SRPAREN {::};
         
-sequence_att ::= SLPAREN SEQ SRPAREN {::}
-              | SLPAREN SRPAREN {::};
 
-sequence ::= SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t EQUAL sequence_att {::}
+sequence ::= SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t SEQ:k {::}
            | SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t EQUAL STR:k {::}
            | SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t EQUAL method_call {::}
            | SEQD PLPAREN IDENTIFIER:t PRPAREN IDENTIFIER{::}

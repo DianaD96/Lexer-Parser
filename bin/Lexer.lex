@@ -167,7 +167,7 @@ Float =  {Digit}+"."{Digit}+ | "-"{Digit}+"."{Digit}+
 DictionaryValue = {NonNewlineWhitespace}*{Top}{NonNewlineWhitespace}*":"{NonNewlineWhitespace}*{Top}{NonNewlineWhitespace}*
 Dictionary = "{"({DictionaryValue}",")*{DictionaryValue}"}" | "{""}"
 
-Sequence =  {NonNewlineWhitespace}* ({NonNewlineWhitespace}*({Top}|{Identifier})","{NonNewlineWhitespace}*)* ({Top}|{Identifier}) {NonNewlineWhitespace}* 
+Sequence = "=" {NonNewlineWhitespace}* "["  {NonNewlineWhitespace}* ({NonNewlineWhitespace}*({Top}|{Identifier})","{NonNewlineWhitespace}*)* ({Top}|{Identifier}) {NonNewlineWhitespace}* "]" | "[""]"
 
 Top = {Number} | {Character} | {BooleanConstants}
 DataType = "bool" | "int" | "rat" | "float" | "char" | "top" | "string"
