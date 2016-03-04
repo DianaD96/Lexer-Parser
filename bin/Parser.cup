@@ -62,7 +62,7 @@ terminal BADCHAR;
 
 nonterminal statements, statement, top_level;
 nonterminal if_statement, do_statement, while_statement, for_all_statement, expression, Number;
-nonterminal return_statement, method_declaration, method_attribute, types,let_bind, full_exp, simple_exp, operator, colon, dictionary_value, dictionary, sequence, dictionary_assignment, sequence_operations, while_expression;
+nonterminal in_operations, return_statement, method_declaration, method_attribute, types,let_bind, full_exp, simple_exp, operator, colon, dictionary_value, dictionary, sequence, dictionary_assignment, sequence_operations, while_expression;
 nonterminal alias, declaration_list, data_type_declaration, method_call, method_input, z_statements, after_then, while_mini_expression, do_input;
 
 precedence left EQUAL;
@@ -214,8 +214,11 @@ after_then ::= full_exp {::}
              | for_all_statement FI {::};
              
 if_statement ::= IF LPAREN while_mini_expression RPAREN THEN after_then {::}
-|
-			  | ELIF LPAREN IDENTIFIER RPAREN THEN after_then {::};
+			  | ELIF LPAREN while_mini_expression RPAREN THEN after_then {::}
+			  | IF LPAREN while_expression RPAREN THEN after_then {::}
+			  | ELIF LPAREN while_expression RPAREN THEN after_then {::}
+			  | IF LPAREN in_operations RPAREN THEN after_then {::}
+			  | ELIF LPAREN in_operations RPAREN THEN after_then {::};
 	
 do_input ::=  statement  {::}
 			| statement do_input {::};
@@ -270,24 +273,14 @@ Number ::= INT {::}
 		  	 | FLOAT {::}
 		  	 | RAT {::};
 
-for_all_statement ::=FORALL LPAREN INT IN IDENTIFIER RPAREN do_statement {::}
-                    | FORALL LPAREN FLOAT IN IDENTIFIER RPAREN do_statement {::}
-                    | FORALL LPAREN RAT IN IDENTIFIER RPAREN do_statement {::}
-                    | FORALL LPAREN CHAR IN IDENTIFIER RPAREN do_statement {::}
-                    | FORALL LPAREN STR IN IDENTIFIER RPAREN do_statement {::}
-                    | FORALL LPAREN IDENTIFIER IN IDENTIFIER RPAREN do_statement {::}
-                    | FORALL LPAREN IDENTIFIER IN SEQ RPAREN do_statement {::}
-                    | FORALL LPAREN IDENTIFIER IN DICT RPAREN do_statement {::}
-                    | FORALL LPAREN INT IN SEQ RPAREN do_statement {::}
-                    | FORALL LPAREN FLOAT IN SEQ RPAREN do_statement {::}
-                    | FORALL LPAREN RAT IN SEQ RPAREN do_statement {::}
-                    | FORALL LPAREN CHAR IN SEQ RPAREN do_statement {::}
-                    | FORALL LPAREN STR IN SEQ RPAREN do_statement {::}
-                    | FORALL LPAREN INT IN DICT RPAREN do_statement {::}
-                    | FORALL LPAREN FLOAT IN DICT RPAREN do_statement {::}
-                    | FORALL LPAREN RAT IN DICT RPAREN do_statement {::}
-                    | FORALL LPAREN CHAR IN DICT RPAREN do_statement {::}
-                    | FORALL LPAREN STR IN DICT RPAREN do_statement {::};
+in_operations ::= DATATYPE IN IDENTIFIER {::}
+               | IDENTIFIER IN IDENTIFIER {::}
+               | IDENTIFIER IN SEQ {::}
+               | IDENTIFIER IN DICT {::}
+               | DATATYPE IN SEQ {::}
+               | DATATYPE IN DICT {::};
+
+for_all_statement ::= FORALL LPAREN in_operations RPAREN do_statement {::};
 
 //Change Identifier t to expression 
 // 1. REPLACE IDENTIFIER WITH FUNCTION BODY
