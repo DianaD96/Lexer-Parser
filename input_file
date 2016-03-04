@@ -1,5 +1,2 @@
-fdef dict<top, top> invert(dict<top,top> d) {
 
-  return t;
-} ;
-
+      t[i] = i;

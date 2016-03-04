@@ -54,7 +54,7 @@ parser code {:
  
 // Do something with ILLEGAL_CHARARCTER or drop it.
 terminal INT, FLOAT, RAT, CHAR, STR, TDEF, FDEF, IDENTIFIER, COMMENT, BOOLEAN, LET, EQUAL, SEMICOL, PLUS, MINUS, MULT, DIV;
-terminal INDEX, EQEQ, NOTEQ, ANDAND, OROR, MAIN;
+terminal EQEQ, NOTEQ, ANDAND, OROR, MAIN;
 terminal READ, PRINT, IF, THEN, FI, ELSE, ELIF, WHILE, DO, OD, FORALL, IN, RETURN, VOID;
 terminal ALIAS, DICT, SEQ, DICTD, SEQD, DATATYPE, PRPAREN, PLPAREN;
 terminal SLPAREN, SRPAREN, LPAREN, RPAREN, CRPAREN, CLPAREN, COLON, COMMA, DOT, DOTDOT;
@@ -63,7 +63,7 @@ terminal BADCHAR;
 nonterminal statements, statement, top_level;
 nonterminal if_statement, do_statement, while_statement, for_all_statement, expression, Number;
 nonterminal in_operations, return_statement, method_declaration, method_attribute, types,let_bind, full_exp, simple_exp, operator, colon, dictionary_value, dictionary, sequence, dictionary_assignment, sequence_operations, while_expression;
-nonterminal alias, declaration_list, data_type_declaration, method_call, method_input, z_statements, after_then, while_mini_expression, do_input;
+nonterminal index, alias, declaration_list, data_type_declaration, method_call, method_input, z_statements, after_then, while_mini_expression, do_input;
 
 precedence left EQUAL;
 precedence left PLUS, MINUS;
@@ -127,7 +127,10 @@ operator ::= PLUS  {: RESULT = new Node("+"); :}
            | MINUS {: RESULT = new Node("-"); :}
            | MULT  {: RESULT = new Node("*"); :}
            | DIV   {: RESULT = new Node("/"); :};
-      
+    
+index ::= IDENTIFIER SLPAREN IDENTIFIER SRPAREN {::}  
+        | IDENTIFIER SLPAREN INT SRPAREN {::};
+        
 sequence ::= SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t EQUAL SEQ:k {::}
            | SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t EQUAL STR:k {::}
            | SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t EQUAL method_call {::}
@@ -139,8 +142,8 @@ dictionary ::= DICTD PLPAREN DATATYPE:i COMMA DATATYPE:j PRPAREN IDENTIFIER:t EQ
 dictionary_assignment ::= IDENTIFIER:t SLPAREN IDENTIFIER:i SRPAREN EQUAL IDENTIFIER:j {::};
 
 sequence_operations ::= 
-                       INDEX:s {::}
-                      | INDEX DOTDOT{::}
+                       index {::}
+                      | index DOTDOT{::}
                       | types DOTDOT{::}
                       | IDENTIFIER:t SLPAREN IDENTIFIER:s operator:e INT:i SRPAREN {::}
                       | IDENTIFIER:t SLPAREN INT:i COLON INT:j SRPAREN {::}
@@ -167,8 +170,8 @@ method_input ::= types:i {::}
                | types:i COMMA IDENTIFIER {::}
                | SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t {::}
                | SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t COMMA method_input {::}
-               | DICT PLPAREN DATATYPE COMMA DATATYPE PRPAREN IDENTIFIER {::}
-               | DICT PLPAREN IDENTIFIER COMMA IDENTIFIER PRPAREN IDENTIFIER {::}
+               | DICTD PLPAREN DATATYPE COMMA DATATYPE PRPAREN IDENTIFIER {::}
+               | DICTD PLPAREN IDENTIFIER COMMA IDENTIFIER PRPAREN IDENTIFIER {::}
                | IDENTIFIER COMMA types {::}
                | IDENTIFIER:i LPAREN method_input:j RPAREN {::}
                | DATATYPE:t IDENTIFIER:i {::}
