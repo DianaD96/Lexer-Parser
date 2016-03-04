@@ -265,32 +265,6 @@ while_mini_expression ::= IDENTIFIER {::}
 					 | IDENTIFIER ANDAND while_expression{::}
 					 | IDENTIFIER OROR while_expression{::};
 					 
-while_mini_expression ::= IDENTIFIER {::}
-					 | BOOLEAN {::}
-					 | method_call {::}
-					 | IDENTIFIER PLPAREN Number {::}
-					 | IDENTIFIER PLPAREN EQUAL Number {::}
-//	                 | IDENTIFIER PRPAREN Number
-					 | Number PLPAREN IDENTIFIER {::}
-					 | Number PLPAREN EQUAL IDENTIFIER {::}
-//					 | Number PRPAREN IDENTIFIER {::}
-					 | IDENTIFIER PLPAREN IDENTIFIER {::}
-					 | IDENTIFIER PLPAREN EQUAL IDENTIFIER
-//					 | IDENTIFIER PRPAREN IDENTIFIER {::}
-					 | Number PLPAREN Number {::}
-					 | Number PLPAREN EQUAL Number {::}
-//					 | Number PRPAREN Number {::}
-					 | IDENTIFIER EQEQ types {::}
-					 | types EQEQ IDENTIFIER {::}
-					 | IDENTIFIER EQEQ IDENTIFIER {::}
-					 | types EQEQ types {::}
-					 | IDENTIFIER NOTEQ types {::}
-					 | types NOTEQ IDENTIFIER {::}
-					 | IDENTIFIER NOTEQ IDENTIFIER {::}
-					 | types NOTEQ types {::}
-					 | IDENTIFIER ANDAND while_expression{::}
-					 | IDENTIFIER OROR while_expression{::};
-					 
 
 Number ::= INT {::}
 		  	 | FLOAT {::}
@@ -327,6 +301,7 @@ expression ::= DATATYPE:s IDENTIFIER:i EQUAL IDENTIFIER:t SEMICOL {::}
                 | DATATYPE:s IDENTIFIER:i EQUAL types SEMICOL {::}
                 | DATATYPE:s IDENTIFIER:i SEMICOL {::}
 				| READ IDENTIFIER:i SEMICOL {::} //input
-				| PRINT simple_exp SEMICOL {::}; //output
+				| PRINT simple_exp SEMICOL {::} //output
+				| expression expression {::};
 				
 
