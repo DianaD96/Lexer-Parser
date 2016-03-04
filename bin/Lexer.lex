@@ -173,7 +173,7 @@ Sequence = "["  {NonNewlineWhitespace}* ({NonNewlineWhitespace}*{Top}","{NonNewl
 Index = "["{Integer}"]"
 
 Top = {Number} | {Character} | {BooleanConstants}
-DataType = "bool" | "int" | "rat" | "float" | "char" | "top"
+DataType = "bool" | "int" | "rat" | "float" | "char" | "top" | "string"
 
 %%
 

@@ -89,7 +89,6 @@ statement ::= let_bind:s {::}
             | full_exp:s {::}
             | simple_exp:s {::}
             | alias:s {::}
-            | sequence:s {::}
             | dictionary:s {::}
             | z_statements {::}
             | expression {::}
