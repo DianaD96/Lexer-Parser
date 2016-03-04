@@ -1,5 +1,4 @@
 
-while (i < 2) do
-outseq = inseq[i] :: outseq;
-i = i + 1;
+while (i<len(s)) do
+print i;
 od

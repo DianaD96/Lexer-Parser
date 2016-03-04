@@ -54,7 +54,7 @@ parser code {:
  
 // Do something with ILLEGAL_CHARARCTER or drop it.
 terminal INT, FLOAT, RAT, CHAR, STR, TDEF, FDEF, IDENTIFIER, COMMENT, BOOLEAN, LET, EQUAL, SEMICOL, PLUS, MINUS, MULT, DIV;
-terminal LEN, INDEX, EQEQ, NOTEQ, ANDAND, OROR, MAIN;
+terminal INDEX, EQEQ, NOTEQ, ANDAND, OROR, MAIN;
 terminal READ, PRINT, IF, THEN, FI, ELSE, ELIF, WHILE, DO, OD, FORALL, IN, RETURN, VOID;
 terminal ALIAS, DICT, SEQ, DICTD, SEQD, DATATYPE, PRPAREN, PLPAREN;
 terminal SLPAREN, SRPAREN, LPAREN, RPAREN, CRPAREN, CLPAREN, COLON, COMMA, DOT, DOTDOT;
@@ -138,15 +138,12 @@ dictionary ::= DICTD PLPAREN DATATYPE:i COMMA DATATYPE:j PRPAREN IDENTIFIER:t EQ
              
 dictionary_assignment ::= IDENTIFIER:t SLPAREN IDENTIFIER:i SRPAREN EQUAL IDENTIFIER:j {::};
 
-sequence_operations ::= LEN LPAREN IDENTIFIER:t RPAREN {::}
-                      | LEN LPAREN IDENTIFIER:t RPAREN operator:e INT:i {::}
-                      | IDENTIFIER:t INDEX:s {::}
+sequence_operations ::= 
+                       IDENTIFIER:t INDEX:s {::}
                       | IDENTIFIER SLPAREN IDENTIFIER SRPAREN {::}
                       | IDENTIFIER SLPAREN IDENTIFIER SRPAREN DOTDOT{::}
                       | types DOTDOT{::}
                       | IDENTIFIER INDEX DOTDOT{::}
-                      | IDENTIFIER:t SLPAREN LEN LPAREN IDENTIFIER:s RPAREN INT:i SRPAREN {::}
-                      | IDENTIFIER:t SLPAREN LEN LPAREN IDENTIFIER:s RPAREN operator:e INT:i SRPAREN {::}
                       | IDENTIFIER:t SLPAREN IDENTIFIER:s operator:e INT:i SRPAREN {::}
                       | IDENTIFIER:t SLPAREN INT:i COLON INT:j SRPAREN {::}
                       | IDENTIFIER:t SLPAREN COLON INT:J SRPAREN {::}
@@ -238,8 +235,19 @@ while_expression ::=  LPAREN while_mini_expression RPAREN
 
 while_mini_expression ::= IDENTIFIER {::}
 					 | BOOLEAN {::}
-					 //method_declaration
+					 | method_call {::}
+					 | IDENTIFIER PLPAREN method_call {::}
+					 | IDENTIFIER PLPAREN EQUAL method_call {::}
+					 | Number PLPAREN method_call {::}
+					 | Number PLPAREN EQUAL method_call {::}
+					 | method_call PLPAREN IDENTIFIER {::}
+					 | method_call PLPAREN EQUAL IDENTIFIER {::}
+					 | method_call PLPAREN Number {::}
+					 | method_call PLPAREN EQUAL Number {::}
+					 | method_call PLPAREN method_call {::}
+					 | method_call PLPAREN EQUAL method_call {::}
 					 | IDENTIFIER PLPAREN Number {::}
+					 | IDENTIFIER PLPAREN EQUAL Number {::}
 	                 | IDENTIFIER PRPAREN Number
 					 | Number PLPAREN IDENTIFIER {::}
 					 | Number PRPAREN IDENTIFIER {::}

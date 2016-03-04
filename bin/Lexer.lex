@@ -68,8 +68,6 @@ import java_cup.runtime.*;
         System.out.print("dict"); break;
       case sym.SEQD:
         System.out.print("seq"); break; 
-      case sym.LEN:
-        System.out.print("len"); break;
       case sym.TDEF:
         System.out.print("tdef"); break;
       case sym.FDEF:
@@ -186,7 +184,6 @@ DataType = "bool" | "int" | "rat" | "float" | "char" | "top"
   "fdef"						 {return symbol(sym.FDEF);			}
   "dict"	                     {return symbol(sym.DICTD);			}
   "seq"                          {return symbol(sym.SEQD);          }
-  "len"	                         {return symbol(sym.LEN);			}
   "alias"	                     {return symbol(sym.ALIAS);			}
   "read"						 {return symbol(sym.READ);			}
   "print"						 {return symbol(sym.PRINT);			}
@@ -202,11 +199,7 @@ DataType = "bool" | "int" | "rat" | "float" | "char" | "top"
   "in"							 {return symbol(sym.IN);			}
   "return"						 {return symbol(sym.RETURN);		}
   "void"						 {return symbol(sym.VOID);			}
-<<<<<<< HEAD
   "main"                         {return symbol(sym.MAIN);          }
-=======
-  "main"						 {return symbol(sym.MAIN);          }
->>>>>>> origin/master
   
   {DataType}  	                 {return symbol(sym.DATATYPE, yytext());}
   {Character}                    {return symbol(sym.CHAR, yytext());}
