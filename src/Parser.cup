@@ -167,6 +167,8 @@ method_input ::= types:i {::}
                | types:i COMMA IDENTIFIER {::}
                | SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t {::}
                | SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t COMMA method_input {::}
+               | DICT PLPAREN DATATYPE COMMA DATATYPE PRPAREN IDENTIFIER {::}
+               | DICT PLPAREN IDENTIFIER COMMA IDENTIFIER PRPAREN IDENTIFIER {::}
                | IDENTIFIER COMMA types {::}
                | IDENTIFIER:i LPAREN method_input:j RPAREN {::}
                | DATATYPE:t IDENTIFIER:i {::}
