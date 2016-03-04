@@ -63,7 +63,7 @@ terminal BADCHAR;
 nonterminal statements, statement, top_level;
 nonterminal if_statement, do_statement, while_statement, for_all_statement, expression, Number;
 nonterminal return_statement, method_declaration, method_attribute, types,let_bind, full_exp, simple_exp, operator, colon, dictionary_value, dictionary, sequence, dictionary_assignment, sequence_operations, while_expression;
-nonterminal alias, declaration_list, data_type_declaration, method_call, method_input, z_statements, after_then, while_mini_expression;
+nonterminal alias, declaration_list, data_type_declaration, method_call, method_input, z_statements, after_then, while_mini_expression, do_input;
 
 precedence left EQUAL;
 precedence left PLUS, MINUS;
@@ -215,13 +215,12 @@ after_then ::= full_exp {::}
              
 if_statement ::= IF LPAREN simple_exp RPAREN THEN after_then {::}
 			  | ELIF LPAREN IDENTIFIER RPAREN THEN after_then {::};
-			  
-do_statement ::= DO expression OD {::}
-			   | DO full_exp OD {::}
-               | DO if_statement OD {::}
-               | DO do_statement OD {::}
-               | DO while_statement OD {::}
-               | DO for_all_statement OD {::};
+	
+do_input ::=  statement  {::}
+			| statement do_input {::};
+		  
+do_statement ::= DO do_input OD {::};
+			   
                
 while_statement ::= WHILE LPAREN while_expression RPAREN do_statement {::}
 					| WHILE LPAREN while_mini_expression RPAREN do_statement {::};
@@ -301,7 +300,6 @@ expression ::= DATATYPE:s IDENTIFIER:i EQUAL IDENTIFIER:t SEMICOL {::}
                 | DATATYPE:s IDENTIFIER:i EQUAL types SEMICOL {::}
                 | DATATYPE:s IDENTIFIER:i SEMICOL {::}
 				| READ IDENTIFIER:i SEMICOL {::} //input
-				| PRINT simple_exp SEMICOL {::} //output
-				| expression expression {::};
+				| PRINT simple_exp SEMICOL {::}; //output
 				
 
