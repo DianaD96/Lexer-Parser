@@ -167,7 +167,7 @@ Float =  {Digit}+"."{Digit}+ | "-"{Digit}+"."{Digit}+
 DictionaryValue = {NonNewlineWhitespace}*{Top}{NonNewlineWhitespace}*":"{NonNewlineWhitespace}*{Top}{NonNewlineWhitespace}*
 Dictionary = "{"({DictionaryValue}",")*{DictionaryValue}"}" | "{""}"
 
-//Sequence = "["  {NonNewlineWhitespace}* ({NonNewlineWhitespace}*({Top}|{Identifier})","{NonNewlineWhitespace}*)* ({Top}|{Identifier}) {NonNewlineWhitespace}* "]" | "[""]"
+Sequence =  {NonNewlineWhitespace}* ({NonNewlineWhitespace}*({Top}|{Identifier})","{NonNewlineWhitespace}*)* ({Top}|{Identifier}) {NonNewlineWhitespace}* 
 
 Top = {Number} | {Character} | {BooleanConstants}
 DataType = "bool" | "int" | "rat" | "float" | "char" | "top" | "string"
@@ -207,7 +207,7 @@ DataType = "bool" | "int" | "rat" | "float" | "char" | "top" | "string"
   {BooleanConstants}             {return symbol(sym.BOOLEAN, yytext());}
   {Identifier}                   {return symbol(sym.IDENTIFIER, yytext());}
   {Dictionary}                   {return symbol(sym.DICT, yytext());}
-//  {Sequence}                     {return symbol(sym.SEQ, yytext());}
+  {Sequence}                     {return symbol(sym.SEQ, yytext());}
   {Whitespace}  			     { /* do nothing */               }
 
 
