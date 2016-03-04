@@ -100,7 +100,8 @@ statement ::= let_bind:s {::}
 return_statement ::= RETURN {::}
                   | RETURN types {::}
                   | RETURN IDENTIFIER {::}
-                  | RETURN method_call {::};
+                  | RETURN method_call {::}
+                  | RETURN method_call operator method_call {::};
 				
 types ::=  INT:i       {: RESULT = new Node(i); :}
         | RAT:i        {: RESULT = new Node(i); :}
@@ -140,7 +141,8 @@ sequence ::= SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t SEQ:k {::}
            | SEQD PLPAREN IDENTIFIER:t PRPAREN IDENTIFIER{::}
            | SEQD PLPAREN DATATYPE PRPAREN IDENTIFIER{::};
 
-dictionary ::= DICTD PLPAREN DATATYPE:i COMMA DATATYPE:j PRPAREN IDENTIFIER:t EQUAL DICT:k {::};
+dictionary ::= DICTD PLPAREN DATATYPE:i COMMA DATATYPE:j PRPAREN IDENTIFIER:t EQUAL DICT:k {::}
+             |  DICTD PLPAREN DATATYPE:i COMMA DATATYPE:j PRPAREN IDENTIFIER:t EQUAL method_call {::};
              
 dictionary_assignment ::= IDENTIFIER:t SLPAREN IDENTIFIER:i SRPAREN EQUAL IDENTIFIER:j {::};
 
@@ -189,6 +191,9 @@ method_call ::= IDENTIFIER:i DOT IDENTIFIER:j {::}
                       | IDENTIFIER:i DOTDOT SEQ {::}
                       | IDENTIFIER:i LPAREN RPAREN {::}
                       | IDENTIFIER:i LPAREN IDENTIFIER RPAREN {::} 
+                      | IDENTIFIER:i LPAREN IDENTIFIER operator types RPAREN {::} 
+                      | IDENTIFIER:i LPAREN IDENTIFIER operator method_call RPAREN {::}
+                      | IDENTIFIER:i LPAREN IDENTIFIER INT RPAREN {::}
                       | IDENTIFIER:i LPAREN method_input RPAREN {::} 
                       | method_call:i operator:e INT:j{::}
                       | method_call:i operator:e FLOAT:j{::}
