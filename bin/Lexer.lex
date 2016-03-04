@@ -154,7 +154,7 @@ Identifier = {Letter}("_" | {Letter} | {Digit})*
 Punctuation = "!" | "\"" | "#" | "%" | "%" | "&" | "'" | "(" | ")" | "*" | "+" | "," | "-" | "." | "/" | "\\" | ":" | ";" | "<" | "=" | ">" | "?" | "@" | "[" | "]" | "^" | "_" | "`" | "{" | "}" | "|" | "~" 
 
 Comment = {OneLineComment} | {MultipleLineComment}
-OneLineComment = (({Letter} | {Digit} | {Punctuation}) | {NonNewlineWhitespace})*"#"
+OneLineComment = "#" {NonNewlineWhitespace}* (({Letter} | {Digit} | {Punctuation}) | {NonNewlineWhitespace})*
 MultipleLineComment = "/#"(({Letter} | {Digit} | {Punctuation})|{Whitespace})*"#/"
 
 BooleanConstants = "T" | "F"
@@ -165,7 +165,7 @@ Rational = {Digit}+"/"{Digit}+ | "-"{Digit}+"/"{Digit}+ | {Digit}+"_"{Digit}+"/"
 Float =  {Digit}+"."{Digit}+ | "-"{Digit}+"."{Digit}+ 
 
 DictionaryValue = {NonNewlineWhitespace}*{Top}{NonNewlineWhitespace}*":"{NonNewlineWhitespace}*{Top}{NonNewlineWhitespace}*
-Dictionary = "{"({DictionaryValue}",")*{DictionaryValue}"}" | "{""}"
+Dictionary = "{"({DictionaryValue}",")*{DictionaryValue}"}" | "{" {NonNewLineWhitespace}* "}"
 
 Sequence = "=" {NonNewlineWhitespace}* "["  {NonNewlineWhitespace}* ({NonNewlineWhitespace}*({Top}|{Identifier})","{NonNewlineWhitespace}*)* ({Top}|{Identifier}) {NonNewlineWhitespace}* "]" | "[""]"
 

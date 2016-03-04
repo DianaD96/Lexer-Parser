@@ -86,6 +86,7 @@ statements ::= statements:ss statement:s {:
              ;
 
 statement ::= let_bind:s {::}
+            | COMMENT {::}
             | full_exp:s {::}
             | simple_exp:s {::}
             | alias:s {::}
@@ -209,7 +210,8 @@ method_declaration ::= MAIN CLPAREN statements CRPAREN SEMICOL {::}
           | FDEF SEQD PLPAREN DATATYPE PRPAREN IDENTIFIER LPAREN method_input RPAREN CLPAREN statements CRPAREN SEMICOL {::}
           | FDEF DICTD PLPAREN DATATYPE COMMA DATATYPE PRPAREN IDENTIFIER CLPAREN statements CRPAREN SEMICOL {::}
           | FDEF DATATYPE IDENTIFIER LPAREN method_input RPAREN CLPAREN statements CRPAREN SEMICOL {::}
-          | FDEF VOID IDENTIFIER CLPAREN statements CRPAREN SEMICOL {::}
+          | FDEF VOID IDENTIFIER LPAREN RPAREN CLPAREN statements CRPAREN SEMICOL {::}
+          | FDEF VOID IDENTIFIER LPAREN method_input RPAREN CLPAREN statements CRPAREN SEMICOL {::}
           | FDEF SEQD PLPAREN DATATYPE PRPAREN IDENTIFIER LPAREN RPAREN CLPAREN statements CRPAREN SEMICOL {::}
           | FDEF DATATYPE IDENTIFIER LPAREN RPAREN CLPAREN statements CRPAREN SEMICOL {::}
           | FDEF DICTD PLPAREN DATATYPE COMMA DATATYPE PRPAREN IDENTIFIER LPAREN method_input RPAREN CLPAREN statements CRPAREN SEMICOL {::};
