@@ -1,5 +1,1 @@
-while (i < len(l)) do
-i = i + 1;
-print 6;
-print 7;
-od
+seq<string> books= [s1,s2,s3];
