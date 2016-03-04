@@ -169,7 +169,7 @@ Dictionary = "{"({DictionaryValue}",")*{DictionaryValue}"}" | "{" {NonNewlineWhi
 
 Sequence = "=" {NonNewlineWhitespace}* "["  {NonNewlineWhitespace}* ({NonNewlineWhitespace}*({Top}|{Identifier})","{NonNewlineWhitespace}*)* ({Top}|{Identifier}) {NonNewlineWhitespace}* "]" | "=" {NonNewlineWhitespace}* "[""]"
 
-Top = {Number} | {Character} | {BooleanConstants}
+Top = {Number} | {Character} | {BooleanConstants} | {Str}
 DataType = "bool" | "int" | "rat" | "float" | "char" | "top" | "string"
 
 %%

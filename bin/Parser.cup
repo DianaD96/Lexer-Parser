@@ -87,7 +87,6 @@ statements ::= statements:ss statement:s {:
 
 statement ::= let_bind:s {::}
             | COMMENT {::}
-            | full_exp:s {::}
             | simple_exp:s {::}
             | dictionary:s {::}
             | z_statements {::}
@@ -140,6 +139,7 @@ index ::= IDENTIFIER SLPAREN IDENTIFIER SRPAREN {::}
         
 
 sequence ::= SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t SEQ:k {::}
+           | SEQD PLPAREN DATATYPE PRPAREN IDENTIFIER EQUAL sequence_operations {::}
            | SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t EQUAL STR:k {::}
            | SEQD PLPAREN DATATYPE:i PRPAREN IDENTIFIER:t EQUAL method_call {::}
            | SEQD PLPAREN IDENTIFIER:t PRPAREN IDENTIFIER{::}
@@ -158,10 +158,11 @@ dictionary ::= DICTD PLPAREN DATATYPE:i COMMA DATATYPE:j PRPAREN IDENTIFIER:t EQ
              
 dictionary_assignment ::= IDENTIFIER:t SLPAREN IDENTIFIER:i SRPAREN EQUAL IDENTIFIER:j {::};
 
-sequence_operations ::= 
-                       index {::}
-                      | index DOTDOT{::}
-                      | types DOTDOT{::}
+sequence_operations ::= index {::}
+                      | IDENTIFIER DOTDOT IDENTIFIER {::}
+                      | IDENTIFIER DOTDOT sequence_operations {::}
+                      | index DOTDOT sequence_operations {::}
+                      | types DOTDOT sequence_operations {::}
                       | IDENTIFIER:t SLPAREN IDENTIFIER:s operator:e INT:i SRPAREN {::}
                       | IDENTIFIER:t SLPAREN INT:i COLON INT:j SRPAREN {::}
                       | IDENTIFIER:t SLPAREN COLON INT:J SRPAREN {::}
@@ -231,13 +232,12 @@ method_declaration ::= MAIN CLPAREN statements CRPAREN SEMICOL {::}
           | FDEF DICTD PLPAREN DATATYPE COMMA DATATYPE PRPAREN IDENTIFIER LPAREN method_input RPAREN CLPAREN statements CRPAREN SEMICOL {::};
                  
 alias ::= ALIAS DATATYPE IDENTIFIER {::}
+        | ALIAS IDENTIFIER IDENTIFIER {::}
         | ALIAS SEQD PLPAREN DATATYPE PRPAREN IDENTIFIER {::}
         | ALIAS DICTD PLPAREN DATATYPE:i COMMA DATATYPE:j PRPAREN IDENTIFIER {::};
 
 
-//1.REPLACE IDENTIFIER WITH FUNCTION BODY
 after_then ::= full_exp {::}
-             | full_exp ELSE after_then {::} 
              | do_statement {::}
              | while_statement {::}
              | for_all_statement {::}
@@ -255,7 +255,13 @@ elif_statement ::= ELIF LPAREN while_mini_expression RPAREN THEN after_then {::}
 
 if_statement ::= IF LPAREN while_mini_expression RPAREN THEN after_then FI{::}
 			  | IF LPAREN while_expression RPAREN THEN after_then FI {::}
-			  | IF LPAREN in_operations RPAREN THEN after_then FI {::};
+			  | IF LPAREN in_operations RPAREN THEN after_then FI {::}
+			  | IF LPAREN while_mini_expression RPAREN THEN after_then ELSE after_then FI{::}
+			  | IF LPAREN while_expression RPAREN THEN after_then ELSE after_then FI {::}
+			  | IF LPAREN in_operations RPAREN THEN after_then ELSE after_then FI {::}
+			  | IF LPAREN while_mini_expression RPAREN THEN after_then ELSE if_statement FI{::}
+			  | IF LPAREN while_expression RPAREN THEN after_then ELSE if_statement FI {::}
+			  | IF LPAREN in_operations RPAREN THEN after_then ELSE if_statement FI {::};
 			  	
 do_input ::=  statement  {::}
 			| statement do_input {::};
@@ -322,6 +328,7 @@ for_all_statement ::= FORALL LPAREN in_operations RPAREN do_statement {::};
 //Change Identifier t to expression 
 // 1. REPLACE IDENTIFIER WITH FUNCTION BODY
 z_statements ::= dictionary SEMICOL{::}
+                | full_exp {::}
                 | alias SEMICOL {::}
 				| if_statement {::}
 				| do_statement {::}
