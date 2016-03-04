@@ -1,2 +1,3 @@
 
-  dict< char ,int > X = { }; 
+	dict<Ssmth,int> x;
+
