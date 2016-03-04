@@ -139,11 +139,9 @@ dictionary ::= DICTD PLPAREN DATATYPE:i COMMA DATATYPE:j PRPAREN IDENTIFIER:t EQ
 dictionary_assignment ::= IDENTIFIER:t SLPAREN IDENTIFIER:i SRPAREN EQUAL IDENTIFIER:j {::};
 
 sequence_operations ::= 
-                       IDENTIFIER:t INDEX:s {::}
-                      | IDENTIFIER SLPAREN IDENTIFIER SRPAREN {::}
-                      | IDENTIFIER SLPAREN IDENTIFIER SRPAREN DOTDOT{::}
+                       INDEX:s {::}
+                      | INDEX DOTDOT{::}
                       | types DOTDOT{::}
-                      | IDENTIFIER INDEX DOTDOT{::}
                       | IDENTIFIER:t SLPAREN IDENTIFIER:s operator:e INT:i SRPAREN {::}
                       | IDENTIFIER:t SLPAREN INT:i COLON INT:j SRPAREN {::}
                       | IDENTIFIER:t SLPAREN COLON INT:J SRPAREN {::}
