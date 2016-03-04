@@ -237,8 +237,12 @@ after_then ::= full_exp {::}
              | while_statement {::}
              | for_all_statement {::}
              | expression {::}
-             | elif_statement {::};
-             
+             | full_exp elif_statement {::}
+             | do_statement elif_statement{::}
+             | while_statement elif_statement{::}
+             | for_all_statement elif_statement{::}
+             | expression elif_statement{::};
+                          
 elif_statement ::= ELIF LPAREN while_mini_expression RPAREN THEN after_then {::}
 			  | ELIF LPAREN while_expression RPAREN THEN after_then {::}
 			  | ELIF LPAREN in_operations RPAREN THEN after_then {::};
